@@ -2,7 +2,7 @@
   "name": "exercism",
   "displayName": "Exercism",
   "description": "Exercism support for Visual Studio Code.",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "author": "Mason D. Liu",
   "publisher": "masonliu",
   "license": "MIT",
