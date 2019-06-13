@@ -16,8 +16,6 @@ You can download this extension from the [Visual Studio Marketplace](https://mar
 
 ### Usage
 
-Send me screenshots/gifs with your favorite themes and I'll add them here.
-
 <p align="center">
   <img width="100%" src="https://github.com/masliu/vscode-exercism/blob/assets/demo.gif?raw=true">
 </p>
