@@ -8,6 +8,7 @@ scripts/**
 node_modules/**
 out/**
 webpack.config.js
+preview
 **/tsconfig.json
 **/tslint.json
 **/*.map
