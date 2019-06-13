@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
 import { Logger } from "../../../common/logger";
-import { CustomIconURI } from "../../../exercism/icons";
+import { CustomIconURI } from "../../../exercism/controller";
 import { Exercise, ExerciseStatus } from "../../../typings/api";
 import { FileNode } from "./fileNode";
 import { TrackNode } from "./trackNode";

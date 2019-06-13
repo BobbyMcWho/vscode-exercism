@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { CustomIconURI } from "../../../exercism/icons";
+import { CustomIconURI } from "../../../exercism/controller";
 import { Track } from "../../../typings/api";
 import { ExerciseNode } from "./exerciseNode";
 import { RootNode } from "./rootNode";

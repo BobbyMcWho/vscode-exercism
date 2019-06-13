@@ -1,21 +1,25 @@
 import { exec } from "child_process";
 import * as fs from "fs";
+import { memo } from "helpful-decorators";
 import * as path from "path";
 import { promisify } from "util";
 import * as vscode from "vscode";
+import { ExtensionManager } from "../common/context";
 import { Logger } from "../common/logger";
 import { StorageItem } from "../common/storage";
 import { Exercise, ExerciseStatus, Solution, Track, TrackStatus, UserDataModel } from "../typings/api";
 import { getUserConfig } from "./config";
-import { ExercismIconManager } from "./icons";
 import * as scraper from "./scraper";
+
+export interface CustomIconURI {
+  light: vscode.Uri;
+  dark: vscode.Uri;
+}
 
 export class ExercismController {
   private readonly _userDataStore: StorageItem<UserDataModel>;
-  private readonly _exercismIconManager: ExercismIconManager;
 
   constructor() {
-    this._exercismIconManager = new ExercismIconManager();
     this._userDataStore = new StorageItem<UserDataModel>("exercism.client.data", {
       config: getUserConfig()
     });
@@ -82,17 +86,41 @@ export class ExercismController {
   getExerciseIconPath(exercise: Exercise, shouldUseStatus?: boolean) {
     if (shouldUseStatus) {
       if (exercise.status & ExerciseStatus.COMPLETED) {
-        return this._exercismIconManager.getStatusIcon("complete");
+        return this.getCachedStatusIcon("complete");
       }
       if (exercise.status & ExerciseStatus.SUBMITTED) {
-        return this._exercismIconManager.getStatusIcon("inprogress");
+        return this.getCachedStatusIcon("inprogress");
       }
     }
-    return this._exercismIconManager.getExerciseIcon(exercise.id);
+    return this.getCachedExerciseIcon(exercise.id);
   }
 
   getTrackIconPath(track: Track, shouldUseStatus?: boolean) {
-    return this._exercismIconManager.getTrackIcon(track.id);
+    return this.getCachedTrackIcon(track.id);
+  }
+
+  @memo()
+  private getCachedTrackIcon(id: string) {
+    return {
+      light: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/track/" + id + "-hex-white.png")),
+      dark: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/track/" + id + "-bordered-turquoise.png"))
+    };
+  }
+
+  @memo()
+  private getCachedExerciseIcon(id: string) {
+    return {
+      light: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/exercise/" + id + "-turquoise.png")),
+      dark: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/exercise/" + id + "-white.png"))
+    };
+  }
+
+  @memo()
+  private getCachedStatusIcon(id: string) {
+    return {
+      light: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/status/" + id + ".png")),
+      dark: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/status/" + id + ".png"))
+    };
   }
 
   // Submit the exercise file for evaluation.
