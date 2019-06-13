@@ -50,13 +50,12 @@ My usage of Exercism is entirely independent which is why I would appreciate som
 
 ## Roadmap
 
-In the near future (probably when Exercism has a public api) I would like to:
-
 - Add commenting support
 - Display profile information
 - Display statistics
 - Restructure codebase (instead of scraping data maybe we should just provide a local copy?)
 - Get rid of import/export
+- Not rely on the cli client; implement our own client instead
 
 ## License
 
