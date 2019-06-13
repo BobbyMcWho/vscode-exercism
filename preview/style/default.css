@@ -1,0 +1,185 @@
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
+  font-size: 14px;
+  padding: 0 1rem;
+  word-wrap: break-word;
+  height: 100%;
+}
+
+body {
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.root {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  outline-offset: none;
+}
+
+main {
+  flex: 1;
+  overflow: auto;
+  padding-bottom: 1.25rem;
+}
+
+main .nav-content {
+  padding: 0 1rem;
+}
+
+main .nav-content .solution-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+main .nav-content .solution {
+  transition: 0.2s;
+  flex: 1;
+  min-width: 200px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 2rem;
+  border-radius: 2px;
+  margin: 6px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+main .nav-content .solution:hover {
+  border: 1px solid;
+}
+
+main h1 {
+  display: none;
+}
+
+main p,
+main li,
+main span {
+  line-height: 1.5rem;
+  margin-top: 1rem;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1.25rem;
+}
+
+header .top-section {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  min-height: 100px;
+  padding: 1rem 1rem 0.5rem 1rem;
+}
+
+header .top-section .icons {
+  margin-right: 1.5rem;
+}
+
+header .top-section .icons .exercise-icon {
+  width: 64px;
+  height: 64px;
+  background-size: 50%;
+  background-color: white;
+  border: 1px solid #339ab9;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+}
+
+header .top-section .icons .track-icon {
+  position: absolute;
+  margin-top: 28px;
+  margin-left: 28px;
+  width: 52px;
+  height: 52px;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+}
+
+header .top-section .meta {
+  flex: auto;
+  margin-right: 1rem;
+  overflow: auto;
+  max-height: 120px;
+}
+
+header .top-section .meta h3 {
+  margin: 1rem 0;
+}
+
+header .top-section .meta .difficulty {
+  padding-left: 1rem;
+  background: rgba(0, 0, 0, 0.15);
+  color: var(--vscode-descriptionForeground);
+  padding: 3px 5px;
+  border-radius: 2px;
+  font-size: 12px;
+  margin: 3px;
+}
+
+header .top-section .meta .summary {
+  line-height: 1.2rem;
+}
+
+header .top-section .actions {
+  display: flex;
+  flex-direction: column;
+}
+
+header .top-section .actions .action-btn {
+  margin: 4px;
+  padding: 7px 1rem;
+  width: 110px;
+  border: none;
+  border-radius: 2px;
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+header .top-section .actions .action-btn:hover {
+  filter: brightness(120%);
+}
+
+header .top-section .actions .action-btn:disabled,
+header .top-section .actions .action-btn:disabled:hover {
+  filter: brightness(60%);
+  cursor: default;
+}
+
+header .bottom-section {
+  border-bottom: 1px solid var(--vscode-textSeparator-foreground);
+  padding: 4.5px 0 9px 0;
+}
+
+header .bottom-section .nav-link {
+  display: inline;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--vscode-descriptionForeground);
+  padding: 12px;
+}
+
+header .bottom-section .nav-link.active {
+  color: var(--vscode-editor-foreground);
+  border-bottom: 1px solid var(--vscode-editor-foreground);
+}

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "outDir": "../out/",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "sourceMap": false,
+    "strict": false,
+    "noUnusedLocals": false,
+    "noImplicitAny": false,
+    "lib": ["dom", "esnext"]
+  },
+  "include": ["./**/*", "../src/typings/api.d.ts"]
+}

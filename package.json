@@ -1,0 +1,373 @@
+{
+  "name": "exercism",
+  "displayName": "Exercism",
+  "description": "Exercism support for Visual Studio Code.",
+  "version": "0.0.1",
+  "author": "Mason D. Liu",
+  "publisher": "masliu",
+  "license": "MIT",
+  "icon": "images/logo/logo.jpeg",
+  "preview": true,
+  "enableProposedApi": false,
+  "homepage": "https://github.com/masliu/vscode-exercism.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/masliu/vscode-exercism.git"
+  },
+  "bugs": {
+    "url": "https://github.com/masliu/vscode-exercism.git/issues"
+  },
+  "engines": {
+    "vscode": "^1.35.0"
+  },
+  "galleryBanner": {
+    "color": "#339AA8",
+    "theme": "dark"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "algorithms",
+    "exercism",
+    "tree",
+    "view",
+    "comments",
+    "explorer",
+    "fun",
+    "challenges",
+    "learning",
+    "break",
+    "exercise",
+    "questions"
+  ],
+  "activationEvents": [
+    "onCommand:exercism.global.exportUserData",
+    "onCommand:exercism.global.importUserData",
+    "onView:exercism.view.tracks"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "exercism-explorer",
+          "title": "Exercism",
+          "icon": "images/logo/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "exercism-explorer": [
+        {
+          "id": "exercism.view.tracks",
+          "name": "Tracks"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "exercism.exercise.openStart",
+        "title": "Open and Start",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.exercise.createNewFile",
+        "title": "New File",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.exercise.preview",
+        "title": "Open Preview",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.exercise.complete",
+        "title": "Complete Exercise",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.exercise.download",
+        "title": "Download Exercise",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.file.submit",
+        "title": "Submit File for Evaluation",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.file.delete",
+        "title": "Delete File",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.file.rename",
+        "title": "Rename File",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.sortExercisesByDifficulty",
+        "title": "Sort By: Difficulty",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.sortExercisesByName",
+        "title": "Sort By: Name",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.sortExercisesByTopic",
+        "title": "Sort By: Topic",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.sortExercisesByStatus",
+        "title": "Sort By: Status",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.clearFilters",
+        "title": "Clear All Filters",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.showCompletedExercises",
+        "title": "Show Completed Exercises",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.showUncompletedExercises",
+        "title": "Show Uncompleted Exercises",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.showDownloadedExercises",
+        "title": "Show Downloaded Exercises",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.showJoinedTracks",
+        "title": "Show Joined Tracks",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.view.tracks.filterExercisesByTopic",
+        "title": "Filter Exercises By Topic",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.track.focus",
+        "title": "Focus Track",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.track.openAsFolder",
+        "title": "Open as Folder",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.track.downloadAllExercises",
+        "title": "Download All Exercises",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.global.clearStorageData",
+        "title": "Clear Storage Data",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
+        "command": "exercism.global.exportUserData",
+        "title": "Export User Data",
+        "category": "Exercism"
+      },
+      {
+        "command": "exercism.global.importUserData",
+        "title": "Import User Data",
+        "category": "Exercism"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "exercism.view.tracks.showJoinedTracks",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "1@2"
+        },
+        {
+          "command": "exercism.view.tracks.showCompletedExercises",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "1@3"
+        },
+        {
+          "command": "exercism.view.tracks.showUncompletedExercises",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "1@4"
+        },
+        {
+          "command": "exercism.view.tracks.showDownloadedExercises",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "1@5"
+        },
+        {
+          "command": "exercism.view.tracks.sortExercisesByDifficulty",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "2@1"
+        },
+        {
+          "command": "exercism.view.tracks.sortExercisesByName",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "2@2"
+        },
+        {
+          "command": "exercism.view.tracks.sortExercisesByStatus",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "2@3"
+        },
+        {
+          "command": "exercism.view.tracks.sortExercisesByTopic",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "2@4"
+        },
+        {
+          "command": "exercism.global.clearStorageData",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "3@1"
+        },
+        {
+          "command": "exercism.view.tracks.clearFilters",
+          "when": "view == 'exercism.view.tracks'",
+          "group": "3@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "exercism.exercise.createNewFile",
+          "when": "view == 'exercism.view.tracks' && viewItem == exerciseTreeNode",
+          "group": "1@1"
+        },
+        {
+          "command": "exercism.exercise.openStart",
+          "when": "view == 'exercism.view.tracks' && viewItem == exerciseTreeNode",
+          "group": "1@2"
+        },
+        {
+          "command": "exercism.exercise.preview",
+          "when": "view == 'exercism.view.tracks' && viewItem == exerciseTreeNode",
+          "group": "1@3"
+        },
+        {
+          "command": "exercism.exercise.download",
+          "when": "view == 'exercism.view.tracks' && viewItem == exerciseTreeNode",
+          "group": "2@1"
+        },
+        {
+          "command": "exercism.exercise.complete",
+          "when": "view == 'exercism.view.tracks' && viewItem == exerciseTreeNode",
+          "group": "2@2"
+        },
+        {
+          "command": "exercism.file.submit",
+          "when": "view == 'exercism.view.tracks' && viewItem == fileTreeNode",
+          "group": "1@1"
+        },
+        {
+          "command": "exercism.file.rename",
+          "when": "view == 'exercism.view.tracks' && viewItem == fileTreeNode",
+          "group": "1@2"
+        },
+        {
+          "command": "exercism.file.delete",
+          "when": "view == 'exercism.view.tracks' && viewItem == fileTreeNode",
+          "group": "1@3"
+        },
+        {
+          "command": "exercism.track.focus",
+          "when": "view == 'exercism.view.tracks' && viewItem == trackTreeNode",
+          "group": "1@1"
+        },
+        {
+          "command": "exercism.track.openAsFolder",
+          "when": "view == 'exercism.view.tracks' && viewItem == trackTreeNode",
+          "group": "1@2"
+        },
+        {
+          "command": "exercism.track.downloadAllExercises",
+          "when": "view == 'exercism.view.tracks' && viewItem == trackTreeNode",
+          "group": "1@3"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "Exercism",
+        "properties": {
+          "exercism.logging": {
+            "type": "string",
+            "default": "silent",
+            "enum": [
+              "silent",
+              "error",
+              "debug"
+            ],
+            "enumDescriptions": [
+              "Disable all logging.",
+              "Only log errors.",
+              "Enable all logging."
+            ],
+            "description": "Specifies the verbosity of the logger. By default all logging is disabled.",
+            "scope": "window"
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "clean": "rm dist/extension.js",
+    "build-dev": "webpack -d --mode development",
+    "build-prod": "webpack -p --mode production",
+    "build-debug": "tsc -p .",
+    "vscode:prepublish": "webpack -p --mode production"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.11",
+    "@types/markdown-it": "0.0.7",
+    "@types/node": "^12.0.8",
+    "@types/vscode": "^1.35.0",
+    "css-loader": "^2.1.1",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^6.0.2",
+    "typescript": "^3.5.1",
+    "webpack": "^4.33.0",
+    "webpack-cli": "^3.3.4"
+  },
+  "dependencies": {
+    "@types/marked": "^0.6.5",
+    "cheerio": "^1.0.0-rc.3",
+    "helpful-decorators": "^2.0.4",
+    "marked": "^0.6.2",
+    "preact": "^8.4.2"
+  }
+}
