@@ -46,7 +46,7 @@ There is currently no available api that supports that functionality. Please sub
 
 Pull requests, feature requests, or any other form of contribution is always welcome.
 
-My usage of Exercism is entirely independent which is why I would appreciate some feedback/suggestions on how to improve this extension for everyone else. If there's a feature you feel would greatly enhance your experience, please let me know by filing an issue and I'll try my best to work on it.
+I only use Exercism in independent mode which is why I would appreciate some feedback/suggestions on how to improve this extension for everyone else. If there's a feature you feel would greatly enhance your experience, please let me know by filing an issue and I'll try my best to work on it.
 
 ## Roadmap
 
