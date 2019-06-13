@@ -2,7 +2,7 @@
   <img width="100%" src="https://github.com/masliu/vscode-exercism/blob/assets/banner.jpg?raw=true">
 </p>
 
-> Quickly complete Exercism challenges without leaving your favorite editor -- Visual Studio Code.
+> Complete Exercism challenges without leaving your favorite editor.
 
 ## Getting Started
 
