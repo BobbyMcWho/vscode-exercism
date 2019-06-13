@@ -13,7 +13,7 @@ export default ({ solutions, exercise, track, currentTab }: State) => (
           >
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div>{solution.author}</div>
-              <div>{"★" + solution.stars}</div>
+              <div>{"★ " + solution.stars}</div>
             </div>
           </a>
         ))}
