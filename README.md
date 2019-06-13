@@ -32,7 +32,7 @@ Send me screenshots/gifs with your favorite themes and I'll add them here.
 
 **Why did you create this extension?**
 
-I wanted a way to practice exercises while taking a break from my actual work, so I spent a weekend building this extension. It might seem a little too opinionated for some, but hopefully you'll find it useful.
+I wanted a way to quickly do exercises during 30-minute breaks without having to leave my editor or close my current workspace.
 
 **Is this extension available for Atom/Emacs/Vim etc...**
 
