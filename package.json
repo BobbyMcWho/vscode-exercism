@@ -115,6 +115,12 @@
         "enablement": "view == 'exercism.view.tracks'"
       },
       {
+        "command": "exercism.file.open",
+        "title": "Open Exercise File",
+        "category": "Exercism",
+        "enablement": "view == 'exercism.view.tracks'"
+      },
+      {
         "command": "exercism.view.tracks.sortExercisesByDifficulty",
         "title": "Sort By: Difficulty",
         "category": "Exercism",

@@ -284,6 +284,14 @@ export function RegisterAllCommands(
       }
     },
     {
+      id: "exercism.file.open",
+      cb: (fileNode: FileNode): void => {
+        vscode.window.showTextDocument(fileNode.resourceUri, {
+          preview: true
+        });
+      }
+    },
+    {
       id: "exercism.file.delete",
       cb: (fileNode: FileNode): void => {
         fs.unlink(fileNode.resourceUri.fsPath, () => tracksTreeProvider.refresh(fileNode.parent));

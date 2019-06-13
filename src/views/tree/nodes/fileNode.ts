@@ -9,13 +9,13 @@ export class FileNode implements TreeNode {
 
   get command(): vscode.Command {
     return {
-      title: "Open File",
-      command: "vscode.open",
-      arguments: [this.resourceUri]
+      title: "Open Exercise File",
+      command: "exercism.file.open",
+      arguments: [this]
     };
   }
 
-  async getChildren(): Promise<never[]> {
+  async getChildren(): Promise<[]> {
     return [];
   }
 }
