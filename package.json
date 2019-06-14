@@ -355,7 +355,7 @@
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
     "build-debug": "tsc -p .",
-    "vscode:prepublish": "rm -r dist/* && webpack -p --mode production"
+    "vscode:prepublish": "webpack -p --mode production"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.11",
