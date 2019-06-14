@@ -181,8 +181,8 @@
         "enablement": "view == 'exercism.view.tracks'"
       },
       {
-        "command": "exercism.track.focus",
-        "title": "Focus Track",
+        "command": "exercism.track.toggleFocus",
+        "title": "Toggle Track Focus",
         "category": "Exercism",
         "enablement": "view == 'exercism.view.tracks'"
       },
@@ -310,7 +310,7 @@
           "group": "1@3"
         },
         {
-          "command": "exercism.track.focus",
+          "command": "exercism.track.toggleFocus",
           "when": "view == 'exercism.view.tracks' && viewItem == trackTreeNode",
           "group": "1@1"
         },

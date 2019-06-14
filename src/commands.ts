@@ -24,9 +24,9 @@ export function RegisterAllCommands(
 ): void {
   [
     {
-      id: "exercism.track.focus",
+      id: "exercism.track.toggleFocus",
       cb: (trackNode: TrackNode): void => {
-        nodeFilterProvider.focusTrackNode(trackNode);
+        nodeFilterProvider.toggleTrackFocus(trackNode);
         tracksTreeProvider.refresh();
       }
     },

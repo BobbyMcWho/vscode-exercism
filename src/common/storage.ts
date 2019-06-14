@@ -8,7 +8,7 @@ import { Logger } from "./logger";
  * global storage without worrying about performance and other such issues.
  */
 export class StorageItem<T> {
-  private readonly _model: T;
+  private _model: T;
 
   /**
    * Create a new instance of StorageItem by loading its model from global storage
@@ -56,16 +56,16 @@ export class StorageItem<T> {
    */
   reset(): void {
     Logger.debug("storage", "Reseting model to default:", this._key);
-    Object.assign(this.model, this._defaultModel);
+    this._model = { ...this._defaultModel };
     this.save();
   }
 
   /**
-   * Update and save the model using a callback transaction.
+   * Mutate and save the model using a callback transaction.
    *
-   * @param fn The transaction callback to use when updating the model.
+   * @param fn The transaction callback to use.
    */
-  update(fn: (model: T) => void): void {
+  mutate(fn: (model: T) => void): void {
     Logger.debug("storage", "Updating model:", this._key);
     fn(this._model);
     this.save();
@@ -84,7 +84,7 @@ export class StorageItem<T> {
    * @param json The json data to parse and assign to the model.
    */
   fromJSON(json: string): void {
-    Object.assign(this._model, JSON.parse(json));
+    this._model = { ...JSON.parse(json) };
   }
 
   /**

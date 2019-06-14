@@ -31,7 +31,7 @@ interface FilterCollectionModel {
 }
 
 export class NodeFilterProvider {
-  private _filterCollectionStore: StorageItem<FilterCollectionModel>;
+  private readonly _filterCollectionStore: StorageItem<FilterCollectionModel>;
 
   constructor() {
     this._filterCollectionStore = new StorageItem<FilterCollectionModel>("exercism.view.filters", {
@@ -108,34 +108,34 @@ export class NodeFilterProvider {
   }
 
   filterByTopic(topic: string): void {
-    this._filterCollectionStore.update(model => {
-      model.exerciseFilter = ExerciseFilter.FILTER_TOPIC;
+    this._filterCollectionStore.mutate(model => {
+      model.exerciseFilter |= ExerciseFilter.FILTER_TOPIC;
       model.topicToFilter = topic;
     });
   }
 
-  focusTrackNode(trackNode: TrackNode): void {
-    this._filterCollectionStore.update(model => {
+  toggleTrackFocus(trackNode: TrackNode): void {
+    this._filterCollectionStore.mutate(model => {
+      model.trackFilter ^= TrackFilter.FILTER_FOCUSED;
       model.focusedTrackNodeID = trackNode.id;
-      model.trackFilter = TrackFilter.FILTER_FOCUSED;
     });
   }
 
   focusExerciseNode(exerciseNode: ExerciseNode): void {
-    this._filterCollectionStore.update(model => {
+    this._filterCollectionStore.mutate(model => {
+      model.exerciseFilter ^= ExerciseFilter.FILTER_FOCUSED;
       model.focusedExerciseNodeID = exerciseNode.id;
-      model.exerciseFilter = ExerciseFilter.FILTER_FOCUSED;
     });
   }
 
   toggleTrackFilter(filter: TrackFilter): void {
-    this._filterCollectionStore.update(model => {
+    this._filterCollectionStore.mutate(model => {
       model.trackFilter ^= filter;
     });
   }
 
   toggleExerciseFilter(filter: ExerciseFilter): void {
-    this._filterCollectionStore.update(model => {
+    this._filterCollectionStore.mutate(model => {
       if (filter === ExerciseFilter.FILTER_COMPLETED && model.exerciseFilter & ExerciseFilter.FILTER_UNCOMPLETED) {
         model.exerciseFilter ^= ExerciseFilter.FILTER_UNCOMPLETED;
       } else if (
