@@ -5,6 +5,7 @@ const webview = {
   entry: {
     index: "./preview/index.tsx"
   },
+  devtool: "source-map",
   module: {
     rules: [
       {
