@@ -1,7 +1,7 @@
 {
   "name": "exercism",
   "displayName": "Exercism",
-  "description": "Exercism support for Visual Studio Code.",
+  "description": "Work on Exercism programming challenges from inside Visual Studio Code.",
   "version": "1.8.0",
   "author": "Mason D. Liu",
   "publisher": "masonliu",
@@ -28,17 +28,13 @@
     "Other"
   ],
   "keywords": [
+    "programming challenges",
+    "view",
+    "practice",
     "algorithms",
     "exercism",
+    "problems",
     "tree",
-    "view",
-    "comments",
-    "explorer",
-    "fun",
-    "challenges",
-    "learning",
-    "break",
-    "exercise",
     "questions"
   ],
   "activationEvents": [
