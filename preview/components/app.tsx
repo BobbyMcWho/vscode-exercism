@@ -69,7 +69,8 @@ export default class App extends Component<{}, State> {
         break;
       case "update:exercise":
         this.setState({
-          exercise: payload.exercise
+          exercise: payload.exercise,
+          instructions: payload.instructions
         });
         break;
       default:

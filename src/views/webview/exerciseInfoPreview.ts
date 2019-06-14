@@ -5,7 +5,7 @@ import { ExtensionManager } from "../../common/context";
 import { DisposableStore } from "../../common/lifecycle";
 import { Logger } from "../../common/logger";
 import { ExercismController } from "../../exercism/controller";
-import { ExerciseStatus } from "../../typings/api";
+import { Exercise, ExerciseStatus, Track } from "../../typings/api";
 import { ExerciseNode } from "../tree/nodes/exerciseNode";
 import { TreeNode } from "../tree/nodes/treeNode";
 import { TracksTreeProvider } from "../tree/tracksTreeProvider";
@@ -65,7 +65,8 @@ export class ExerciseInfoPreview extends DisposableStore {
       this._panel.webview.postMessage({
         command: "update:exercise",
         payload: {
-          exercise: this._exerciseNode.exercise
+          exercise: this._exerciseNode.exercise,
+          instructions: this.getInstructions(this._exerciseNode.parent.track, this._exerciseNode.exercise)
         }
       });
     }
@@ -128,18 +129,18 @@ export class ExerciseInfoPreview extends DisposableStore {
           trackIconPath: trackIcon.light.with({ scheme: "vscode-resource" }).toString(),
           exerciseIconPath: exerciseIcon.light.with({ scheme: "vscode-resource" }).toString(),
           solutions: [],
-          instructions:
-            exercise.status & ExerciseStatus.DOWNLOADED
-              ? fs.readFileSync(
-                  path.join(this._exercismController.getExerciseDirPath(track, exercise), "README.md"),
-                  "UTF8"
-                )
-              : undefined
+          instructions: this.getInstructions(track, exercise)
         }
       });
     }
 
     this._panel.reveal();
+  }
+
+  private getInstructions(track: Track, exercise: Exercise): string | undefined {
+    return exercise.status & ExerciseStatus.DOWNLOADED
+      ? fs.readFileSync(path.join(this._exercismController.getExerciseDirPath(track, exercise), "README.md"), "UTF8")
+      : undefined;
   }
 
   async getHTML(): Promise<string> {
