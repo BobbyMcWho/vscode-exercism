@@ -19,6 +19,7 @@ export class ExtensionManager {
    * Get a workspace configuration object by passing its section key.
    *
    * @param section The section key to use when retrieving the item.
+   * @param defaultValue The value to use when section can't be found.
    */
   static getConfigurationItem<T>(section: string, defaultValue: T): T {
     return vscode.workspace.getConfiguration("exercism").get<T>(section, defaultValue);
