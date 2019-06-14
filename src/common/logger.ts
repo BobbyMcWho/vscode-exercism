@@ -24,6 +24,10 @@ export class Logger {
     ExtensionManager.subscribe(vscode.workspace.onDidChangeConfiguration(() => this.updateLogSeverity()));
   }
 
+  private static updateLogSeverity(): void {
+    this._severity = ExtensionManager.getConfigurationItem<LogSeverity>("logging", LogSeverity.SILENT);
+  }
+
   /**
    * Log a debug message.
    *
@@ -44,10 +48,6 @@ export class Logger {
    */
   static error(group: string, message: string, ...optional: any[]): void {
     this.createLogEntry(LogSeverity.ERROR, group, message, optional);
-  }
-
-  private static updateLogSeverity(): void {
-    this._severity = ExtensionManager.getConfigurationItem<LogSeverity>("logging", LogSeverity.SILENT);
   }
 
   private static createLogEntry(severity: LogSeverity, group: string, message: string, ...optional: any[]): void {
