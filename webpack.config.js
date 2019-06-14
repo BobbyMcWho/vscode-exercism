@@ -31,6 +31,7 @@ const extension = {
   name: "extension",
   target: "node",
   entry: "./src/extension.ts",
+  devtool: "source-map",
   output: {
     path: path.join(__dirname, "dist"),
     filename: "extension.js",
