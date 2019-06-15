@@ -28,7 +28,7 @@ I wanted a way to quickly complete exercises during my breaks without having to 
 
 **Does this extension completely replace the website?**
 
-No, my intent is only to create a tool to supplement the website. Furthermore, there is no available api that provides access to user profile information making it extremely difficult to replicate online features.
+No, the purpose of this tool is to supplement the website. Furthermore, there is no public api that provides access to profile information, making it extremely difficult to replicate online features.
 
 **Why can't I view my profile information? Why is my progress not synced with exercism.io?**
 
