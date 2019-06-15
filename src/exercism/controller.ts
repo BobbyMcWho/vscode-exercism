@@ -8,13 +8,9 @@ import { ExtensionManager } from "../common/context";
 import { Logger } from "../common/logger";
 import { StorageItem } from "../common/storage";
 import { Exercise, ExerciseStatus, Solution, Track, TrackStatus, UserDataModel } from "../typings/api";
+import { CustomIconURI } from "../typings/vsc";
 import { getUserConfig } from "./config";
 import * as scraper from "./scraper";
-
-export interface CustomIconURI {
-  light: vscode.Uri;
-  dark: vscode.Uri;
-}
 
 export class ExercismController {
   private readonly _userDataStore: StorageItem<UserDataModel>;
@@ -83,7 +79,7 @@ export class ExercismController {
     return path.join(this.getTrackDirPath(track), exercise.id);
   }
 
-  getExerciseIconPath(exercise: Exercise, shouldUseStatus?: boolean) {
+  getExerciseIconPath(exercise: Exercise, shouldUseStatus?: boolean): CustomIconURI {
     if (shouldUseStatus) {
       if (exercise.status & ExerciseStatus.COMPLETED) {
         return this.getCachedStatusIcon("complete");
@@ -95,12 +91,12 @@ export class ExercismController {
     return this.getCachedExerciseIcon(exercise.id);
   }
 
-  getTrackIconPath(track: Track, shouldUseStatus?: boolean) {
+  getTrackIconPath(track: Track, shouldUseStatus?: boolean): CustomIconURI {
     return this.getCachedTrackIcon(track.id);
   }
 
   @memo()
-  private getCachedTrackIcon(id: string) {
+  private getCachedTrackIcon(id: string): CustomIconURI {
     return {
       light: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/track/" + id + "-hex-white.png")),
       dark: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/track/" + id + "-bordered-turquoise.png"))
@@ -108,7 +104,7 @@ export class ExercismController {
   }
 
   @memo()
-  private getCachedExerciseIcon(id: string) {
+  private getCachedExerciseIcon(id: string): CustomIconURI {
     return {
       light: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/exercise/" + id + "-turquoise.png")),
       dark: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/exercise/" + id + "-white.png"))
@@ -116,7 +112,7 @@ export class ExercismController {
   }
 
   @memo()
-  private getCachedStatusIcon(id: string) {
+  private getCachedStatusIcon(id: string): CustomIconURI {
     return {
       light: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/status/" + id + ".png")),
       dark: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/status/" + id + ".png"))
