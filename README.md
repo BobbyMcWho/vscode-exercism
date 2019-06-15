@@ -42,7 +42,7 @@ My primary usage of Exercism is in independent mode, which is why I would greatl
 
 ## Roadmap
 
-Although the lack of a public api places us in a precarious position, there are still some features that I would like to explore in the near future. The following are some that are planned:
+Although the lack of a public api places us in a precarious situation, there are still some features that are planned for the near future:
 
 - Commenting support via the comment api
 - Profile information
