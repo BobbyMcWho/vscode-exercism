@@ -1,60 +1,57 @@
-<p align="center">
-  <img width="100%" src="https://github.com/masliu/vscode-exercism/blob/assets/banner.jpg?raw=true">
-</p>
+# Exercism for Visual Studio Code
 
-> Complete Exercism challenges without leaving your favorite editor.
+<p align="center">
+  <img width="100%" src="https://github.com/masliu/vscode-exercism/blob/assets/screenshot.png?raw=true">
+</p>
 
 ## Getting Started
 
 ### Prerequisites
 
-This extension assumes the official [Exercism](https://exercism.io) client has already been installed.
+This extension requires you to install the official [Exercism](https://exercism.io) client.
 
 ### Installation
 
-You can download this extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/). To build from source, run `npm build-dev` or use the launch scripts.
-
-### Usage
-
-<p align="center">
-  <img width="100%" src="https://github.com/masliu/vscode-exercism/blob/assets/demo.gif?raw=true">
-</p>
+You can download this extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/). To build from source, simply run `npm build-dev` or use the launch script.
 
 ### Notes
 
-- I'm not affiliated with Exercism, Inc
-- The status of your exercise is not synced online (exercism.io won't know if you've marked an exercise as "complete" inside this extension)
-- You can import/export your data from a .json file instead
+- I am not affiliated with Exercism, Inc
+- Your progress is not synced with exercism.io (you will need to manually update the status of your exercise)
+- You can import/export your data if you need access to it on multiple hosts
 
 ## FAQ
 
 **Why did you create this extension?**
 
-I wanted a way to quickly do exercises during 30-minute breaks without having to leave my editor or close my current workspace.
+I wanted a way to quickly complete exercises during my breaks without having to leave my editor or close my current workspace.
 
-**Is this extension available for Atom/Emacs/Vim etc...**
+**Does this extension completely replace the website?**
 
-No. Please use the [official client](https://github.com/exercism/cli) or find a suitable alternative.
+No, my intent is only to create a tool to supplement the website. Furthermore, there is no available api that provides access to user profile information making it extremely difficulty to replicate online features.
 
-**Why can't I view my online information?**
+**Why can't I view my profile information? Why is my progress not synced with exercism.io?**
 
-There is currently no available api that supports that functionality. Please subscribe to [#4087](https://github.com/exercism/exercism/issues/4087) for more information.
+As mentioned in the answer above, there is no available api that supports that functionality. Please read and subscribe to [#4087](https://github.com/exercism/exercism/issues/4087) for more information.
 
 ## Contributing
 
 Pull requests, feature requests, or any other form of contribution is always welcome.
 
-I only use Exercism in independent mode which is why I would appreciate some feedback/suggestions on how to improve this extension for everyone else. If there's a feature you feel would greatly enhance your experience, please let me know by filing an issue and I'll try my best to work on it.
+My primary usage of Exercism is in independent mode, which is why I would greatly appreciate some feedback/suggestions on how to improve this extension for everyone else. If there is a feature that you feel would greatly enhance your experience, please let me know by filing an issue and I will do my best to implement it.
 
 ## Roadmap
 
-- Add commenting support
-- Display profile information
-- Display statistics
-- Restructure codebase (instead of scraping data maybe we should just provide a local copy?)
-- Get rid of import/export
-- Not rely on the cli client; implement our own client instead
+Although the lack of a public api places us in a precarious position, there are still some features that I would like to explore in the near future. The following are some that are planned:
+
+- Commenting support via the comment api
+- Profile information
+- Statistics
+- Track preview with mentor information and language resources
+- Tools for mentors (solution queues, review sessions)
+- Diffing your solution with a third party solution
+- Getting rid of the cli client and implementing our own client instead
 
 ## License
 
-Source code is licensed under MIT. Track and Exercise icons are licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) by Exercism, Inc and Noun Project. Status icons are licensed under [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/) by Icons8 LLC.
+Source code is licensed under MIT. The track and exercise icons are licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) by Exercism, Inc and Noun Project. The status icons are licensed under [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/) by Icons8 LLC.
