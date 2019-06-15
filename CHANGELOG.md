@@ -1,4 +1,10 @@
-[v1.10.2]
+# Changelog
+
+## v1.10.3 (June 15th 2019)
+
+- [docs] Made changelog prettier and added dates
+
+## v1.10.2 (June 15th 2019)
 
 - [docs] Added CHANGELOG.md and CONTRIBUTING.md
 - [docs] Rewrote and improved README.md
