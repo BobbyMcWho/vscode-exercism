@@ -3,6 +3,7 @@
 ## v1.10.3 (June 15th 2019)
 
 - [docs] Made changelog prettier and added dates
+- [docs] Updated README.md
 
 ## v1.10.2 (June 15th 2019)
 
