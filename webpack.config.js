@@ -3,7 +3,7 @@ const path = require("path");
 const webview = {
   name: "webview",
   entry: {
-    index: "./preview/index.tsx"
+    index: "./webview/index.tsx"
   },
   devtool: "source-map",
   module: {

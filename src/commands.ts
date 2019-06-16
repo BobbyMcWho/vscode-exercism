@@ -11,6 +11,7 @@ import { FileNode } from "./views/tree/nodes/fileNode";
 import { TrackNode } from "./views/tree/nodes/trackNode";
 import { TracksTreeProvider } from "./views/tree/tracksTreeProvider";
 import { ExerciseInfoPreview } from "./views/webview/exerciseInfoPreview";
+import { TreeNodePreviewManager } from "./views/webview/previewManager";
 
 interface ICommand {
   id: string;
@@ -137,7 +138,9 @@ export function RegisterAllCommands(
     {
       id: "exercism.exercise.preview",
       cb: (exerciseNode: ExerciseNode): void => {
-        ExerciseInfoPreview.createOrShow(exerciseNode, tracksTreeProvider, exercismController);
+        TreeNodePreviewManager.createOrUpdate(
+          new ExerciseInfoPreview(exerciseNode, exercismController, tracksTreeProvider)
+        );
       }
     },
     {

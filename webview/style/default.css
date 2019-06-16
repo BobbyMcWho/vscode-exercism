@@ -13,7 +13,7 @@ body {
   overflow: hidden;
 }
 
-.root {
+.flexible {
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -111,6 +111,10 @@ header .top-section .icons .track-icon {
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
+}
+
+header .top-section .meta::-webkit-scrollbar {
+  display: none;
 }
 
 header .top-section .meta {

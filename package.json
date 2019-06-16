@@ -369,6 +369,7 @@
     "cheerio": "^1.0.0-rc.3",
     "helpful-decorators": "^2.0.4",
     "marked": "^0.6.2",
-    "preact": "^8.4.2"
+    "preact": "^8.4.2",
+    "redux-zero": "^5.0.4"
   }
 }
