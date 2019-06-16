@@ -12,7 +12,7 @@ This extension requires you to install the official [Exercism](https://exercism.
 
 ### Installation
 
-You can download this extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/). To build from source, simply run `npm build-dev` or use the launch script.
+You can download this extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/). To build from source, simply run `npm build-dev` or use the launch scripts.
 
 ### Notes
 
@@ -24,25 +24,25 @@ You can download this extension from the [Visual Studio Marketplace](https://mar
 
 **Why did you create this extension?**
 
-I wanted a way to quickly complete exercises during my breaks without having to leave my editor or close my current workspace.
+I wanted a way to complete exercises during my breaks without having to leave my editor or close my current workspace.
 
-**Does this extension completely replace the website?**
+**Does this extension intend to replace the website?**
 
 No, the purpose of this tool is to supplement the website. Furthermore, there is no public api that provides access to profile information, making it extremely difficult to replicate online features.
 
 **Why can't I view my profile information? Why is my progress not synced with exercism.io?**
 
-As mentioned in the answer above, there is no available api that supports that functionality. Please read and subscribe to [#4087](https://github.com/exercism/exercism/issues/4087) for more information.
+As mentioned above, there is no available api that supports that functionality. Please read or subscribe to [#4087](https://github.com/exercism/exercism/issues/4087) for more information.
 
 ## Contributing
 
 Pull requests, feature requests, or any other form of contribution is always welcome.
 
-My primary usage of Exercism is in independent mode, which is why I would greatly appreciate some feedback/suggestions on how to improve this extension for everyone else. If there is a feature that you feel would greatly enhance your experience, please let me know by filing an issue and I will do my best to implement it.
+My primary usage of Exercism is in independent mode, which is why I would greatly appreciate some feedback/suggestions on how to improve this extension for everyone else. If there is a feature that you feel would enhance your experience, please let me know by filing an issue and I will do my best to implement it.
 
 ## Roadmap
 
-Although the lack of a public api places us in a precarious situation, there are still some features that are planned for the near future:
+Although the lack of a public api places us in a precarious situation, there are still some features that are planned for the future:
 
 - Commenting support via the comment api
 - Profile information
