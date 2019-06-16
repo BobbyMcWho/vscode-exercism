@@ -12,33 +12,23 @@ export function postMessageToVSC(message: WebviewMessage): void {
 window.addEventListener("message", handleIncomingMessage);
 
 function handleIncomingMessage(event: MessageEvent): void {
-  const { command, view, payload } = event.data;
-  switch (view) {
-    case "track":
-      store.setState({
-        view,
-        trackState: { ...payload },
-        exerciseState: undefined
-      });
-      break;
-    case "exercise":
+  const { command, payload } = event.data;
+  switch (command) {
+    case "update":
       store.setState(state => {
-        console.log(payload.solutions ? payload.solutions.length : 0)
         return {
-          view,
-          trackState: undefined,
-          exerciseState: {
-            exercise: payload.exercise ? payload.exercise : state.exerciseState.exercise,
-            track: payload.track ? payload.track : state.exerciseState.track,
-            exerciseIconPath: payload.exerciseIconPath
-              ? payload.exerciseIconPath
-              : state.exerciseState.exerciseIconPath,
-            trackIconPath: payload.trackIconPath ? payload.trackIconPath : state.exerciseState.trackIconPath,
-            solutions: payload.solutions ? payload.solutions : payload.solutions,
-            instructions: payload.instructions ? payload.instructions : state.exerciseState.instructions
-          }
+          ...payload,
+          currentTabIndex: state.currentTabIndex,
+          instructions: payload.instructions,
+          solutions: payload.solutions
         };
       });
+      break;
+    case "update:solutions":
+      store.setState({
+        solutions: payload.solutions
+      });
+    default:
       break;
   }
 }

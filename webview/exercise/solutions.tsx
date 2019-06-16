@@ -1,8 +1,8 @@
 import { h } from "preact";
 import { postMessageToVSC } from "../utilities/message";
-import { ExerciseState } from "../utilities/store";
+import { State } from "../utilities/store";
 
-const Solutions = (props: ExerciseState) => {
+const Solutions = (props: State) => {
   return props.solutions ? (
     <div class="nav-content">
       <div class="solution-list">
@@ -21,7 +21,7 @@ const Solutions = (props: ExerciseState) => {
     </div>
   ) : (
     (() => {
-      postMessageToVSC({ command: "getExerciseSolutions", view: "exercise" });
+      postMessageToVSC({ command: "getExerciseSolutions" });
       return undefined;
     })()
   );

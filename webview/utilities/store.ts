@@ -7,20 +7,15 @@ export interface TrackState {
   trackIconPath: string;
 }
 
-export interface ExerciseState {
+export interface State {
+  currentTabIndex: number;
+  view?: "track" | "exercise";
   exercise: Exercise;
   track: Track;
   exerciseIconPath: string;
   trackIconPath: string;
-  solutions?: Solution[];
-  instructions?: string;
-}
-
-export interface State {
-  currentTabIndex: number;
-  view?: "track" | "exercise";
-  trackState?: TrackState;
-  exerciseState?: ExerciseState;
+  solutions: Solution[];
+  instructions: string;
 }
 
 export const store: Store<State> = createStore({

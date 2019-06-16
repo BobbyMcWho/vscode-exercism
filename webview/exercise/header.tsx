@@ -2,11 +2,11 @@ import { h } from "preact";
 import { ExerciseStatus } from "../../src/typings/api";
 import Header from "../common/header";
 import { postMessageToVSC } from "../utilities/message";
-import { ExerciseState } from "../utilities/store";
+import { State } from "../utilities/store";
 
-const ExerciseHeader = (props: ExerciseState & { activeTab: number }) => {
+const ExerciseHeader = (props: State) => {
   return (
-    <Header activeTab={props.activeTab} tabs={["Instructions", "Solutions"]}>
+    <Header activeTab={props.currentTabIndex} tabs={["Instructions", "Solutions"]}>
       <div class="icons">
         <div class="track-icon" style={{ backgroundImage: `url(${props.trackIconPath}` }} />
         <div class="exercise-icon" style={{ backgroundImage: `url(${props.exerciseIconPath}` }} />
@@ -32,7 +32,6 @@ const ExerciseHeader = (props: ExerciseState & { activeTab: number }) => {
                 href={tag}
                 onClick={() =>
                   postMessageToVSC({
-                    view: "exercise",
                     command: "filterByTopic",
                     payload: topic
                   })
@@ -58,7 +57,6 @@ const ExerciseHeader = (props: ExerciseState & { activeTab: number }) => {
                 class="action-btn"
                 onClick={() =>
                   postMessageToVSC({
-                    view: "exercise",
                     command: "complete"
                   })
                 }
@@ -72,7 +70,6 @@ const ExerciseHeader = (props: ExerciseState & { activeTab: number }) => {
                 class="action-btn"
                 onClick={() =>
                   postMessageToVSC({
-                    view: "exercise",
                     command: "download"
                   })
                 }
@@ -86,7 +83,6 @@ const ExerciseHeader = (props: ExerciseState & { activeTab: number }) => {
           class="action-btn"
           onClick={() =>
             postMessageToVSC({
-              view: "exercise",
               command: "openStart"
             })
           }
