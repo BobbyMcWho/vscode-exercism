@@ -1,5 +1,5 @@
 import { h, render } from "preact";
-import { connect, Provider } from "unistore/preact";
+import { connect, Provider } from "redux-zero/preact";
 import ExerciseView from "./exercise";
 import "./style/default.css";
 import "./style/markdown.css";
