@@ -1,7 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
-import { Logger } from "../../common/logger";
 import { ExercismController } from "../../exercism/controller";
 import { Exercise, ExerciseStatus, Track } from "../../typings/api";
 import { CustomIconURI } from "../../typings/vsc";
@@ -24,8 +23,6 @@ export class ExerciseInfoPreview implements TreeNodePreview, vscode.Disposable {
     private _exercismController: ExercismController,
     private _tracksTreeProvider: TracksTreeProvider
   ) {
-    Logger.debug("webview", "Creating new ExerciseInfoPreview.");
-
     const track = this._exerciseNode.parent.track;
     const exercise = this._exerciseNode.exercise;
     const trackIconPath = this._exercismController.getTrackIconPath(track);
@@ -47,8 +44,8 @@ export class ExerciseInfoPreview implements TreeNodePreview, vscode.Disposable {
 
     this._disposables.push(
       this._tracksTreeProvider.onDidChangeTreeData(node => {
-        Logger.debug("webview", "Updating exercise node:", node.id);
         if (node instanceof ExerciseNode && node.id === this._exerciseNode.id) {
+          this._exerciseNode = node;
           this._onDidUpdateMessage.fire({
             command: "update",
             payload: {
