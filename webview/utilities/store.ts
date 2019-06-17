@@ -1,5 +1,4 @@
-const createStore = require("redux-zero");
-import Store from "redux-zero/interfaces/Store";
+const createStore = require("unistore");
 import { Exercise, Solution, Track } from "../../src/typings/api";
 
 export interface TrackState {
@@ -18,6 +17,6 @@ export interface State {
   instructions: string;
 }
 
-export const store: Store<State> = createStore({
+export const store  = createStore({
   currentTabIndex: 0
 });

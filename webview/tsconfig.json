@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "../out/.tsbuildinfo",
     "target": "esnext",
     "module": "commonjs",
-    "outDir": "../out/",
+    "outDir": "../out/webview",
     "jsx": "react",
     "jsxFactory": "h",
     "strict": false,

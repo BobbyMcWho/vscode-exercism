@@ -2,6 +2,11 @@
 
 ## v1
 
+### v1.12.0 (June 17th 2019)
+
+- [chore] Deleted assets branch in favor of .vscodeignore
+- [test] Added testing capabilities
+
 ### v1.11.0 (June 16th 2019)
 
 - [chore] Removed some logging that wasn't necessary

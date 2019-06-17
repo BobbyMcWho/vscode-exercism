@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./out/.tsbuildinfo",
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "esnext",
@@ -14,5 +16,5 @@
     "experimentalDecorators": true,
     "preserveWatchOutput": true
   },
-  "include": ["src/**/*"]
+  "include": ["./src/**/*"],
 }
