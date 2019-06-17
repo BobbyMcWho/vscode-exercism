@@ -9,6 +9,8 @@ node_modules/**
 out/**
 images/screenshots/**
 webpack.config.js
+webview/**
+preview/**
 **/tsconfig.json
 **/tslint.json
 **/*.map
