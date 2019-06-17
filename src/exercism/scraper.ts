@@ -44,7 +44,7 @@ export async function fetchExerciseSolutions(track: Track, exercise: Exercise): 
       });
     });
   } catch (err) {
-    Logger.error("exercism/scraper", err);
+    Logger.error("scraper", err);
   }
   return solutions;
 }
@@ -64,7 +64,7 @@ export async function fetchUserSolutions(userID: string): Promise<Solutions> {
         .text();
     });
   } catch (err) {
-    Logger.error("exercism/scraper", err);
+    Logger.error("scraper", err);
   }
   return solutions;
 }
@@ -107,7 +107,7 @@ export async function fetchTrackExercises(trackID: string): Promise<Exercise[]> 
       });
     });
   } catch (err) {
-    Logger.error("exercism/scraper", err);
+    Logger.error("scraper", err);
   }
   return Promise.resolve(exercises);
 }
@@ -138,7 +138,7 @@ export async function fetchAllTracks(): Promise<Track[]> {
       });
     });
   } catch (err) {
-    Logger.error("exercism/scraper", err);
+    Logger.error("scraper", err);
   }
   return Promise.resolve(tracks);
 }
