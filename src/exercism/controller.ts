@@ -95,27 +95,25 @@ export class ExercismController {
     return this.getCachedTrackIcon(track.id);
   }
 
-  @memo()
   private getCachedTrackIcon(id: string): CustomIconURI {
     return {
-      light: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/track/" + id + "-hex-white.png")),
-      dark: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/track/" + id + "-bordered-turquoise.png"))
+      light: ExtensionManager.getAbsolutePathURI("images/icons/track/" + id + "-hex-white.png"),
+      dark: ExtensionManager.getAbsolutePathURI("images/icons/track/" + id + "-bordered-turquoise.png")
     };
   }
 
-  @memo()
   private getCachedExerciseIcon(id: string): CustomIconURI {
     return {
-      light: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/exercise/" + id + "-turquoise.png")),
-      dark: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/exercise/" + id + "-white.png"))
+      light: ExtensionManager.getAbsolutePathURI("images/icons/exercise/" + id + "-turquoise.png"),
+      dark: ExtensionManager.getAbsolutePathURI("images/icons/exercise/" + id + "-white.png")
     };
   }
 
   @memo()
   private getCachedStatusIcon(id: string): CustomIconURI {
     return {
-      light: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/status/" + id + ".png")),
-      dark: vscode.Uri.file(ExtensionManager.getAbsolutePath("images/icons/status/" + id + ".png"))
+      light: ExtensionManager.getAbsolutePathURI("images/icons/status/" + id + ".png"),
+      dark: ExtensionManager.getAbsolutePathURI("images/icons/status/" + id + ".png")
     };
   }
 
