@@ -17,6 +17,7 @@ body {
   display: flex;
   height: 100%;
   flex-direction: column;
+  min-width: 300px;
 }
 
 a:focus,
