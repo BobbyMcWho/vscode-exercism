@@ -7,6 +7,10 @@
 - [chore] Deleted assets branch in favor of .vscodeignore
 - [publish] No longer including the webview folder in the packaged extension
 - [test] Included a framework for integration tests
+- [webview] Fixed header tags: you can now click on a tag to filter the tree! This was previously supported but it broke with the last release.
+- [preview] Removed some logging that was causing type errors
+- [commands] Made open & start much faster
+- [webview] Improved width when views are split 
 
 ### v1.11.0 (June 16th 2019)
 
