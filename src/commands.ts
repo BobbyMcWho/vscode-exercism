@@ -165,7 +165,7 @@ export function RegisterAllCommands(
         }
 
         const fileNodes = await exerciseNode.getChildren();
-        await vscode.commands.executeCommand("vscode.setEditorLayout", {
+        vscode.commands.executeCommand("vscode.setEditorLayout", {
           orientation: 0,
           groups: [{ groups: [], size: 0.5 }, { groups: [{}, {}], size: 0.5 }]
         });
