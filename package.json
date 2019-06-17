@@ -7,7 +7,6 @@
   "publisher": "masonliu",
   "license": "MIT",
   "icon": "images/logo/logo.jpeg",
-  "preview": true,
   "enableProposedApi": false,
   "homepage": "https://github.com/masliu/vscode-exercism.git",
   "repository": {
