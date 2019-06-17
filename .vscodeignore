@@ -7,8 +7,8 @@ vsc-extension-quickstart.md
 scripts/**
 node_modules/**
 out/**
+images/screenshots/**
 webpack.config.js
-preview
 **/tsconfig.json
 **/tslint.json
 **/*.map
