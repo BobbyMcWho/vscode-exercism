@@ -5,7 +5,8 @@
 ### v1.12.0 (June 17th 2019)
 
 - [chore] Deleted assets branch in favor of .vscodeignore
-- [test] Added testing capabilities
+- [publish] No longer including the webview folder in the packaged extension
+- [test] Included a framework for integration tests
 
 ### v1.11.0 (June 16th 2019)
 
