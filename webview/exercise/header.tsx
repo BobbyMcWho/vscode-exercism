@@ -33,7 +33,9 @@ const ExerciseHeader = (props: State) => {
                 onClick={() =>
                   postMessageToVSC({
                     command: "filterByTopic",
-                    payload: topic
+                    payload: {
+                      topic
+                    }
                   })
                 }
               >
