@@ -120,17 +120,3 @@ export async function fetchAllTracks(): Promise<Track[]> {
   }
   return Promise.resolve(tracks);
 }
-
-// export async function fetchTracksWithExercises(): Promise<Track[]> {
-//   const tracks = await fetchAllTracks();
-//   for (let i = 0; i < tracks.length; i++) {
-//     const track = tracks[i];
-//     track.exercises = await fetchTrackExercises(track.id);
-//   }
-//   return Promise.resolve(tracks);
-// }
-
-// export async function outputTrackData(): Promise<void> {
-//   const tracks = await fetchTracksWithExercises();
-//   await promisify(writeFile)(ExtensionManager.getAbsolutePath("data/tracks.json"), JSON.stringify(tracks, null, 4));
-// }

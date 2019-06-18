@@ -1,6 +1,5 @@
-import * as fs from "fs";
+import * as fs from "fs-extra";
 import * as path from "path";
-import { promisify } from "util";
 import * as vscode from "vscode";
 import { ExtensionManager } from "./common/context";
 import { ExercismController } from "./exercism/controller";
@@ -253,7 +252,7 @@ export function RegisterAllCommands(
       cb: async (): Promise<void> => {
         const uri = await vscode.window.showSaveDialog({});
         if (uri) {
-          await promisify(fs.writeFile)(uri.fsPath, exercismController.getUserDataInJSON());
+          await fs.writeFile(uri.fsPath, exercismController.getUserDataInJSON());
           await vscode.window.showTextDocument(uri);
         }
       }
@@ -261,10 +260,11 @@ export function RegisterAllCommands(
     {
       id: "exercism.global.importUserData",
       cb: async (): Promise<void> => {
-        const uri = await vscode.window.showOpenDialog({ canSelectFolders: false, canSelectMany: false });
-        if (uri && uri[0]) {
-          const data = await promisify(fs.readFile)(uri[0].fsPath);
-          exercismController.loadUserDataFromJSON(data.toString());
+        const selectedFiles = await vscode.window.showOpenDialog({ canSelectFolders: false, canSelectMany: false });
+        if (selectedFiles) {
+          const firstFileSelectionUri = selectedFiles[0];
+          const fileData = await fs.readFile(firstFileSelectionUri.fsPath);
+          exercismController.loadUserDataFromJSON(fileData.toString());
           tracksTreeProvider.refresh();
         }
       }
@@ -297,7 +297,7 @@ export function RegisterAllCommands(
     {
       id: "exercism.file.delete",
       cb: (fileNode: FileNode): void => {
-        fs.unlink(fileNode.resourceUri.fsPath, () => tracksTreeProvider.refresh(fileNode.parent));
+        fs.remove(fileNode.resourceUri.fsPath).then(() => tracksTreeProvider.refresh(fileNode.parent));
       }
     },
     {

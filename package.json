@@ -99,13 +99,13 @@
       },
       {
         "command": "exercism.file.delete",
-        "title": "Delete File",
+        "title": "Delete",
         "category": "Exercism",
         "enablement": "view == 'exercism.view.tracks'"
       },
       {
         "command": "exercism.file.rename",
-        "title": "Rename File",
+        "title": "Rename",
         "category": "Exercism",
         "enablement": "view == 'exercism.view.tracks'"
       },
@@ -266,7 +266,7 @@
       "view/item/context": [
         {
           "command": "exercism.exercise.createNewFile",
-          "when": "view == 'exercism.view.tracks' && viewItem == exerciseTreeNode",
+          "when": "view == 'exercism.view.tracks' && (viewItem == exerciseTreeNode || viewItem == exerciseTreeNode:directory)",
           "group": "1@1"
         },
         {
@@ -291,17 +291,17 @@
         },
         {
           "command": "exercism.file.submit",
-          "when": "view == 'exercism.view.tracks' && viewItem == fileTreeNode",
+          "when": "view == 'exercism.view.tracks' && viewItem == fileTreeNode:file",
           "group": "1@1"
         },
         {
           "command": "exercism.file.rename",
-          "when": "view == 'exercism.view.tracks' && viewItem == fileTreeNode",
+          "when": "view == 'exercism.view.tracks' && viewItem =~ /fileTreeNode/",
           "group": "1@2"
         },
         {
           "command": "exercism.file.delete",
-          "when": "view == 'exercism.view.tracks' && viewItem == fileTreeNode",
+          "when": "view == 'exercism.view.tracks' && viewItem =~ /fileTreeNode/",
           "group": "1@3"
         },
         {

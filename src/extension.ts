@@ -6,7 +6,7 @@ import { ExercismController } from "./exercism/controller";
 import { NodeFilterProvider } from "./views/tree/nodeFilterProvider";
 import { TracksTreeProvider } from "./views/tree/tracksTreeProvider";
 
-export function activate(context: vscode.ExtensionContext): void {
+export async function activate(context: vscode.ExtensionContext): Promise<void> {
   ExtensionManager.initialize(context);
 
   Logger.initialize();
