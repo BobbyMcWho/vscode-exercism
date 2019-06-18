@@ -94,7 +94,7 @@ export class ExercismController {
     );
   }
 
-  getTrackIconPath(track: Track, shouldUseStatus?: boolean): CustomIconURI {
+  getTrackIconPath(track: Track): CustomIconURI {
     return this.getIconPath(
       "images/icons/track/" + track.id + "-hex-white.png",
       "images/icons/track/" + track.id + "-bordered-turquoise.png"

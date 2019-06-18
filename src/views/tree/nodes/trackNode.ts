@@ -10,7 +10,7 @@ export class TrackNode implements TreeNode<ExerciseNode> {
   public readonly label = this.track.name;
   public readonly collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
   public readonly description = this.track.totalExercisesCompleted + "/" + this.track.totalExercises;
-  public readonly iconPath = this.parent.exercismController.getTrackIconPath(this.track, true);
+  public readonly iconPath = this.parent.exercismController.getTrackIconPath(this.track);
 
   constructor(public readonly parent: RootNode, public readonly track: Track) {}
 
