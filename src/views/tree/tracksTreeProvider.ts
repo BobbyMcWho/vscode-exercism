@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { ExtensionManager } from "../../common/context";
 import { ExercismController } from "../../exercism/controller";
 import { NodeFilterProvider } from "./nodeFilterProvider";
 import { RootNode } from "./nodes/rootNode";
@@ -17,6 +18,8 @@ export class TracksTreeProvider implements vscode.TreeDataProvider<TreeNode> {
       showCollapseAll: true,
       treeDataProvider: this
     });
+
+    ExtensionManager.subscribe(this.view);
   }
 
   async refresh(node?: TreeNode): Promise<void> {
