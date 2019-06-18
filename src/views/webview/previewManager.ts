@@ -50,7 +50,11 @@ export class TreeNodePreviewManager implements vscode.Disposable {
 
     this._previewDisposables.push(
       this._panel.webview.onDidReceiveMessage(message => preview.receiveMessage(message)),
-      preview.onDidUpdateMessage(message => this._panel.webview.postMessage(message)),
+      preview.onDidUpdateMessage(message => {
+        if (this._panel.visible) {
+          this._panel.webview.postMessage(message);
+        }
+      }),
       preview
     );
 
