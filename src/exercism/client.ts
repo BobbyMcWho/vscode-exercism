@@ -65,8 +65,6 @@ export class ExercismClientController {
 
     const payload = solutionDataResp.data;
 
-    console.log(payload);
-
     // Write the metadata contents
     await this.writeMetaDataFile(exerciseDir, payload);
 
