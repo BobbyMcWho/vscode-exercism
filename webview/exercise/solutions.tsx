@@ -22,7 +22,7 @@ const Solutions = (props: State) => {
   ) : (
     (() => {
       postMessageToVSC({ command: "getExerciseSolutions" });
-      return undefined;
+      return null;
     })()
   );
 };

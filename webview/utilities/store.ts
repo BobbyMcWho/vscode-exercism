@@ -19,6 +19,6 @@ export interface State {
   instructions: string;
 }
 
-export const store: Store<State> = createStore({
+export const store: Store<Partial<State>> = createStore({
   currentTabIndex: 0
 });

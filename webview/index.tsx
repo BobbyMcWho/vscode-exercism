@@ -12,7 +12,7 @@ const App = connect((state: State): State => state)((props: State) => {
   } else if (props.view === "track" && props.track) {
     return <TrackView {...props} />;
   } else {
-    return undefined;
+    return null;
   }
 });
 
@@ -20,5 +20,5 @@ render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root") as HTMLElement
 );
