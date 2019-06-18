@@ -46,61 +46,66 @@ export class NodeFilterProvider {
 
   async filterTrackNodes(nodes: TrackNode[]): Promise<TrackNode[]> {
     const filter = this._filterCollectionStore.model.trackFilter;
-    if (filter & TrackFilter.FILTER_FOCUSED) {
-      const focusedID = this._filterCollectionStore.model.focusedTrackNodeID;
-      if (focusedID) {
-        nodes = nodes.filter(a => a.id === focusedID);
-      }
-    } else {
-      if (filter & TrackFilter.FILTER_JOINED) {
-        nodes = nodes.filter(a => a.track.status & TrackStatus.JOINED);
+
+    if (filter !== TrackFilter.NONE) {
+      if (filter & TrackFilter.FILTER_FOCUSED) {
+        const focusedID = this._filterCollectionStore.model.focusedTrackNodeID;
+        if (focusedID) {
+          return nodes.filter(a => a.id === focusedID);
+        }
+      } else {
+        if (filter & TrackFilter.FILTER_JOINED) {
+          nodes = nodes.filter(a => a.track.status & TrackStatus.JOINED);
+        }
       }
     }
 
-    return Promise.resolve(nodes);
+    return nodes;
   }
 
   async filterExerciseNodes(nodes: ExerciseNode[]): Promise<ExerciseNode[]> {
     const filter = this._filterCollectionStore.model.exerciseFilter;
 
-    if (filter & ExerciseFilter.FILTER_TOPIC) {
-      const topic = this._filterCollectionStore.model.topicToFilter;
-      if (topic) {
-        nodes = nodes.filter(a => !!a.exercise.topics.find(t => t === topic));
-        nodes.forEach(node => node.showTopics());
+    if (filter !== ExerciseFilter.NONE) {
+      if (filter & ExerciseFilter.FILTER_TOPIC) {
+        const topic = this._filterCollectionStore.model.topicToFilter;
+        if (topic) {
+          nodes = nodes.filter(a => !!a.exercise.topics.find(t => t === topic));
+          nodes.forEach(node => node.showTopics());
+        }
+      }
+
+      if (filter & ExerciseFilter.FILTER_UNCOMPLETED) {
+        nodes = nodes.filter(a => !(a.exercise.status & ExerciseStatus.COMPLETED));
+      }
+
+      if (filter & ExerciseFilter.FILTER_COMPLETED) {
+        nodes = nodes.filter(a => a.exercise.status & ExerciseStatus.COMPLETED);
+      }
+
+      if (filter & ExerciseFilter.FILTER_DOWNLOADED) {
+        nodes = nodes.filter(a => a.exercise.status & ExerciseStatus.DOWNLOADED);
+      }
+
+      if (filter & ExerciseFilter.SORT_BY_NAME) {
+        nodes = nodes.sort((a, b) => this.compare(a.exercise.name, b.exercise.name));
+      }
+
+      if (filter & ExerciseFilter.SORT_BY_DIFFICULTY) {
+        nodes = nodes.sort((a, b) => this.compare(a.exercise.difficulty.length, b.exercise.difficulty.length));
+      }
+
+      if (filter & ExerciseFilter.SORT_BY_STATUS) {
+        nodes = nodes.sort((a, b) => this.compare(b.exercise.status, a.exercise.status));
+      }
+
+      if (filter & ExerciseFilter.SORT_BY_TOPIC) {
+        (async () => nodes.forEach(node => node.showTopics()))();
+        nodes = nodes.sort((a, b) => this.compare(b.exercise.topics[0], a.exercise.topics[0]));
       }
     }
 
-    if (filter & ExerciseFilter.FILTER_UNCOMPLETED) {
-      nodes = nodes.filter(a => !(a.exercise.status & ExerciseStatus.COMPLETED));
-    }
-
-    if (filter & ExerciseFilter.FILTER_COMPLETED) {
-      nodes = nodes.filter(a => a.exercise.status & ExerciseStatus.COMPLETED);
-    }
-
-    if (filter & ExerciseFilter.FILTER_DOWNLOADED) {
-      nodes = nodes.filter(a => a.exercise.status & ExerciseStatus.DOWNLOADED);
-    }
-
-    if (filter & ExerciseFilter.SORT_BY_NAME) {
-      nodes = nodes.sort((a, b) => this.compare(a.exercise.name, b.exercise.name));
-    }
-
-    if (filter & ExerciseFilter.SORT_BY_DIFFICULTY) {
-      nodes = nodes.sort((a, b) => this.compare(a.exercise.difficulty.length, b.exercise.difficulty.length));
-    }
-
-    if (filter & ExerciseFilter.SORT_BY_STATUS) {
-      nodes = nodes.sort((a, b) => this.compare(b.exercise.status, a.exercise.status));
-    }
-
-    if (filter & ExerciseFilter.SORT_BY_TOPIC) {
-      (async () => nodes.forEach(node => node.showTopics()))();
-      nodes = nodes.sort((a, b) => this.compare(b.exercise.topics[0], a.exercise.topics[0]));
-    }
-
-    return Promise.resolve(nodes);
+    return nodes;
   }
 
   clearFilters(): void {
