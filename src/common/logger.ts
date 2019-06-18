@@ -58,7 +58,11 @@ export class Logger {
         severity,
         group
       };
-      console.log(`[${log.date}][${log.group}]: ${log.message}`);
+      if (severity === LogSeverity.ERROR) {
+        console.error(`[${log.date}][${log.group}]: ${log.message}`);
+      } else {
+        console.log(`[${log.date}][${log.group}]: ${log.message}`);
+      }
     }
   }
 }
