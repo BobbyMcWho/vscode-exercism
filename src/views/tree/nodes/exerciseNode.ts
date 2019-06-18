@@ -3,27 +3,27 @@ import * as path from "path";
 import * as vscode from "vscode";
 import { Logger } from "../../../common/logger";
 import { Exercise, ExerciseStatus } from "../../../typings/api";
-import { CustomIconURI } from "../../../typings/vsc";
 import { FileNode } from "./fileNode";
 import { TrackNode } from "./trackNode";
 import { TreeNode } from "./treeNode";
 
 export class ExerciseNode implements TreeNode<FileNode> {
-  private _showTopics: boolean = false;
+  private _shouldShowTopics: boolean = false;
   public readonly contextValue = "exerciseTreeNode";
+  public readonly label = this.exercise.name;
+  public readonly id = this.parent.id + "/" + this.exercise.id;
+  public readonly iconPath = this.parent.parent.exercismController.getExerciseIconPath(this.exercise, true);
+  public readonly tooltip = this.exercise.name + " " + this.description;
+  public readonly command = {
+    command: "exercism.exercise.preview",
+    arguments: [this],
+    title: "Open Exercise Preview"
+  };
 
   constructor(public readonly parent: TrackNode, public readonly exercise: Exercise) {}
 
-  get id(): string {
-    return this.parent.id + "/" + this.exercise.id;
-  }
-
-  get label(): string {
-    return this.exercise.name;
-  }
-
   get description(): string {
-    return this._showTopics
+    return this._shouldShowTopics
       ? this.exercise.difficulty + " " + this.exercise.topics.join(", ")
       : this.exercise.difficulty;
   }
@@ -34,24 +34,8 @@ export class ExerciseNode implements TreeNode<FileNode> {
       : vscode.TreeItemCollapsibleState.None;
   }
 
-  get iconPath(): CustomIconURI {
-    return this.parent.parent.exercismController.getExerciseIconPath(this.exercise, true);
-  }
-
-  get tooltip(): string {
-    return this.exercise.name + " " + this.description;
-  }
-
-  get command(): vscode.Command {
-    return {
-      command: "exercism.exercise.preview",
-      arguments: [this],
-      title: "Open Exercise Preview"
-    };
-  }
-
   showTopics(): void {
-    this._showTopics = true;
+    this._shouldShowTopics = true;
   }
 
   async getChildren(): Promise<FileNode[]> {
