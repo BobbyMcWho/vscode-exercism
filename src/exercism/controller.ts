@@ -1,5 +1,6 @@
 import { exec } from "child_process";
 import * as fs from "fs";
+import { memo } from "helpful-decorators";
 import * as path from "path";
 import { promisify } from "util";
 import * as vscode from "vscode";
@@ -81,28 +82,44 @@ export class ExercismController {
   getExerciseIconPath(exercise: Exercise, shouldUseStatus?: boolean): CustomIconURI {
     if (shouldUseStatus) {
       if (exercise.status & ExerciseStatus.COMPLETED) {
-        return {
-          light: ExtensionManager.getAbsolutePathURI("images/icons/status/complete.png"),
-          dark: ExtensionManager.getAbsolutePathURI("images/icons/status/complete.png")
-        };
+        return this.getIconPath("images/icons/status/complete.png", "images/icons/status/complete.png");
       }
       if (exercise.status & ExerciseStatus.SUBMITTED) {
-        return {
-          light: ExtensionManager.getAbsolutePathURI("images/icons/status/inprogress.png"),
-          dark: ExtensionManager.getAbsolutePathURI("images/icons/status/inprogress.png")
-        };
+        return this.getIconPath("images/icons/status/inprogress.png", "images/icons/status/inprogress.png");
       }
     }
-    return {
-      light: ExtensionManager.getAbsolutePathURI("images/icons/exercise/" + exercise.id + "-turquoise.png"),
-      dark: ExtensionManager.getAbsolutePathURI("images/icons/exercise/" + exercise.id + "-white.png")
-    };
+    return this.getIconPath(
+      "images/icons/exercise/" + exercise.id + "-turquoise.png",
+      "images/icons/exercise/" + exercise.id + "-white.png"
+    );
   }
 
   getTrackIconPath(track: Track, shouldUseStatus?: boolean): CustomIconURI {
+    return this.getIconPath(
+      "images/icons/track/" + track.id + "-hex-white.png",
+      "images/icons/track/" + track.id + "-bordered-turquoise.png"
+    );
+  }
+
+  @memo()
+  private getIconPath(lightRelPath: string, darkRelPath: string): CustomIconURI {
+    const lightURI = ExtensionManager.getAbsolutePathURI(lightRelPath);
+    const darkURI = ExtensionManager.getAbsolutePathURI(darkRelPath);
+
+    if (!fs.existsSync(lightURI.fsPath) || !fs.existsSync(darkURI.fsPath)) {
+      return {
+        light: vscode.Uri.parse(
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+        ),
+        dark: vscode.Uri.parse(
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+        )
+      };
+    }
+
     return {
-      light: ExtensionManager.getAbsolutePathURI("images/icons/track/" + track.id + "-hex-white.png"),
-      dark: ExtensionManager.getAbsolutePathURI("images/icons/track/" + track.id + "-bordered-turquoise.png")
+      light: lightURI,
+      dark: darkURI
     };
   }
 
