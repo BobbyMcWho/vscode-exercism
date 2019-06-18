@@ -33,8 +33,6 @@ export async function fetchExerciseSolutions(track: Track, exercise: Exercise): 
           details[i] = parseInt($(el).text());
         });
       solutions.push({
-        track,
-        exercise,
         author: $(el)
           .find(".details-bar > .handle")
           .text(),

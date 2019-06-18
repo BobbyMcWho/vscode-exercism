@@ -39,8 +39,6 @@ export interface Solution {
   author: string;
   stars: number;
   comments: number;
-  track: Track;
-  exercise: Exercise;
 }
 
 export interface Solutions {
