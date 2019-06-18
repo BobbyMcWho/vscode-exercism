@@ -9,19 +9,16 @@ import { Logger } from "../common/logger";
 import { StorageItem } from "../common/storage";
 import { Exercise, ExerciseStatus, Solution, Track, TrackStatus, UserDataModel } from "../typings/api";
 import { CustomIconURI } from "../typings/vsc";
-import { ExercismClientController } from "./client";
 import { getUserConfig } from "./config";
 import * as scraper from "./scraper";
 
 export class ExercismController {
   private readonly _userDataStore: StorageItem<UserDataModel>;
-  private _clientController: ExercismClientController;
 
   constructor() {
     this._userDataStore = new StorageItem<UserDataModel>("exercism.client.data", {
       config: getUserConfig()
     });
-    this._clientController = new ExercismClientController(this._userDataStore.model.config);
   }
 
   // Get all available tracks (from local storage or scraping exercism.io).
@@ -147,7 +144,7 @@ export class ExercismController {
     Logger.debug("exercism", "Downloading exercise:", track.id, exercise.id);
 
     try {
-      await this._clientController.downloadExerciseFiles(track, exercise);
+      await promisify(exec)(`exercism download --track=${track.id} --exercise=${exercise.id}`);
     } catch (e) {
       throw e;
     }
