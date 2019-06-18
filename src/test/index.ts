@@ -5,7 +5,8 @@ import * as path from "path";
 export function run(cwd: string, cb: (error: any, failures?: number) => void): void {
   const mocha = new Mocha({
     ui: "tdd",
-    useColors: true
+    useColors: true,
+    slow: 0
   });
 
   glob("**/**.test.js", { cwd }, (err, files) => {
