@@ -7,7 +7,7 @@ import { ExercismController } from "./exercism/controller";
 import { ExerciseStatus } from "./typings/api";
 import { ExerciseFilter, NodeFilterProvider, TrackFilter } from "./views/tree/nodeFilterProvider";
 import { ExerciseNode } from "./views/tree/nodes/exerciseNode";
-import { FileNode } from "./views/tree/nodes/fileNode";
+import { FileNode, getFileNodeExerciseNode } from "./views/tree/nodes/fileNode";
 import { TrackNode } from "./views/tree/nodes/trackNode";
 import { TracksTreeProvider } from "./views/tree/tracksTreeProvider";
 import { ExerciseInfoPreview } from "./views/webview/exerciseInfoPreview";
@@ -325,7 +325,8 @@ export function RegisterAllCommands(
               title: "Submitting exercise...",
               location: vscode.ProgressLocation.Notification
             },
-            () => exercismController.submitExerciseFile(fileNode.parent.exercise, fileNode.resourceUri)
+            () =>
+              exercismController.submitExerciseFile(getFileNodeExerciseNode(fileNode).exercise, fileNode.resourceUri)
           );
         } catch (e) {
           const action = await vscode.window.showErrorMessage(String(e), "Retry", "Cancel");
