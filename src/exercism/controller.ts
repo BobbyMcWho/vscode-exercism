@@ -1,6 +1,5 @@
 import { exec } from "child_process";
 import * as fs from "fs";
-import { memo } from "helpful-decorators";
 import * as path from "path";
 import { promisify } from "util";
 import * as vscode from "vscode";
@@ -82,38 +81,28 @@ export class ExercismController {
   getExerciseIconPath(exercise: Exercise, shouldUseStatus?: boolean): CustomIconURI {
     if (shouldUseStatus) {
       if (exercise.status & ExerciseStatus.COMPLETED) {
-        return this.getCachedStatusIcon("complete");
+        return {
+          light: ExtensionManager.getAbsolutePathURI("images/icons/status/complete.png"),
+          dark: ExtensionManager.getAbsolutePathURI("images/icons/status/complete.png")
+        };
       }
       if (exercise.status & ExerciseStatus.SUBMITTED) {
-        return this.getCachedStatusIcon("inprogress");
+        return {
+          light: ExtensionManager.getAbsolutePathURI("images/icons/status/inprogress.png"),
+          dark: ExtensionManager.getAbsolutePathURI("images/icons/status/inprogress.png")
+        };
       }
     }
-    return this.getCachedExerciseIcon(exercise.id);
+    return {
+      light: ExtensionManager.getAbsolutePathURI("images/icons/exercise/" + exercise.id + "-turquoise.png"),
+      dark: ExtensionManager.getAbsolutePathURI("images/icons/exercise/" + exercise.id + "-white.png")
+    };
   }
 
   getTrackIconPath(track: Track, shouldUseStatus?: boolean): CustomIconURI {
-    return this.getCachedTrackIcon(track.id);
-  }
-
-  private getCachedTrackIcon(id: string): CustomIconURI {
     return {
-      light: ExtensionManager.getAbsolutePathURI("images/icons/track/" + id + "-hex-white.png"),
-      dark: ExtensionManager.getAbsolutePathURI("images/icons/track/" + id + "-bordered-turquoise.png")
-    };
-  }
-
-  private getCachedExerciseIcon(id: string): CustomIconURI {
-    return {
-      light: ExtensionManager.getAbsolutePathURI("images/icons/exercise/" + id + "-turquoise.png"),
-      dark: ExtensionManager.getAbsolutePathURI("images/icons/exercise/" + id + "-white.png")
-    };
-  }
-
-  @memo()
-  private getCachedStatusIcon(id: string): CustomIconURI {
-    return {
-      light: ExtensionManager.getAbsolutePathURI("images/icons/status/" + id + ".png"),
-      dark: ExtensionManager.getAbsolutePathURI("images/icons/status/" + id + ".png")
+      light: ExtensionManager.getAbsolutePathURI("images/icons/track/" + track.id + "-hex-white.png"),
+      dark: ExtensionManager.getAbsolutePathURI("images/icons/track/" + track.id + "-bordered-turquoise.png")
     };
   }
 
