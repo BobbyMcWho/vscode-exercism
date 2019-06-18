@@ -1,7 +1,7 @@
 import * as cheerio from "cheerio";
 import * as https from "https";
 import { Logger } from "../common/logger";
-import { Exercise, ExerciseStatus, Solution, Solutions, Track, TrackStatus } from "../typings/api";
+import { Exercise, ExerciseStatus, Solution, Track, TrackStatus } from "../typings/api";
 
 async function request(url: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
@@ -40,26 +40,6 @@ export async function fetchExerciseSolutions(track: Track, exercise: Exercise): 
         stars: details[1],
         uuid
       });
-    });
-  } catch (err) {
-    Logger.error("scraper", err);
-  }
-  return solutions;
-}
-
-export async function fetchUserSolutions(userID: string): Promise<Solutions> {
-  let solutions: Solutions = {};
-  try {
-    const data = await request("https://exercism.io/profiles/" + userID);
-    const $ = cheerio.load(data);
-    $(".solution").each((_, el) => {
-      const track = $(el)
-        .find(".title-bar > .track")
-        .text()
-        .slice(0, -6); // cut off " track"
-      const exercise = $(el)
-        .find(".title-bar > .title")
-        .text();
     });
   } catch (err) {
     Logger.error("scraper", err);

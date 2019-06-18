@@ -1,4 +1,3 @@
-
 export const enum ExerciseStatus {
   INACTIVE = 0,
   DOWNLOADED = 1,
@@ -41,8 +40,33 @@ export interface Solution {
   comments: number;
 }
 
-export interface Solutions {
-  [id: string]: Solution;
+export interface DownloadPayload {
+  solution: {
+    id: string;
+    url: string;
+    team: {
+      name: string;
+      slug: string;
+    };
+    user: {
+      handle: string;
+      is_requester: string;
+    };
+    exercise: {
+      id: string;
+      instructions_url: string;
+      auto_approve: string;
+      track: {
+        id: string;
+        language: string;
+      };
+    };
+    file_download_base_url: string;
+    files: string[];
+    iteration: {
+      submitted_at: string;
+    };
+  };
 }
 
 export interface UserConfig {
