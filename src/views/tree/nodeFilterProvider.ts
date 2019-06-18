@@ -1,4 +1,5 @@
 import { StorageItem } from "../../common/storage";
+import { compare } from "../../common/utilities";
 import { ExerciseStatus, TrackStatus } from "../../typings/api";
 import { ExerciseNode } from "./nodes/exerciseNode";
 import { TrackNode } from "./nodes/trackNode";
@@ -38,10 +39,6 @@ export class NodeFilterProvider {
       exerciseFilter: ExerciseFilter.NONE,
       trackFilter: TrackFilter.NONE
     });
-  }
-
-  private compare(a: number | string, b: number | string): number {
-    return a < b ? -1 : a > b ? 1 : 0;
   }
 
   async filterTrackNodes(nodes: TrackNode[]): Promise<TrackNode[]> {
@@ -88,20 +85,20 @@ export class NodeFilterProvider {
       }
 
       if (filter & ExerciseFilter.SORT_BY_NAME) {
-        nodes = nodes.sort((a, b) => this.compare(a.exercise.name, b.exercise.name));
+        nodes = nodes.sort((a, b) => compare(a.exercise.name, b.exercise.name));
       }
 
       if (filter & ExerciseFilter.SORT_BY_DIFFICULTY) {
-        nodes = nodes.sort((a, b) => this.compare(a.exercise.difficulty.length, b.exercise.difficulty.length));
+        nodes = nodes.sort((a, b) => compare(a.exercise.difficulty.length, b.exercise.difficulty.length));
       }
 
       if (filter & ExerciseFilter.SORT_BY_STATUS) {
-        nodes = nodes.sort((a, b) => this.compare(b.exercise.status, a.exercise.status));
+        nodes = nodes.sort((a, b) => compare(b.exercise.status, a.exercise.status));
       }
 
       if (filter & ExerciseFilter.SORT_BY_TOPIC) {
         (async () => nodes.forEach(node => node.showTopics()))();
-        nodes = nodes.sort((a, b) => this.compare(b.exercise.topics[0], a.exercise.topics[0]));
+        nodes = nodes.sort((a, b) => compare(b.exercise.topics[0], a.exercise.topics[0]));
       }
     }
 
