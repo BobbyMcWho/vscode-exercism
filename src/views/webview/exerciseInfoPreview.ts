@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
 import { ExercismController } from "../../exercism/controller";
+import { getExerciseIconPath, getTrackIconPath } from "../../exercism/icons";
 import { Exercise, ExerciseStatus, Track } from "../../typings/api";
 import { CustomIconURI } from "../../typings/vsc";
 import { WebviewMessage } from "../../typings/webview";
@@ -25,8 +26,8 @@ export class ExerciseInfoPreview implements TreeNodePreview, vscode.Disposable {
   ) {
     const track = this._exerciseNode.parent.track;
     const exercise = this._exerciseNode.exercise;
-    const trackIconPath = this._exercismController.getTrackIconPath(track);
-    const exerciseIconPath = this._exercismController.getExerciseIconPath(exercise);
+    const trackIconPath = getTrackIconPath(track);
+    const exerciseIconPath = getExerciseIconPath(exercise);
 
     this.title = track.name + " - " + exercise.name;
     this.iconPath = exerciseIconPath;

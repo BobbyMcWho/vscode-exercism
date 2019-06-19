@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { Logger } from "../../../common/logger";
+import { getExerciseIconPath } from "../../../exercism/icons";
 import { Exercise, ExerciseStatus } from "../../../typings/api";
 import { CustomIconURI } from "../../../typings/vsc";
 import { FileNode, getFileNodesForDir } from "./fileNode";
@@ -19,7 +20,7 @@ export class ExerciseNode implements TreeNode<FileNode> {
     this.contextValue = "exerciseTreeNode";
     this.label = this.exercise.name;
     this.id = this.parent.id + "/" + this.exercise.id;
-    this.iconPath = this.parent.parent.exercismController.getExerciseIconPath(this.exercise, true);
+    this.iconPath = getExerciseIconPath(this.exercise, true);
     this.command = {
       command: "exercism.exercise.preview",
       arguments: [this],

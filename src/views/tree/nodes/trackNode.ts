@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { getTrackIconPath } from "../../../exercism/icons";
 import { Track } from "../../../typings/api";
 import { CustomIconURI } from "../../../typings/vsc";
 import { ExerciseNode } from "./exerciseNode";
@@ -17,7 +18,7 @@ export class TrackNode implements TreeNode<ExerciseNode> {
     this.id = this.track.id;
     this.label = this.track.name;
     this.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
-    this.iconPath = this.parent.exercismController.getTrackIconPath(this.track);
+    this.iconPath = getTrackIconPath(this.track);
   }
 
   get description(): string {

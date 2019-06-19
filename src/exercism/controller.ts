@@ -1,14 +1,11 @@
 import { exec } from "child_process";
 import * as fs from "fs";
-import { memo } from "helpful-decorators";
 import * as path from "path";
 import { promisify } from "util";
 import * as vscode from "vscode";
-import { ExtensionManager } from "../common/context";
 import { Logger } from "../common/logger";
 import { StorageItem } from "../common/storage";
 import { Exercise, ExerciseStatus, Solution, Track, TrackStatus, UserDataModel } from "../typings/api";
-import { CustomIconURI } from "../typings/vsc";
 import { getUserConfig } from "./config";
 import * as scraper from "./scraper";
 
@@ -77,50 +74,6 @@ export class ExercismController {
   // Get the directory path of the given exercise.
   getExerciseDirPath(track: Track, exercise: Exercise): string {
     return path.join(this.getTrackDirPath(track), exercise.id);
-  }
-
-  getExerciseIconPath(exercise: Exercise, shouldUseStatus?: boolean): CustomIconURI {
-    if (shouldUseStatus) {
-      if (exercise.status & ExerciseStatus.COMPLETED) {
-        return this.getIconPath("images/icons/status/complete.png", "images/icons/status/complete.png");
-      }
-      if (exercise.status & ExerciseStatus.SUBMITTED) {
-        return this.getIconPath("images/icons/status/inprogress.png", "images/icons/status/inprogress.png");
-      }
-    }
-    return this.getIconPath(
-      "images/icons/exercise/" + exercise.id + "-turquoise.png",
-      "images/icons/exercise/" + exercise.id + "-white.png"
-    );
-  }
-
-  getTrackIconPath(track: Track): CustomIconURI {
-    return this.getIconPath(
-      "images/icons/track/" + track.id + "-hex-white.png",
-      "images/icons/track/" + track.id + "-bordered-turquoise.png"
-    );
-  }
-
-  @memo()
-  private getIconPath(lightRelPath: string, darkRelPath: string): CustomIconURI {
-    const lightURI = ExtensionManager.getAbsolutePathURI(lightRelPath);
-    const darkURI = ExtensionManager.getAbsolutePathURI(darkRelPath);
-
-    if (!fs.existsSync(lightURI.fsPath) || !fs.existsSync(darkURI.fsPath)) {
-      return {
-        light: vscode.Uri.parse(
-          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-        ),
-        dark: vscode.Uri.parse(
-          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-        )
-      };
-    }
-
-    return {
-      light: lightURI,
-      dark: darkURI
-    };
   }
 
   // Submit the exercise file for evaluation.
