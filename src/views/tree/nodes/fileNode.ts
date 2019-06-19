@@ -28,8 +28,8 @@ export async function getFileNodesForDir(parent: ExerciseNode | FileNode, dir: s
         }
         return nodes;
       }, [])
-      .sort((a, b) => compare(a.label.toUpperCase(), b.label.toUpperCase()))
-      .sort((a, b) => compare(b.isDirectory, a.isDirectory));
+      .sort((a, b) => compare<string>(a.label.toUpperCase(), b.label.toUpperCase()))
+      .sort((a, b) => compare<boolean>(b.isDirectory, a.isDirectory));
   }
   return [];
 }
