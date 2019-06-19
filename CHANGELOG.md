@@ -2,6 +2,12 @@
 
 ## v1
 
+### v1.13.1 (June 19th 2019)
+
+- Fixed regression where track complete count would not update
+- Made icons display faster
+- Fixed async issues with open & start (should feel much faster now)
+
 ### v1.13.0 (June 18th 2019)
 
 - Fixed some formatting/legibility issues
