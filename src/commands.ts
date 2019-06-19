@@ -169,12 +169,13 @@ export function RegisterAllCommands(
           groups: [{ groups: [], size: 0.5 }, { groups: [{}, {}], size: 0.5 }]
         });
 
-        fileNodes.forEach((fileNode, i) => {
-          vscode.window.showTextDocument(fileNode.resourceUri, {
+        for (let i = 0; i < fileNodes.length; i++) {
+          const fileNode = fileNodes[i];
+          await vscode.window.showTextDocument(fileNode.resourceUri, {
             preview: false,
             viewColumn: i === 0 ? 2 : i === 2 ? 3 : i
           });
-        });
+        }
       }
     },
     {
