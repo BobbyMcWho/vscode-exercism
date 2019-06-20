@@ -4,10 +4,11 @@ import * as vscode from "vscode";
 import { ExtensionManager } from "./common/context";
 import { ExercismController } from "./exercism/controller";
 import { ExerciseStatus } from "./typings/api";
-import { ExerciseFilter, NodeFilterProvider, TrackFilter } from "./views/tree/nodeFilterProvider";
-import { ExerciseNode } from "./views/tree/nodes/exerciseNode";
-import { FileNode, getFileNodeExerciseNode } from "./views/tree/nodes/fileNode";
-import { TrackNode } from "./views/tree/nodes/trackNode";
+import { ExerciseNode } from "./views/tree/nodes/exercise/exerciseNode";
+import { ExerciseNodeFilter, ExerciseNodeFilterFlags } from "./views/tree/nodes/exercise/exerciseNodeFilter";
+import { FileNode, getFileNodeExerciseNode } from "./views/tree/nodes/file/fileNode";
+import { TrackNode } from "./views/tree/nodes/track/trackNode";
+import { TrackNodeFilter, TrackNodeFilterFlags } from "./views/tree/nodes/track/trackNodeFilter";
 import { TracksTreeProvider } from "./views/tree/tracksTreeProvider";
 import { ExerciseInfoPreview } from "./views/webview/exerciseInfoPreview";
 import { TreeNodePreviewManager } from "./views/webview/previewManager";
@@ -19,14 +20,13 @@ interface ICommand {
 
 export function RegisterAllCommands(
   exercismController: ExercismController,
-  tracksTreeProvider: TracksTreeProvider,
-  nodeFilterProvider: NodeFilterProvider
+  tracksTreeProvider: TracksTreeProvider
 ): void {
   [
     {
       id: "exercism.track.toggleFocus",
       cb: (trackNode: TrackNode): void => {
-        nodeFilterProvider.toggleTrackFocus(trackNode);
+        TrackNodeFilter.focusTrackNode(trackNode);
         tracksTreeProvider.refresh();
       }
     },
@@ -181,70 +181,71 @@ export function RegisterAllCommands(
     {
       id: "exercism.view.tracks.sortExercisesByDifficulty",
       cb: (): void => {
-        nodeFilterProvider.toggleExerciseFilter(ExerciseFilter.SORT_BY_DIFFICULTY);
+        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.SORT_BY_DIFFICULTY);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.sortExercisesByName",
       cb: (): void => {
-        nodeFilterProvider.toggleExerciseFilter(ExerciseFilter.SORT_BY_NAME);
+        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.SORT_BY_NAME);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.sortExercisesByStatus",
       cb: (): void => {
-        nodeFilterProvider.toggleExerciseFilter(ExerciseFilter.SORT_BY_STATUS);
+        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.SORT_BY_STATUS);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.sortExercisesByTopic",
       cb: (): void => {
-        nodeFilterProvider.toggleExerciseFilter(ExerciseFilter.SORT_BY_TOPIC);
+        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.SORT_BY_TOPIC);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.showUncompletedExercises",
       cb: (): void => {
-        nodeFilterProvider.toggleExerciseFilter(ExerciseFilter.FILTER_UNCOMPLETED);
+        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.FILTER_UNCOMPLETED);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.showCompletedExercises",
       cb: (): void => {
-        nodeFilterProvider.toggleExerciseFilter(ExerciseFilter.FILTER_COMPLETED);
+        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.FILTER_COMPLETED);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.showDownloadedExercises",
       cb: (): void => {
-        nodeFilterProvider.toggleExerciseFilter(ExerciseFilter.FILTER_DOWNLOADED);
-        tracksTreeProvider.refresh();
-      }
-    },
-    {
-      id: "exercism.view.tracks.showJoinedTracks",
-      cb: (): void => {
-        nodeFilterProvider.toggleTrackFilter(TrackFilter.FILTER_JOINED);
+        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.FILTER_DOWNLOADED);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.filterExercisesByTopic",
       cb: (topic: string): void => {
-        nodeFilterProvider.filterByTopic(topic);
+        ExerciseNodeFilter.filterByTopic(topic);
+        tracksTreeProvider.refresh();
+      }
+    },
+    {
+      id: "exercism.view.tracks.showJoinedTracks",
+      cb: (): void => {
+        TrackNodeFilter.toggleFilterFlags(TrackNodeFilterFlags.FILTER_JOINED);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.clearFilters",
       cb: (): void => {
-        nodeFilterProvider.clearFilters();
+        TrackNodeFilter.clearFilterFlags();
+        ExerciseNodeFilter.clearFilterFlags();
         tracksTreeProvider.refresh();
       }
     },

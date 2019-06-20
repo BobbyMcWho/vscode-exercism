@@ -1,9 +1,9 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as vscode from "vscode";
-import { compare } from "../../../common/utilities";
-import { ExerciseNode } from "./exerciseNode";
-import { TreeNode } from "./treeNode";
+import { ExerciseNode } from "../exercise/exerciseNode";
+import { TreeNode } from "../treeNode";
+import { FileNodeFilter } from "./fileNodeFilter";
 
 export function getFileNodeExerciseNode(fileNode: FileNode): ExerciseNode {
   const parent = fileNode.parent;
@@ -12,9 +12,8 @@ export function getFileNodeExerciseNode(fileNode: FileNode): ExerciseNode {
 
 export async function getFileNodesForDir(parent: ExerciseNode | FileNode, dir: string): Promise<FileNode[]> {
   if (fs.existsSync(dir)) {
-    return fs
-      .readdirSync(dir)
-      .reduce((nodes: FileNode[], filename: string): FileNode[] => {
+    return FileNodeFilter.instance.sieve(
+      fs.readdirSync(dir).reduce((nodes: FileNode[], filename: string): FileNode[] => {
         if (filename !== ".exercism") {
           const uri = vscode.Uri.file(path.join(dir, filename));
           const stat = fs.lstatSync(uri.fsPath);
@@ -28,18 +27,18 @@ export async function getFileNodesForDir(parent: ExerciseNode | FileNode, dir: s
         }
         return nodes;
       }, [])
-      .sort((a, b) => compare<string>(a.label.toUpperCase(), b.label.toUpperCase()))
-      .sort((a, b) => compare<boolean>(b.isDirectory, a.isDirectory));
+    );
   }
   return [];
 }
 
-export class FileNode implements TreeNode {
+export class FileNode implements TreeNode<FileNode | never> {
   public readonly contextValue: string;
   public readonly iconPath?: vscode.ThemeIcon;
   public readonly collapsibleState?: vscode.TreeItemCollapsibleState;
   public readonly command?: vscode.Command;
   public readonly label: string;
+  public readonly filter: FileNodeFilter;
 
   constructor(
     public readonly parent: ExerciseNode | FileNode,
@@ -47,6 +46,7 @@ export class FileNode implements TreeNode {
     public readonly isDirectory: boolean
   ) {
     this.label = path.basename(this.resourceUri.fsPath);
+    this.filter = FileNodeFilter.instance;
     if (this.isDirectory) {
       this.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
       this.iconPath = vscode.ThemeIcon.Folder;
@@ -61,7 +61,7 @@ export class FileNode implements TreeNode {
     }
   }
 
-  async getChildren(): Promise<FileNode[]> {
+  async getChildren(): Promise<FileNode[] | never[]> {
     return getFileNodesForDir(this, this.resourceUri.fsPath);
   }
 }

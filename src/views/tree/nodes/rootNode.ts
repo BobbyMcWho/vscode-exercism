@@ -1,16 +1,21 @@
 import { ExercismController } from "../../../exercism/controller";
-import { NodeFilterProvider } from "../nodeFilterProvider";
-import { TrackNode } from "./trackNode";
+import { TrackNode } from "./track/trackNode";
+import { TrackNodeFilter } from "./track/trackNodeFilter";
 import { TreeNode } from "./treeNode";
 
 export class RootNode implements TreeNode<TrackNode> {
-  constructor(
-    public readonly exercismController: ExercismController,
-    public readonly nodeFilterProvider: NodeFilterProvider
-  ) {}
+  public readonly filter: TrackNodeFilter;
+
+  constructor(public readonly exercismController: ExercismController) {
+    this.filter = TrackNodeFilter.instance;
+  }
+
+  async sortChildren(trackNodes: TrackNode[]): Promise<TrackNode[]> {
+    return [];
+  }
 
   async getChildren(): Promise<TrackNode[]> {
     const tracks = await this.exercismController.getAllTracks();
-    return this.nodeFilterProvider.filterTrackNodes(tracks.map(track => new TrackNode(this, track)));
+    return this.filter.sieve(tracks.map(track => new TrackNode(this, track)));
   }
 }

@@ -1,11 +1,12 @@
 import * as vscode from "vscode";
-import { Logger } from "../../../common/logger";
-import { getExerciseIconPath } from "../../../exercism/icons";
-import { Exercise, ExerciseStatus } from "../../../typings/api";
-import { CustomIconURI } from "../../../typings/vsc";
-import { FileNode, getFileNodesForDir } from "./fileNode";
-import { TrackNode } from "./trackNode";
-import { TreeNode } from "./treeNode";
+import { Logger } from "../../../../common/logger";
+import { getExerciseIconPath } from "../../../../exercism/icons";
+import { Exercise, ExerciseStatus } from "../../../../typings/api";
+import { CustomIconURI } from "../../../../typings/vsc";
+import { FileNode, getFileNodesForDir } from "../file/fileNode";
+import { FileNodeFilter } from "../file/fileNodeFilter";
+import { TrackNode } from "../track/trackNode";
+import { TreeNode } from "../treeNode";
 
 export class ExerciseNode implements TreeNode<FileNode> {
   private _isShowingTopics: boolean;
@@ -14,9 +15,11 @@ export class ExerciseNode implements TreeNode<FileNode> {
   public readonly id: string;
   public readonly iconPath: CustomIconURI;
   public readonly command: vscode.Command;
+  public readonly filter: FileNodeFilter;
 
   constructor(public readonly parent: TrackNode, public readonly exercise: Exercise) {
     this._isShowingTopics = false;
+    this.filter = FileNodeFilter.instance;
     this.contextValue = "exerciseTreeNode";
     this.label = this.exercise.name;
     this.id = this.parent.id + "/" + this.exercise.id;

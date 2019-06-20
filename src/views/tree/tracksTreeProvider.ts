@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import { ExtensionManager } from "../../common/context";
 import { ExercismController } from "../../exercism/controller";
-import { NodeFilterProvider } from "./nodeFilterProvider";
 import { RootNode } from "./nodes/rootNode";
 import { TreeNode } from "./nodes/treeNode";
 
@@ -12,8 +11,8 @@ export class TracksTreeProvider implements vscode.TreeDataProvider<TreeNode> {
   readonly root: TreeNode;
   readonly view: vscode.TreeView<TreeNode>;
 
-  constructor(private _exercismController: ExercismController, private _nodeFilterProvider: NodeFilterProvider) {
-    this.root = new RootNode(this._exercismController, this._nodeFilterProvider);
+  constructor(private _exercismController: ExercismController) {
+    this.root = new RootNode(this._exercismController);
     this.view = vscode.window.createTreeView<TreeNode>("exercism.view.tracks", {
       showCollapseAll: true,
       treeDataProvider: this

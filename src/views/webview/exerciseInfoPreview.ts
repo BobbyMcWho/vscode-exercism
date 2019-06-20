@@ -6,7 +6,7 @@ import { getExerciseIconPath, getTrackIconPath } from "../../exercism/icons";
 import { Exercise, ExerciseStatus, Track } from "../../typings/api";
 import { CustomIconURI } from "../../typings/vsc";
 import { WebviewMessage } from "../../typings/webview";
-import { ExerciseNode } from "../tree/nodes/exerciseNode";
+import { ExerciseNode } from "../tree/nodes/exercise/exerciseNode";
 import { TracksTreeProvider } from "../tree/tracksTreeProvider";
 import { TreeNodePreview } from "./previewManager";
 

@@ -3,7 +3,6 @@ import { RegisterAllCommands } from "./commands";
 import { ExtensionManager } from "./common/context";
 import { Logger } from "./common/logger";
 import { ExercismController } from "./exercism/controller";
-import { NodeFilterProvider } from "./views/tree/nodeFilterProvider";
 import { TracksTreeProvider } from "./views/tree/tracksTreeProvider";
 
 export function activate(context: vscode.ExtensionContext): void {
@@ -12,8 +11,7 @@ export function activate(context: vscode.ExtensionContext): void {
   Logger.initialize();
 
   const exercismController = new ExercismController();
-  const nodeFilterProvider = new NodeFilterProvider();
-  const tracksTreeProvider = new TracksTreeProvider(exercismController, nodeFilterProvider);
+  const tracksTreeProvider = new TracksTreeProvider(exercismController);
 
-  RegisterAllCommands(exercismController, tracksTreeProvider, nodeFilterProvider);
+  RegisterAllCommands(exercismController, tracksTreeProvider);
 }
