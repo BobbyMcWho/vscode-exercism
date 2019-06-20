@@ -13,8 +13,8 @@ function getStatusIconPath(status: string): CustomIconURI {
 
 export function getTrackIconPath(track: Track): CustomIconURI {
   return {
-    light: ExtensionManager.getAbsolutePathURI("images/icons/light/track/" + track.id + ".png"),
-    dark: ExtensionManager.getAbsolutePathURI("images/icons/dark/track/" + track.id + ".png")
+    light: ExtensionManager.getAbsolutePathURI("images/icons/track/light/" + track.id + ".png"),
+    dark: ExtensionManager.getAbsolutePathURI("images/icons/track/dark/" + track.id + ".png")
   };
 }
 
@@ -29,8 +29,8 @@ export function getExerciseIconPath(exercise: Exercise, shouldUseStatus?: boolea
   }
 
   const exerciseIconURI = {
-    light: ExtensionManager.getAbsolutePathURI("images/icons/light/exercise/" + exercise.id + ".png"),
-    dark: ExtensionManager.getAbsolutePathURI("images/icons/dark/exercise/" + exercise.id + ".png")
+    light: ExtensionManager.getAbsolutePathURI("images/icons/exercise/light/" + exercise.id + ".png"),
+    dark: ExtensionManager.getAbsolutePathURI("images/icons/exercise/dark/" + exercise.id + ".png")
   };
 
   if (!fs.existsSync(exerciseIconURI.dark.fsPath)) {
