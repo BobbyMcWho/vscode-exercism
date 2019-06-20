@@ -1,7 +1,7 @@
 # Exercism for Visual Studio Code
 
 <p align="center">
-  <img width="100%" src="https://github.com/masliu/vscode-exercism/blob/master/images/screenshots/screenshot2.png?raw=true">
+  <img width="100%" src="https://github.com/masliu/vscode-exercism/blob/master/images/screenshots/screenshot2.jpg?raw=true">
 </p>
 
 ## Getting Started
