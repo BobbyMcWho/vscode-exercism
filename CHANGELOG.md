@@ -2,6 +2,12 @@
 
 ## v1
 
+### v1.13.2 (June 20th 2019)
+
+- Rewrote filtering logic so filter states are going to be reset
+- Add new screenshot
+- Improved file sorting
+
 ### v1.13.1 (June 19th 2019)
 
 - Fixed regression where track complete count would not update
