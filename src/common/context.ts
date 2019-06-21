@@ -1,4 +1,3 @@
-import { memo } from "helpful-decorators";
 import * as path from "path";
 import * as vscode from "vscode";
 import { StorageItem } from "./storage";
@@ -33,7 +32,6 @@ export class ExtensionManager {
    * @param relativePath The path of a resource relative to the installation directory.
    * @example ExtensionManager.getAbsolutePathURI("images/logo/logo.svg")
    */
-  @memo()
   static getAbsolutePathURI(relativePath: string): vscode.Uri {
     return vscode.Uri.file(path.join(this._context.extensionPath, relativePath));
   }
