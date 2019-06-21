@@ -35,7 +35,7 @@ export class ExtensionManager {
    */
   @memo()
   static getAbsolutePathURI(relativePath: string): vscode.Uri {
-    return vscode.Uri.parse("file://" + path.join(this._context.extensionPath, relativePath));
+    return vscode.Uri.file(path.join(this._context.extensionPath, relativePath));
   }
 
   /**
