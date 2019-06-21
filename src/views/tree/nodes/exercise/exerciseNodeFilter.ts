@@ -94,10 +94,6 @@ export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
         nodes = nodes.sort((a, b) => compare<string>(a.exercise.name, b.exercise.name));
       }
 
-      if (flags & ExerciseNodeFilterFlags.SORT_BY_DIFFICULTY) {
-        nodes = nodes.sort((a, b) => compare<number>(a.exercise.difficulty.length, b.exercise.difficulty.length));
-      }
-
       if (flags & ExerciseNodeFilterFlags.SORT_BY_STATUS) {
         nodes = nodes.sort((a, b) => compare<ExerciseStatus>(b.exercise.status, a.exercise.status));
       }
@@ -105,6 +101,10 @@ export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
       if (flags & ExerciseNodeFilterFlags.SORT_BY_TOPIC) {
         (async () => nodes.forEach(node => node.showTopics()))();
         nodes = nodes.sort((a, b) => compare<string>(b.exercise.topics[0], a.exercise.topics[0]));
+      }
+
+      if (flags & ExerciseNodeFilterFlags.SORT_BY_DIFFICULTY) {
+        nodes = nodes.sort((a, b) => compare<number>(a.exercise.difficulty.length, b.exercise.difficulty.length));
       }
     }
 
