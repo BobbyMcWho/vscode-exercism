@@ -18,10 +18,7 @@ interface ICommand {
   cb: (...args: any[]) => void | Promise<void>;
 }
 
-export function RegisterAllCommands(
-  exercismController: ExercismController,
-  tracksTreeProvider: TracksTreeProvider
-): void {
+export function RegisterCommands(exercismController: ExercismController, tracksTreeProvider: TracksTreeProvider): void {
   [
     {
       id: "exercism.track.toggleFocus",

@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { RegisterAllCommands } from "./commands";
+import { RegisterCommands } from "./commands";
 import { ExtensionManager } from "./common/context";
 import { Logger } from "./common/logger";
 import { ExercismController } from "./exercism/controller";
@@ -13,5 +13,5 @@ export function activate(context: vscode.ExtensionContext): void {
   const exercismController = new ExercismController();
   const tracksTreeProvider = new TracksTreeProvider(exercismController);
 
-  RegisterAllCommands(exercismController, tracksTreeProvider);
+  RegisterCommands(exercismController, tracksTreeProvider);
 }
