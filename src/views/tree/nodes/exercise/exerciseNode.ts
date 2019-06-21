@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import { Logger } from "../../../../common/logger";
 import { getExerciseIconPath } from "../../../../exercism/icons";
 import { Exercise, ExerciseStatus } from "../../../../typings/api";
 import { CustomIconURI } from "../../../../typings/vsc";
@@ -52,8 +51,9 @@ export class ExerciseNode implements TreeNode<FileNode> {
   }
 
   async getChildren(): Promise<FileNode[]> {
-    Logger.debug("tree", "Getting children for ExerciseNode");
-    const dir = this.parent.parent.exercismController.getExerciseDirPath(this.parent.track, this.exercise);
-    return getFileNodesForDir(this, dir);
+    return getFileNodesForDir(
+      this,
+      this.parent.parent.exercismController.getExerciseDirPath(this.parent.track, this.exercise)
+    );
   }
 }
