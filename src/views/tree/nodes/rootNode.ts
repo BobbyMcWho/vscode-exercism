@@ -10,10 +10,6 @@ export class RootNode implements TreeNode<TrackNode> {
     this.filter = TrackNodeFilter.instance;
   }
 
-  async sortChildren(trackNodes: TrackNode[]): Promise<TrackNode[]> {
-    return [];
-  }
-
   async getChildren(): Promise<TrackNode[]> {
     const tracks = await this.exercismController.getAllTracks();
     return this.filter.sieve(tracks.map(track => new TrackNode(this, track)));
