@@ -13,11 +13,6 @@ import { TracksTreeProvider } from "./views/tree/tracksTreeProvider";
 import { ExerciseInfoPreview } from "./views/webview/exerciseInfoPreview";
 import { TreeNodePreviewManager } from "./views/webview/previewManager";
 
-interface ICommand {
-  id: string;
-  cb: (...args: any[]) => void | Promise<void>;
-}
-
 export function RegisterCommands(exercismController: ExercismController, tracksTreeProvider: TracksTreeProvider): void {
   [
     {
@@ -338,7 +333,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
         tracksTreeProvider.refresh(fileNode.parent);
       }
     }
-  ].forEach((command: ICommand) => {
+  ].forEach((command: { id: string; cb: (...args: any[]) => void | Promise<void> }) => {
     ExtensionManager.subscribe(vscode.commands.registerCommand(command.id, command.cb));
   });
 }
