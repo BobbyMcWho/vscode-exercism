@@ -46,7 +46,7 @@ export class StorageItem<T> {
    * the expense of consecutive update calls to the global storage.
    */
   @debounce(10000)
-  save(): void {
+  async save(): Promise<void> {
     Logger.debug("storage", "Saving model to global storage:", this._key);
     ExtensionManager.updateGlobalStorage(this._key, this._model);
   }
