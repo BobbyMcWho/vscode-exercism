@@ -5,8 +5,7 @@ import { ExerciseNode } from "../exercise/exerciseNode";
 import { TreeNode } from "../treeNode";
 import { FileNodeFilter } from "./fileNodeFilter";
 
-export function getFileNodeExerciseNode(fileNode: FileNode): ExerciseNode {
-  const parent = fileNode.parent;
+export function getFileNodeExerciseNode({ parent }: FileNode): ExerciseNode {
   return parent instanceof ExerciseNode ? parent : getFileNodeExerciseNode(parent);
 }
 
