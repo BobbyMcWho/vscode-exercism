@@ -5,10 +5,6 @@ import { ExerciseNode } from "../exercise/exerciseNode";
 import { TreeNode } from "../treeNode";
 import { FileNodeFilter } from "./fileNodeFilter";
 
-export function getFileNodeExerciseNode({ parent }: FileNode): ExerciseNode {
-  return parent instanceof ExerciseNode ? parent : getFileNodeExerciseNode(parent);
-}
-
 export async function getFileNodesForDir(parent: ExerciseNode | FileNode, dir: string): Promise<FileNode[]> {
   if (fs.existsSync(dir)) {
     return FileNodeFilter.instance.sieve(
@@ -58,6 +54,10 @@ export class FileNode implements TreeNode<FileNode | never> {
         arguments: [this]
       };
     }
+  }
+
+  getExerciseNode(): ExerciseNode {
+    return this.parent instanceof ExerciseNode ? this.parent : this.parent.getExerciseNode();
   }
 
   async getChildren(): Promise<FileNode[] | never[]> {
