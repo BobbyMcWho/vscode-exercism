@@ -9,7 +9,7 @@ import { Logger } from "./logger";
  */
 export class StorageItem<T> {
   private _model: T;
-
+  
   /**
    * Create a new instance of StorageItem by loading its model from global storage
    * using the given key. If no model exists, the default model will be used instead.
@@ -45,7 +45,7 @@ export class StorageItem<T> {
    * Save the model to the global storage. It is debounced by 10 seconds to avoid
    * the expense of consecutive update calls to the global storage.
    */
-  @debounce(10000)
+  @debounce(3000)
   async save(): Promise<void> {
     Logger.debug("storage", "Saving model to global storage:", this._key);
     ExtensionManager.updateGlobalStorage(this._key, this._model);
