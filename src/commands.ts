@@ -158,6 +158,8 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           onlyFiles: true
         });
 
+        vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility");
+
         if (files.length < 1) {
           await vscode.window.showErrorMessage(
             "We couldn't find any files matching the `openStartGlob` setting! Please make sure the glob includes the file extensions you want opened before trying again."
