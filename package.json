@@ -326,7 +326,7 @@
         "properties": {
           "exercism.openStartGlob": {
             "type": "string",
-            "default": "**/*.{js,go,md,rs,vim,cc,cpp,c,coffee,cs,swift,ts,h,java,lua,rb,sh,vb,php,py}",
+            "default": "**/!(README).{js,go,md,rs,vim,cc,cpp,c,coffee,cs,swift,ts,h,java,lua,rb,sh,vb,php,py}",
             "description": "The file glob to use when opening files for `Open and Start`.",
             "scope": "window"
           },

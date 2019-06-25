@@ -174,15 +174,15 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
             orientation: 0,
             groups:
               files.length === 2
-                ? [{ groups: [], size: 0.5 }, { groups: [{}], size: 0.5 }]
-                : [{ groups: [], size: 0.5 }, { groups: [{}, {}], size: 0.5 }]
+                ? [{ groups: [{}], size: 0.5 }, { groups: [{}], size: 0.5 }]
+                : [{ groups: [{}], size: 0.5 }, { groups: [{}, {}], size: 0.5 }]
           });
         }
 
         for (let i = 0; i < files.length; i++) {
           await vscode.window.showTextDocument(vscode.Uri.file(files[i]), {
             preview: false,
-            viewColumn: i === 0 ? 2 : i === 1 ? 1 : 3
+            viewColumn: (i % 3) + 1
           });
         }
       }
