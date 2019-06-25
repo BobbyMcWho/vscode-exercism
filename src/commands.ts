@@ -347,7 +347,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
             return;
           }
         }
-        tracksTreeProvider.refresh(fileNode.parent);
+        tracksTreeProvider.refresh(fileNode.getExerciseNode());
       }
     }
   ].forEach((command: { id: string; cb: (...args: any[]) => void | Promise<void> }) => {
