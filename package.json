@@ -2,7 +2,7 @@
   "name": "exercism",
   "displayName": "Exercism",
   "description": "Complete programming challenges in different languages to improve your skills.",
-  "version": "1.13.2",
+  "version": "1.14.0",
   "author": "Mason D. Liu",
   "publisher": "masonliu",
   "license": "MIT",
