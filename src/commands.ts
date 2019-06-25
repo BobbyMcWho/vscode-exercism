@@ -5,10 +5,10 @@ import { ExtensionManager } from "./common/context";
 import { ExercismController } from "./exercism/controller";
 import { ExerciseStatus } from "./typings/api";
 import { ExerciseNode } from "./views/tree/nodes/exercise/exerciseNode";
-import { ExerciseNodeFilter, ExerciseNodeFilterFlags } from "./views/tree/nodes/exercise/exerciseNodeFilter";
+import { ExerciseNodeFilterFlags } from "./views/tree/nodes/exercise/exerciseNodeFilter";
 import { FileNode } from "./views/tree/nodes/file/fileNode";
 import { TrackNode } from "./views/tree/nodes/track/trackNode";
-import { TrackNodeFilter, TrackNodeFilterFlags } from "./views/tree/nodes/track/trackNodeFilter";
+import { TrackNodeFilterFlags } from "./views/tree/nodes/track/trackNodeFilter";
 import { TracksTreeProvider } from "./views/tree/tracksTreeProvider";
 import { ExerciseInfoPreview } from "./views/webview/exerciseInfoPreview";
 import { TreeNodePreviewManager } from "./views/webview/previewManager";
@@ -18,7 +18,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
     {
       id: "exercism.track.toggleFocus",
       cb: (trackNode: TrackNode): void => {
-        TrackNodeFilter.focusTrackNode(trackNode);
+        tracksTreeProvider.trackNodeFilter.focus(trackNode);
         tracksTreeProvider.refresh();
       }
     },
@@ -51,7 +51,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
               disposables
             );
 
-            const exerciseNodes = await trackNode.getChildren();
+            const exerciseNodes = await tracksTreeProvider.getTrackNodeChildren(trackNode);
 
             for (let i = 0; i < exerciseNodes.length; i++) {
               const exerciseNode = exerciseNodes[i];
@@ -155,7 +155,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           }
         }
 
-        const fileNodes = await exerciseNode.getChildren();
+        const fileNodes = await tracksTreeProvider.getExerciseNodeChildren(exerciseNode);
         vscode.commands.executeCommand("vscode.setEditorLayout", {
           orientation: 0,
           groups: [{ groups: [], size: 0.5 }, { groups: [{}, {}], size: 0.5 }]
@@ -173,71 +173,71 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
     {
       id: "exercism.view.tracks.sortExercisesByDifficulty",
       cb: (): void => {
-        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.SORT_BY_DIFFICULTY);
+        tracksTreeProvider.exerciseNodeFilter.toggle(ExerciseNodeFilterFlags.SORT_BY_DIFFICULTY);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.sortExercisesByName",
       cb: (): void => {
-        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.SORT_BY_NAME);
+        tracksTreeProvider.exerciseNodeFilter.toggle(ExerciseNodeFilterFlags.SORT_BY_NAME);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.sortExercisesByStatus",
       cb: (): void => {
-        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.SORT_BY_STATUS);
+        tracksTreeProvider.exerciseNodeFilter.toggle(ExerciseNodeFilterFlags.SORT_BY_STATUS);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.sortExercisesByTopic",
       cb: (): void => {
-        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.SORT_BY_TOPIC);
+        tracksTreeProvider.exerciseNodeFilter.toggle(ExerciseNodeFilterFlags.SORT_BY_TOPIC);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.showUncompletedExercises",
       cb: (): void => {
-        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.FILTER_UNCOMPLETED);
+        tracksTreeProvider.exerciseNodeFilter.toggle(ExerciseNodeFilterFlags.FILTER_UNCOMPLETED);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.showCompletedExercises",
       cb: (): void => {
-        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.FILTER_COMPLETED);
+        tracksTreeProvider.exerciseNodeFilter.toggle(ExerciseNodeFilterFlags.FILTER_COMPLETED);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.showDownloadedExercises",
       cb: (): void => {
-        ExerciseNodeFilter.toggleFilterFlags(ExerciseNodeFilterFlags.FILTER_DOWNLOADED);
+        tracksTreeProvider.exerciseNodeFilter.toggle(ExerciseNodeFilterFlags.FILTER_DOWNLOADED);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.filterExercisesByTopic",
       cb: (topic: string): void => {
-        ExerciseNodeFilter.filterByTopic(topic);
+        tracksTreeProvider.exerciseNodeFilter.filterByTopic(topic);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.showJoinedTracks",
       cb: (): void => {
-        TrackNodeFilter.toggleFilterFlags(TrackNodeFilterFlags.FILTER_JOINED);
+        tracksTreeProvider.trackNodeFilter.toggle(TrackNodeFilterFlags.FILTER_JOINED);
         tracksTreeProvider.refresh();
       }
     },
     {
       id: "exercism.view.tracks.clearFilters",
       cb: (): void => {
-        TrackNodeFilter.clearFilterFlags();
-        ExerciseNodeFilter.clearFilterFlags();
+        tracksTreeProvider.trackNodeFilter.clear();
+        tracksTreeProvider.exerciseNodeFilter.clear();
         tracksTreeProvider.refresh();
       }
     },

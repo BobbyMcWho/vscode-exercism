@@ -3,53 +3,45 @@ import { TrackStatus } from "../../../../typings/api";
 import { TreeNodeFilter } from "../treeNode";
 import { TrackNode } from "./trackNode";
 
-export const enum TrackNodeFilterFlags {
+export enum TrackNodeFilterFlags {
   NONE = 0,
   FILTER_JOINED = 1,
   FILTER_FOCUSED = 2
 }
 
-export interface TrackNodeFilterOptions {
+interface TrackNodeFilterStore {
   flags: TrackNodeFilterFlags;
   trackToFocus?: string;
 }
 
 export class TrackNodeFilter implements TreeNodeFilter<TrackNode> {
-  private static _instance: TrackNodeFilter;
-  private _filterOptionsStore: StorageItem<TrackNodeFilterOptions>;
+  private _store: StorageItem<TrackNodeFilterStore>;
 
-  private constructor() {
-    this._filterOptionsStore = new StorageItem<TrackNodeFilterOptions>("tree.filter.track", {
+  constructor() {
+    this._store = new StorageItem<TrackNodeFilterStore>("tree.filter.track", {
       flags: TrackNodeFilterFlags.NONE
     });
   }
 
-  static get instance(): TrackNodeFilter {
-    if (!this._instance) {
-      this._instance = new TrackNodeFilter();
-    }
-    return this._instance;
+  clear(): void {
+    this._store.reset();
   }
 
-  static clearFilterFlags(): void {
-    this._instance._filterOptionsStore.reset();
-  }
-
-  static toggleFilterFlags(flags: TrackNodeFilterFlags): void {
-    this._instance._filterOptionsStore.mutate(model => {
+  toggle(flags: TrackNodeFilterFlags): void {
+    this._store.mutate(model => {
       model.flags ^= flags;
     });
   }
 
-  static focusTrackNode(trackNode: TrackNode): void {
-    this._instance._filterOptionsStore.mutate(model => {
+  focus(trackNode: TrackNode): void {
+    this._store.mutate(model => {
       model.flags ^= TrackNodeFilterFlags.FILTER_FOCUSED;
       model.trackToFocus = trackNode.id;
     });
   }
 
-  sieve(nodes: TrackNode[]): TrackNode[] {
-    const { flags, trackToFocus } = this._filterOptionsStore.model;
+  filter(nodes: TrackNode[]): TrackNode[] {
+    const { flags, trackToFocus } = this._store.model;
 
     if (flags !== TrackNodeFilterFlags.NONE) {
       if (flags & TrackNodeFilterFlags.FILTER_FOCUSED) {
@@ -62,7 +54,7 @@ export class TrackNodeFilter implements TreeNodeFilter<TrackNode> {
         }
       }
     }
-
+    
     return nodes;
   }
 }

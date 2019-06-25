@@ -1,11 +1,9 @@
 import * as vscode from "vscode";
 
 export interface TreeNodeFilter<T> {
-  sieve: (nodes: T[]) => T[];
+  filter: (nodes: T[]) => T[];
 }
 
-export interface TreeNode<T extends TreeNode = TreeNode<any>> extends vscode.TreeItem {
-  readonly filter?: TreeNodeFilter<any>;
-  readonly parent?: TreeNode;
-  getChildren: () => Promise<T[]>;
+export interface TreeNode extends vscode.TreeItem {
+  readonly parent: TreeNode | undefined;
 }

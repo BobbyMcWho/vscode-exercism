@@ -17,45 +17,37 @@ export enum ExerciseNodeFilterFlags {
   FILTER_TOPIC = 256
 }
 
-export interface ExerciseNodeFilterOptions {
+interface ExerciseNodeFilterStore {
   flags: ExerciseNodeFilterFlags;
   topicToFilter?: string;
 }
 
 export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
-  private static _instance: ExerciseNodeFilter;
-  private _filterOptionsStore: StorageItem<ExerciseNodeFilterOptions>;
+  private _store: StorageItem<ExerciseNodeFilterStore>;
 
-  private constructor() {
-    this._filterOptionsStore = new StorageItem<ExerciseNodeFilterOptions>("tree.filter.exercise", {
+  constructor() {
+    this._store = new StorageItem<ExerciseNodeFilterStore>("tree.filter.exercise", {
       flags: ExerciseNodeFilterFlags.NONE
     });
   }
 
-  static get instance(): ExerciseNodeFilter {
-    if (!this._instance) {
-      this._instance = new ExerciseNodeFilter();
-    }
-    return this._instance;
+  clear(): void {
+    this._store.reset();
   }
 
-  static clearFilterFlags(): void {
-    this._instance._filterOptionsStore.reset();
-  }
-
-  static filterByTopic(topic: string): void {
-    this._instance._filterOptionsStore.mutate(model => {
+  filterByTopic(topic: string): void {
+    this._store.mutate(model => {
+      model.flags ^= ExerciseNodeFilterFlags.FILTER_TOPIC;
       if (model.flags & ExerciseNodeFilterFlags.FILTER_TOPIC && topic === model.topicToFilter) {
-        model.flags ^= ExerciseNodeFilterFlags.FILTER_TOPIC;
+        model.topicToFilter = undefined;
       } else {
-        model.flags |= ExerciseNodeFilterFlags.FILTER_TOPIC;
         model.topicToFilter = topic;
       }
     });
   }
 
-  static toggleFilterFlags(flags: ExerciseNodeFilterFlags): void {
-    this._instance._filterOptionsStore.mutate(model => {
+  toggle(flags: ExerciseNodeFilterFlags): void {
+    this._store.mutate(model => {
       if (flags === ExerciseNodeFilterFlags.FILTER_COMPLETED) {
         if (model.flags & ExerciseNodeFilterFlags.FILTER_UNCOMPLETED) {
           model.flags ^= ExerciseNodeFilterFlags.FILTER_UNCOMPLETED;
@@ -69,45 +61,36 @@ export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
     });
   }
 
-  sieve(nodes: ExerciseNode[]): ExerciseNode[] {
-    const { flags, topicToFilter } = this._filterOptionsStore.model;
-
+  filter(nodes: ExerciseNode[]): ExerciseNode[] {
+    const { flags, topicToFilter } = this._store.model;
     if (flags !== ExerciseNodeFilterFlags.NONE) {
       if (flags & ExerciseNodeFilterFlags.FILTER_TOPIC && topicToFilter) {
         nodes = nodes.filter(a => !!a.exercise.topics.find(t => t === topicToFilter));
         (async () => nodes.forEach(node => node.showTopics()))();
       }
-
       if (flags & ExerciseNodeFilterFlags.FILTER_UNCOMPLETED) {
         nodes = nodes.filter(a => !(a.exercise.status & ExerciseStatus.COMPLETED));
       }
-
       if (flags & ExerciseNodeFilterFlags.FILTER_COMPLETED) {
         nodes = nodes.filter(a => a.exercise.status & ExerciseStatus.COMPLETED);
       }
-
       if (flags & ExerciseNodeFilterFlags.FILTER_DOWNLOADED) {
         nodes = nodes.filter(a => a.exercise.status & ExerciseStatus.DOWNLOADED);
       }
-
       if (flags & ExerciseNodeFilterFlags.SORT_BY_NAME) {
         nodes = nodes.sort((a, b) => compare<string>(a.exercise.name, b.exercise.name));
       }
-
-      if (flags & ExerciseNodeFilterFlags.SORT_BY_STATUS) {
-        nodes = nodes.sort((a, b) => compare<ExerciseStatus>(b.exercise.status, a.exercise.status));
-      }
-
       if (flags & ExerciseNodeFilterFlags.SORT_BY_TOPIC) {
         (async () => nodes.forEach(node => node.showTopics()))();
         nodes = nodes.sort((a, b) => compare<string>(b.exercise.topics[0], a.exercise.topics[0]));
       }
-
       if (flags & ExerciseNodeFilterFlags.SORT_BY_DIFFICULTY) {
         nodes = nodes.sort((a, b) => compare<number>(a.exercise.difficulty.length, b.exercise.difficulty.length));
       }
+      if (flags & ExerciseNodeFilterFlags.SORT_BY_STATUS) {
+        nodes = nodes.sort((a, b) => compare<ExerciseStatus>(b.exercise.status, a.exercise.status));
+      }
     }
-
     return nodes;
   }
 }
