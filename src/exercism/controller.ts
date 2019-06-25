@@ -1,10 +1,9 @@
-import { exec } from "child_process";
-import * as fs from "fs";
+import * as fs from "fs-extra";
 import * as path from "path";
-import { promisify } from "util";
 import * as vscode from "vscode";
 import { Logger } from "../common/logger";
 import { StorageItem } from "../common/storage";
+import { execute } from "../common/utilities";
 import { Exercise, ExerciseStatus, Solution, Track, TrackStatus, UserDataModel } from "../typings/api";
 import { getUserConfig } from "./config";
 import * as scraper from "./scraper";
@@ -37,8 +36,8 @@ export class ExercismController {
 
       // Read the track directory to find out if any exercises have already been downloaded.
       const trackPath = this.getTrackDirPath(track);
-      if (fs.existsSync(trackPath)) {
-        const downloaded = new Set(fs.readdirSync(trackPath));
+      if (await fs.pathExists(trackPath)) {
+        const downloaded = new Set(await fs.readdir(trackPath));
 
         // Update exercises to reflect their download status after reading track.
         track.exercises.forEach(exercise => {
@@ -81,7 +80,7 @@ export class ExercismController {
     Logger.debug("exercism", "Submitting exercise file:", uri.toString());
 
     try {
-      await promisify(exec)(`exercism submit ${uri.fsPath}`);
+      await execute(`exercism submit ${uri.fsPath}`);
     } catch (e) {
       throw e;
     }
@@ -97,7 +96,7 @@ export class ExercismController {
     Logger.debug("exercism", "Downloading exercise:", track.id, exercise.id);
 
     try {
-      await promisify(exec)(`exercism download --track=${track.id} --exercise=${exercise.id}`);
+      await execute(`exercism download --track=${track.id} --exercise=${exercise.id}`);
     } catch (e) {
       throw e;
     }

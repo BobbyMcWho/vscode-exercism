@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import * as fs from "fs-extra";
 import * as path from "path";
 import { UserConfig } from "../typings/api";
 
@@ -19,10 +19,6 @@ function getUserConfigDirPath(): string {
   return "";
 }
 
-function getUserConfigFilePath(): string {
-  return path.join(getUserConfigDirPath(), "/exercism/user.json");
-}
-
 export function getUserConfig(): UserConfig {
-  return JSON.parse(fs.readFileSync(getUserConfigFilePath(), "UTF8"));
+  return fs.readJsonSync(path.join(getUserConfigDirPath(), "/exercism/user.json"));
 }

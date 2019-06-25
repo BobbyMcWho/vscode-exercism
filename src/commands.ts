@@ -25,10 +25,10 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
     },
     {
       id: "exercism.track.openAsFolder",
-      cb: (trackNode: TrackNode): void => {
+      cb: async (trackNode: TrackNode): Promise<void> => {
         const dir = exercismController.getTrackDirPath(trackNode.track);
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir);
+        if (!(await fs.pathExists(dir))) {
+          await fs.mkdir(dir);
         }
         vscode.commands.executeCommand("vscode.openFolder", vscode.Uri.file(dir));
       }
@@ -84,8 +84,9 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           prompt: "Input the name of the file you wish to create."
         });
         if (newFileName) {
-          const dirPath = exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise);
-          fs.writeFile(path.join(dirPath, newFileName), "", () => tracksTreeProvider.refresh(exerciseNode));
+          const dir = exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise);
+          await fs.writeFile(dir, "");
+          tracksTreeProvider.refresh(exerciseNode);
         }
       }
     },
@@ -135,7 +136,9 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
       cb: async (exerciseNode: ExerciseNode): Promise<void> => {
         if (!(exerciseNode.exercise.status & ExerciseStatus.DOWNLOADED)) {
           const action = await vscode.window.showErrorMessage(
-            `You can only open an exercise after it has been downloaded. Would you like to download "${exerciseNode.id}"?`,
+            `You can only open an exercise after it has been downloaded. Would you like to download "${
+              exerciseNode.id
+            }"?`,
             "Download",
             "Cancel"
           );
@@ -303,8 +306,9 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
     },
     {
       id: "exercism.file.delete",
-      cb: (fileNode: FileNode): void => {
-        fs.remove(fileNode.resourceUri.fsPath).then(() => tracksTreeProvider.refresh(fileNode.parent));
+      cb: async (fileNode: FileNode): Promise<void> => {
+        await fs.remove(fileNode.resourceUri.fsPath);
+        tracksTreeProvider.refresh(fileNode.parent);
       }
     },
     {

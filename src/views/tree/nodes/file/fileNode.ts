@@ -5,23 +5,18 @@ import { ExerciseNode } from "../exercise/exerciseNode";
 import { TreeNode } from "../treeNode";
 
 export async function getFileNodesForDir(parent: ExerciseNode | FileNode, dir: string): Promise<FileNode[]> {
-  if (fs.existsSync(dir)) {
-    return fs.readdirSync(dir).reduce((nodes: FileNode[], filename: string): FileNode[] => {
+  const nodes: FileNode[] = [];
+  if (await fs.pathExists(dir)) {
+    const files = await fs.readdir(dir);
+    for (const filename of files) {
       if (filename !== ".exercism") {
         const uri = vscode.Uri.file(path.join(dir, filename));
-        const stat = fs.lstatSync(uri.fsPath);
-        let filenode: FileNode;
-        if (stat.isDirectory()) {
-          filenode = new FileNode(parent, uri, true);
-        } else {
-          filenode = new FileNode(parent, uri, false);
-        }
-        nodes.push(filenode);
+        const stat = await fs.lstat(uri.fsPath);
+        nodes.push(new FileNode(parent, uri, stat.isDirectory()));
       }
-      return nodes;
-    }, []);
+    }
   }
-  return [];
+  return nodes;
 }
 
 export class FileNode implements TreeNode {
