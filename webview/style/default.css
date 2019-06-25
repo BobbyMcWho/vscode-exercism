@@ -83,7 +83,7 @@ header .top-section {
   align-items: center;
   align-content: center;
   min-height: 100px;
-  padding: 1rem 1rem 0.5rem 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
 header .top-section .icons {
