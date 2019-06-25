@@ -1,6 +1,6 @@
-import Mocha from "mocha";
+import * as glob from "fast-glob";
+import * as Mocha from "mocha";
 import * as path from "path";
-import glob from "tiny-glob";
 
 export async function run(cwd: string, cb: (error: any, failures?: number) => void): Promise<void> {
   const mocha = new Mocha({
@@ -8,10 +8,10 @@ export async function run(cwd: string, cb: (error: any, failures?: number) => vo
     useColors: true,
     slow: 0
   });
-  
-  const files = await glob("**/**.test.js", { cwd });
 
-  files.forEach(f => mocha.addFile(path.resolve(cwd, f)));
+  (await glob("**/**.test.js", { cwd })).forEach(file => {
+    mocha.addFile(path.resolve(cwd, file));
+  });
 
   try {
     mocha.run(failures => cb(null, failures));

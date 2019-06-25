@@ -1,22 +1,13 @@
-import * as fs from "fs-extra";
+import * as glob from "fast-glob";
 import * as path from "path";
 import * as vscode from "vscode";
 import { ExerciseNode } from "../exercise/exerciseNode";
 import { TreeNode } from "../treeNode";
 
 export async function getFileNodesForDir(parent: ExerciseNode | FileNode, dir: string): Promise<FileNode[]> {
-  const nodes: FileNode[] = [];
-  if (await fs.pathExists(dir)) {
-    const files = await fs.readdir(dir);
-    for (const filename of files) {
-      if (filename !== ".exercism") {
-        const uri = vscode.Uri.file(path.join(dir, filename));
-        const stat = await fs.lstat(uri.fsPath);
-        nodes.push(new FileNode(parent, uri, stat.isDirectory()));
-      }
-    }
-  }
-  return nodes;
+  return (await glob("*", { cwd: dir, absolute: true, objectMode: true })).map(file => {
+    return new FileNode(parent, vscode.Uri.file(file.path), file.dirent.isDirectory());
+  });
 }
 
 export class FileNode implements TreeNode {

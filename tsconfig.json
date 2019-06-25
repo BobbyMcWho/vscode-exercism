@@ -6,7 +6,7 @@
     "moduleResolution": "node",
     "target": "esnext",
     "lib": ["esnext"],
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "sourceMap": true,
     "rootDir": "./src",
     "outDir": "./out",

@@ -1,6 +1,6 @@
+import * as glob from "fast-glob";
 import * as fs from "fs-extra";
 import * as path from "path";
-import glob from "tiny-glob";
 import * as vscode from "vscode";
 import { ExtensionManager } from "./common/context";
 import { ExercismController } from "./exercism/controller";
@@ -27,9 +27,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
       id: "exercism.track.openAsFolder",
       cb: async (trackNode: TrackNode): Promise<void> => {
         const dir = exercismController.getTrackDirPath(trackNode.track);
-        if (!(await fs.pathExists(dir))) {
-          await fs.mkdir(dir);
-        }
+        await fs.ensureDir(dir);
         vscode.commands.executeCommand("vscode.openFolder", vscode.Uri.file(dir));
       }
     },
@@ -154,10 +152,10 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           }
         }
 
-        const files: string[] = await glob(ExtensionManager.getConfigurationItem("openStartGlob", ""), {
+        const files = await glob(ExtensionManager.getConfigurationItem<string>("openStartGlob", ""), {
           cwd: exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise),
-          filesOnly: true,
-          absolute: true
+          absolute: true,
+          onlyFiles: true
         });
 
         if (files.length < 1) {
@@ -178,8 +176,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
         }
 
         for (let i = 0; i < files.length; i++) {
-          const uri = vscode.Uri.file(files[i]);
-          await vscode.window.showTextDocument(uri, {
+          await vscode.window.showTextDocument(vscode.Uri.file(files[i]), {
             preview: false,
             viewColumn: i === 0 ? 2 : i === 1 ? 1 : 3
           });
