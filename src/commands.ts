@@ -158,7 +158,9 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           onlyFiles: true
         });
 
-        vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility");
+        if (tracksTreeProvider.view.visible) {
+          vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility");
+        }
 
         if (files.length < 1) {
           await vscode.window.showErrorMessage(
