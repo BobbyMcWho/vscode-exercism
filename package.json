@@ -324,6 +324,12 @@
       {
         "title": "Exercism",
         "properties": {
+          "exercism.openStartGlob": {
+            "type": "string",
+            "default": "**/*.{js,go,md,rs,vim,cc,cpp,c,coffee,cs,swift,ts,h,java,lua,rb,sh,vb,php,py}",
+            "description": "The file glob to use when opening files for `Open and Start`.",
+            "scope": "window"
+          },
           "exercism.logging": {
             "type": "string",
             "default": "silent",
@@ -356,7 +362,6 @@
   "devDependencies": {
     "@types/cheerio": "^0.22.11",
     "@types/fs-extra": "^7.0.0",
-    "@types/glob": "^7.1.1",
     "@types/marked": "^0.6.5",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.0.8",
@@ -378,6 +383,7 @@
     "helpful-decorators": "^2.0.4",
     "marked": "^0.6.2",
     "preact": "^8.4.2",
-    "redux-zero": "^5.0.4"
+    "redux-zero": "^5.0.4",
+    "tiny-glob": "^0.2.6"
   }
 }

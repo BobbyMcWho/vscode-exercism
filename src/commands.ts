@@ -1,5 +1,6 @@
 import * as fs from "fs-extra";
 import * as path from "path";
+import glob from "tiny-glob";
 import * as vscode from "vscode";
 import { ExtensionManager } from "./common/context";
 import { ExercismController } from "./exercism/controller";
@@ -150,25 +151,34 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           }
         }
 
-        const fileNodes = await tracksTreeProvider.getExerciseNodeChildren(exerciseNode);
-        if (fileNodes.length > 1) {
-          if (fileNodes.length === 2) {
-            vscode.commands.executeCommand("vscode.setEditorLayout", {
-              orientation: 0,
-              groups: [{ groups: [], size: 0.5 }, { groups: [{}], size: 0.5 }]
-            });
-          } else {
-            vscode.commands.executeCommand("vscode.setEditorLayout", {
-              groups: [{ groups: [], size: 0.5 }, { groups: [{}, {}], size: 0.5 }]
-            });
-          }
+        const files: string[] = await glob(ExtensionManager.getConfigurationItem("openStartGlob", ""), {
+          cwd: exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise),
+          filesOnly: true,
+          absolute: true
+        });
+
+        if (files.length < 1) {
+          await vscode.window.showErrorMessage(
+            "We couldn't find any files matching the `openStartGlob` setting! Please make sure the glob includes the file extensions you want opened before trying again."
+          );
+          return;
         }
 
-        for (let i = 0; i < fileNodes.length; i++) {
-          const fileNode = fileNodes[i];
-          await vscode.window.showTextDocument(fileNode.resourceUri, {
+        if (files.length > 1) {
+          vscode.commands.executeCommand("vscode.setEditorLayout", {
+            orientation: 0,
+            groups:
+              files.length === 2
+                ? [{ groups: [], size: 0.5 }, { groups: [{}], size: 0.5 }]
+                : [{ groups: [], size: 0.5 }, { groups: [{}, {}], size: 0.5 }]
+          });
+        }
+
+        for (let i = 0; i < files.length; i++) {
+          const uri = vscode.Uri.file(files[i]);
+          await vscode.window.showTextDocument(uri, {
             preview: false,
-            viewColumn: i === 0 ? 2 : i === 2 ? 3 : i
+            viewColumn: i === 0 ? 2 : i === 1 ? 1 : 3
           });
         }
       }
