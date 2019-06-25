@@ -2,6 +2,13 @@
 
 ## v1
 
+### v1.14.0 (June 24th 2019)
+
+- Rewrote filtering logic again
+- New screenshot
+- Fixed `open and start` issues
+- Added a new setting called `openStartGlob`. You can use this setting to customize which files will open for `open and start`
+
 ### v1.13.2 (June 20th 2019)
 
 - Rewrote filtering logic so filter states are going to be reset
