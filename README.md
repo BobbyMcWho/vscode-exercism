@@ -8,7 +8,7 @@
 
 ### Prerequisites
 
-This extension requires you to install the official [Exercism](https://exercism.io) client.
+This extension requires you to install the official [Exercism](https://exercism.io) client in order to download and submit exercises.
 
 ### Installation
 
@@ -24,7 +24,7 @@ You can download this extension from the [Visual Studio Marketplace](https://mar
 
 **Why did you create this extension?**
 
-I wanted a way to complete exercises during my breaks without having to leave my editor or close my current workspace.
+I wanted the ability to complete exercises without having to leave my editor or dirty my current workspace.
 
 **Does this extension intend to replace the website?**
 
