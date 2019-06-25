@@ -37,10 +37,11 @@ export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
 
   filterByTopic(topic: string): void {
     this._store.mutate(model => {
-      model.flags ^= ExerciseNodeFilterFlags.FILTER_TOPIC;
       if (model.flags & ExerciseNodeFilterFlags.FILTER_TOPIC && topic === model.topicToFilter) {
+        model.flags ^= ExerciseNodeFilterFlags.FILTER_TOPIC;
         model.topicToFilter = undefined;
       } else {
+        model.flags |= ExerciseNodeFilterFlags.FILTER_TOPIC;
         model.topicToFilter = topic;
       }
     });
