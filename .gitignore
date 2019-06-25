@@ -3,3 +3,4 @@ dist/**
 out/**
 .vscode-test/**
 **.vsix
+stats.json

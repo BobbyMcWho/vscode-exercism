@@ -11,6 +11,7 @@ images/screenshots/**
 webpack.config.js
 webview/**
 preview/**
+stats.json
 **/tsconfig.json
 **/tslint.json
 **/*.map
