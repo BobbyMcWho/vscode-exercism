@@ -56,7 +56,6 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
             for (let i = 0; i < exerciseNodes.length; i++) {
               const exerciseNode = exerciseNodes[i];
               progress.report({ message: exerciseNode.id, increment: (i / exerciseNodes.length) * 100 });
-
               if (!(exerciseNode.exercise.status & ExerciseStatus.DOWNLOADED)) {
                 while (true) {
                   try {
@@ -102,28 +101,24 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
     {
       id: "exercism.exercise.download",
       cb: async (exerciseNode: ExerciseNode): Promise<void> => {
-        if (!(exerciseNode.exercise.status & ExerciseStatus.DOWNLOADED)) {
-          try {
-            await vscode.window.withProgress(
-              {
-                title: "Downloading exercise: " + exerciseNode.id,
-                location: vscode.ProgressLocation.Notification
-              },
-              () => exercismController.downloadExercise(exerciseNode.parent.track, exerciseNode.exercise)
-            );
-          } catch (e) {
-            const action = await vscode.window.showErrorMessage(String(e), "Retry", "Cancel");
-            if (action === "Retry") {
-              return vscode.commands.executeCommand("exercism.exercise.download", exerciseNode);
-            } else {
-              return;
-            }
+        try {
+          await vscode.window.withProgress(
+            {
+              title: "Downloading exercise: " + exerciseNode.id,
+              location: vscode.ProgressLocation.Notification
+            },
+            () => exercismController.downloadExercise(exerciseNode.parent.track, exerciseNode.exercise)
+          );
+        } catch (e) {
+          const action = await vscode.window.showErrorMessage(String(e), "Retry", "Cancel");
+          if (action === "Retry") {
+            return vscode.commands.executeCommand("exercism.exercise.download", exerciseNode);
+          } else {
+            return;
           }
-          tracksTreeProvider.refresh(exerciseNode);
-          tracksTreeProvider.view.reveal(exerciseNode, { expand: true });
-        } else {
-          vscode.window.showErrorMessage("You have already downloaded this exercise.");
         }
+        tracksTreeProvider.refresh(exerciseNode);
+        tracksTreeProvider.view.reveal(exerciseNode, { expand: true });
       }
     },
     {
@@ -156,10 +151,18 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
         }
 
         const fileNodes = await tracksTreeProvider.getExerciseNodeChildren(exerciseNode);
-        vscode.commands.executeCommand("vscode.setEditorLayout", {
-          orientation: 0,
-          groups: [{ groups: [], size: 0.5 }, { groups: [{}, {}], size: 0.5 }]
-        });
+        if (fileNodes.length > 1) {
+          if (fileNodes.length === 2) {
+            vscode.commands.executeCommand("vscode.setEditorLayout", {
+              orientation: 0,
+              groups: [{ groups: [], size: 0.5 }, { groups: [{}], size: 0.5 }]
+            });
+          } else {
+            vscode.commands.executeCommand("vscode.setEditorLayout", {
+              groups: [{ groups: [], size: 0.5 }, { groups: [{}, {}], size: 0.5 }]
+            });
+          }
+        }
 
         for (let i = 0; i < fileNodes.length; i++) {
           const fileNode = fileNodes[i];

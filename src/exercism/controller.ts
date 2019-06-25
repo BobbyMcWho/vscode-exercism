@@ -102,8 +102,10 @@ export class ExercismController {
       throw e;
     }
 
-    exercise.status |= ExerciseStatus.DOWNLOADED;
-    this._userDataStore.save();
+    if (!(exercise.status & ExerciseStatus.DOWNLOADED)) {
+      exercise.status |= ExerciseStatus.DOWNLOADED;
+      this._userDataStore.save();
+    }
   }
 
   async getExerciseSolutions(track: Track, exercise: Exercise): Promise<Solution[]> {
