@@ -50,11 +50,11 @@ export class TrackNodeFilter implements TreeNodeFilter<TrackNode> {
         }
       } else {
         if (flags & TrackNodeFilterFlags.FILTER_JOINED) {
-          nodes = nodes.filter(a => a.track.status & TrackStatus.JOINED);
+          return nodes.filter(a => a.track.status & TrackStatus.JOINED);
         }
       }
     }
-    
+
     return nodes;
   }
 }
