@@ -2,7 +2,11 @@
 
 ## v1
 
-### v1.14.0 (June 24th 2019)
+### v1.15.1 (June 24th 2019)
+
+- Fixed version number mismatch
+
+### v1.15.0 (June 24th 2019)
 
 - Rewrote filtering logic again
 - New screenshot
