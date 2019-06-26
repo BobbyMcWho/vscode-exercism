@@ -1,4 +1,3 @@
-import * as cheerio from "cheerio";
 import * as https from "https";
 import { Logger } from "../common/logger";
 import { Exercise, ExerciseStatus, Solution, Track, TrackStatus } from "../typings/api";
@@ -22,7 +21,7 @@ export async function fetchExerciseSolutions(track: Track, exercise: Exercise): 
     const data = await request(
       `https://exercism.io/tracks/${track.id}/exercises/${exercise.id}/solutions?utf8=%E2%9C%93&order=num_stars`
     );
-    const $ = cheerio.load(data);
+    const $ = (await import("cheerio")).load(data);
     $(".solution").each((_, el) => {
       let details: number[] = [];
       const href = $(el).attr("href");
@@ -51,7 +50,7 @@ export async function fetchTrackExercises(trackID: string): Promise<Exercise[]> 
   let exercises: Exercise[] = [];
   try {
     const data = await request("https://exercism.io/tracks/" + trackID + "/exercises");
-    const $ = cheerio.load(data);
+    const $ = (await import("cheerio")).load(data);
     $(".exercise").each((_, el) => {
       const href = $(el).attr("href");
       const id = href.substr(href.lastIndexOf("/") + 1);
@@ -94,7 +93,7 @@ export async function fetchAllTracks(): Promise<Track[]> {
   let tracks: Track[] = [];
   try {
     const data = await request("https://exercism.io/tracks");
-    const $ = cheerio.load(data);
+    const $ = (await import("cheerio")).load(data);
     $(".track").each((_, el) => {
       const href = $(el).attr("href");
       const id = href.substr(href.lastIndexOf("/") + 1);

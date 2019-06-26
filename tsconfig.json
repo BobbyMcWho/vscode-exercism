@@ -2,7 +2,7 @@
   "compilerOptions": {
     "incremental": true,
     "tsBuildInfoFile": "./out/.tsbuildinfo",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "target": "esnext",
     "lib": ["esnext"],
@@ -17,5 +17,5 @@
     "experimentalDecorators": true,
     "preserveWatchOutput": true
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*"]
 }

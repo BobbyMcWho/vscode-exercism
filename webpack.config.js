@@ -34,6 +34,7 @@ const extension = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "extension.js",
+    chunkFilename: '[name].bundle.js',
     libraryTarget: "commonjs2"
   },
   externals: {
