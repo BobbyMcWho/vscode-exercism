@@ -2,6 +2,14 @@
 
 ## v1
 
+### v1.15.2 (June 26th 2019)
+
+- Fixed problem with exercise icon & topic filter not updating
+- Made preview header smaller
+- Lazy loading scraping module
+- Hiding sidebar for open & start only when its visible now
+- By default README.md is now ignored by open & start
+
 ### v1.15.1 (June 24th 2019)
 
 - Fixed version number mismatch
