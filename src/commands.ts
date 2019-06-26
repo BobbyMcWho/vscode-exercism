@@ -264,7 +264,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
         const uri = await vscode.window.showSaveDialog({});
         if (uri) {
           await fs.writeFile(uri.fsPath, exercismController.getUserDataInJSON());
-          await vscode.window.showTextDocument(uri);
+          vscode.window.showTextDocument(uri);
         }
       }
     },
