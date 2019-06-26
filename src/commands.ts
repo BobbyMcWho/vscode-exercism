@@ -134,7 +134,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
       cb: async (exerciseNode: ExerciseNode): Promise<void> => {
         if (!(exerciseNode.exercise.status & ExerciseStatus.DOWNLOADED)) {
           const action = await vscode.window.showErrorMessage(
-            `You can only open an exercise after it has been downloaded. Would you like to download "${
+            `You can only open downloaded exercises. Would you like to download "${
               exerciseNode.id
             }"?`,
             "Download",
