@@ -2,6 +2,11 @@
 
 ## v1
 
+### v1.15.3 (June 26th 2019)
+
+- Update screenshot
+- Fix folders not showing up (this broke with previous update)
+
 ### v1.15.2 (June 26th 2019)
 
 - Fixed problem with exercise icon & topic filter not updating
