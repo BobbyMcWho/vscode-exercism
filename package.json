@@ -63,140 +63,117 @@
       {
         "command": "exercism.exercise.openStart",
         "title": "Open and Start",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.exercise.createNewFile",
         "title": "New File",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.exercise.preview",
         "title": "Open Preview",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.exercise.complete",
         "title": "Complete Exercise",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.exercise.download",
         "title": "Download Exercise",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.file.submit",
         "title": "Submit File for Evaluation",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.file.delete",
         "title": "Delete",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.file.rename",
         "title": "Rename",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.file.open",
         "title": "Open Exercise File",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.sortExercisesByDifficulty",
         "title": "Sort By: Difficulty",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.sortExercisesByName",
         "title": "Sort By: Name",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.sortExercisesByTopic",
         "title": "Sort By: Topic",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.sortExercisesByStatus",
         "title": "Sort By: Status",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.clearFilters",
         "title": "Clear All Filters",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.showCompletedExercises",
         "title": "Show Completed Exercises",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.showUncompletedExercises",
         "title": "Show Uncompleted Exercises",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.showDownloadedExercises",
         "title": "Show Downloaded Exercises",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.showJoinedTracks",
         "title": "Show Joined Tracks",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.view.tracks.filterExercisesByTopic",
         "title": "Filter Exercises By Topic",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.track.toggleFocus",
         "title": "Toggle Track Focus",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.track.openAsFolder",
         "title": "Open as Folder",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.track.downloadAllExercises",
         "title": "Download All Exercises",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.global.clearStorageData",
         "title": "Clear Storage Data",
-        "category": "Exercism",
-        "enablement": "view == 'exercism.view.tracks'"
+        "category": "Exercism"
       },
       {
         "command": "exercism.global.exportUserData",
@@ -210,6 +187,100 @@
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "exercism.exercise.openStart",
+          "when": "false"
+        },
+        {
+          "command": "exercism.exercise.createNewFile",
+          "when": "false"
+        },
+        {
+          "command": "exercism.exercise.preview",
+          "when": "false"
+        },
+        {
+          "command": "exercism.exercise.complete",
+          "when": "false"
+        },
+        {
+          "command": "exercism.exercise.download",
+          "when": "false"
+        },
+        {
+          "command": "exercism.file.submit",
+          "when": "false"
+        },
+        {
+          "command": "exercism.file.delete",
+          "when": "false"
+        },
+        {
+          "command": "exercism.file.rename",
+          "when": "false"
+        },
+        {
+          "command": "exercism.file.open",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.sortExercisesByDifficulty",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.sortExercisesByName",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.sortExercisesByTopic",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.sortExercisesByStatus",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.clearFilters",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.showCompletedExercises",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.showUncompletedExercises",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.showDownloadedExercises",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.showJoinedTracks",
+          "when": "false"
+        },
+        {
+          "command": "exercism.view.tracks.filterExercisesByTopic",
+          "when": "false"
+        },
+        {
+          "command": "exercism.track.toggleFocus",
+          "when": "false"
+        },
+        {
+          "command": "exercism.track.openAsFolder",
+          "when": "false"
+        },
+        {
+          "command": "exercism.track.downloadAllExercises",
+          "when": "false"
+        },
+        {
+          "command": "exercism.global.clearStorageData",
+          "when": "false"
+        }
+      ],
       "view/title": [
         {
           "command": "exercism.view.tracks.showJoinedTracks",
