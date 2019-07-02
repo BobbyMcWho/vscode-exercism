@@ -2,7 +2,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import * as vscode from "vscode";
 import { ExercismController } from "../../exercism/controller";
-import { getExerciseIconPath, getTrackIconPath } from "../../exercism/icons";
+import { getExerciseIconPath } from "../../exercism/icons";
 import { Exercise, ExerciseStatus, Track } from "../../typings/api";
 import { CustomIconURI } from "../../typings/vsc";
 import { WebviewMessage } from "../../typings/webview";
