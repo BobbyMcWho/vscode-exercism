@@ -9,6 +9,7 @@ export interface State {
   track: Track;
   solutions: Solution[];
   instructions: string;
+  topicBeingFiltered: string;
   exerciseIconPath: {
     light: string;
     dark: string;
@@ -18,6 +19,7 @@ export interface State {
 export interface Actions {
   updateTabIndex: (tab: number) => void;
   postMessageToVSC: (message: WebviewMessage) => void;
+  filterByTopic: (topic: string) => void;
 }
 
 export type StateProps = Partial<State & Actions>;
@@ -36,6 +38,17 @@ export class StateProvider extends Component<{}, StateProps> {
     },
     postMessageToVSC: (message: WebviewMessage) => {
       vscode.postMessage(message);
+    },
+    filterByTopic: (topic: string) => {
+      this.setState(state => ({
+        topicBeingFiltered: state.topicBeingFiltered === topic ? undefined : topic
+      }));
+      this.state.postMessageToVSC({
+        command: "filterByTopic",
+        payload: {
+          topic
+        }
+      });
     }
   };
 

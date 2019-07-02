@@ -30,16 +30,12 @@ const ExerciseHeader = (state: StateProps) => {
               const tag = "#" + topic;
               return (
                 <a
-                  style={{ paddingLeft: "4px" }}
+                  style={{
+                    paddingLeft: "4px",
+                    filter: state.topicBeingFiltered === topic ? "brightness(0.8)" : "none"
+                  }}
                   href={tag}
-                  onClick={() =>
-                    state.postMessageToVSC({
-                      command: "filterByTopic",
-                      payload: {
-                        topic
-                      }
-                    })
-                  }
+                  onClick={() => state.filterByTopic(topic)}
                 >
                   {tag}
                 </a>
