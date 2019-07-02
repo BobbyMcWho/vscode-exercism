@@ -9,7 +9,7 @@ import { Logger } from "./logger";
  */
 export class StorageItem<T> {
   private _model: T;
-  
+
   /**
    * Create a new instance of StorageItem by loading its model from global storage
    * using the given key. If no model exists, the default model will be used instead.
