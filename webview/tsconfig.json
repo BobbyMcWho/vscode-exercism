@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "tsBuildInfoFile": "../out/.tsbuildinfo",
-    "target": "esnext",
-    "module": "commonjs",
-    "outDir": "../out/webview",
     "jsx": "react",
     "jsxFactory": "h",
-    "strict": true,
-    "noUnusedLocals": false,
+    "lib": ["dom", "esnext"],
+    "module": "commonjs",
+    "moduleResolution": "node",
     "noImplicitAny": false,
-    "lib": ["dom", "esnext"]
+    "noUnusedLocals": false,
+    "outDir": "../out/webview",
+    "strict": true,
+    "target": "esnext",
+    "strictNullChecks": false,
+    "tsBuildInfoFile": "../out/.tsbuildinfo"
   },
   "include": ["./**/*", "../src/typings/api.d.ts", "../src/typings/webview.d.ts"]
 }

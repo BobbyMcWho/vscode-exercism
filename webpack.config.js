@@ -19,6 +19,9 @@ const webview = {
     ]
   },
   resolve: {
+    alias: {
+      preact: path.join(__dirname, "node_modules", "preact", "src")
+    },
     extensions: [".ts", ".js", ".tsx", ".jsx"]
   },
   output: {
@@ -34,7 +37,7 @@ const extension = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "extension.js",
-    chunkFilename: '[name].bundle.js',
+    chunkFilename: "[name].bundle.js",
     libraryTarget: "commonjs2"
   },
   externals: {

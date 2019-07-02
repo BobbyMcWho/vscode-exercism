@@ -46,7 +46,7 @@ main .nav-content .solution-list {
 main .nav-content .solution {
   transition: 0.2s;
   flex: 1;
-  min-width: 200px;
+  min-width: 180px;
   cursor: pointer;
   text-decoration: none;
   padding: 2rem;
@@ -86,32 +86,23 @@ header .top-section {
   padding: 1rem 1rem 0 1rem;
 }
 
-header .top-section .icons {
+header .top-section .icon {
   margin-right: 1.5rem;
-}
-
-header .top-section .icons .exercise-icon {
-  width: 64px;
+  min-width: 64px;
+  max-width: 128px;
   height: 64px;
-  background-size: 50%;
-  background-color: white;
-  border: 1px solid #339ab9;
+  background-size: 85%;
   display: block;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 50%;
 }
 
-header .top-section .icons .track-icon {
-  position: absolute;
-  margin-top: 28px;
-  margin-left: 28px;
-  width: 52px;
-  height: 52px;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 50%;
+body.vscode-light header .top-section .icon {
+  background-image: var(--exerciseIconLight);
+}
+
+body.vscode-dark header .top-section .icon {
+  background-image: var(--exerciseIconDark);
 }
 
 header .top-section .meta::-webkit-scrollbar {

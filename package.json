@@ -455,7 +455,6 @@
     "fs-extra": "^8.1.0",
     "helpful-decorators": "^2.0.4",
     "marked": "^0.6.3",
-    "preact": "^8.4.2",
-    "redux-zero": "^5.0.4"
+    "preact": "git+https://github.com/preactjs/preact.git"
   }
 }

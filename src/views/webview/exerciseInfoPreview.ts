@@ -26,7 +26,6 @@ export class ExerciseInfoPreview implements TreeNodePreview, vscode.Disposable {
   ) {
     const track = this._exerciseNode.parent.track;
     const exercise = this._exerciseNode.exercise;
-    const trackIconPath = getTrackIconPath(track);
     const exerciseIconPath = getExerciseIconPath(exercise);
 
     this.title = track.name + " - " + exercise.name;
@@ -37,8 +36,10 @@ export class ExerciseInfoPreview implements TreeNodePreview, vscode.Disposable {
         view: "exercise",
         exercise,
         track,
-        trackIconPath: trackIconPath.light.with({ scheme: "vscode-resource" }).toString(),
-        exerciseIconPath: exerciseIconPath.light.with({ scheme: "vscode-resource" }).toString(),
+        exerciseIconPath: {
+          light: exerciseIconPath.light.with({ scheme: "vscode-resource" }).toString(),
+          dark: exerciseIconPath.dark.with({ scheme: "vscode-resource" }).toString()
+        },
         instructions: this.getInstructions(track, exercise)
       }
     };

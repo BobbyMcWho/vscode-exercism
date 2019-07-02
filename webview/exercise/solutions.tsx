@@ -1,30 +1,31 @@
 import { h } from "preact";
-import { postMessageToVSC } from "../utilities/message";
-import { State } from "../utilities/store";
+import { StateProps } from "../context";
 
-const Solutions = (props: State) => {
-  return props.solutions ? (
-    <div class="nav-content">
-      <div class="solution-list">
-        {props.solutions.map(solution => (
-          <a
-            class="solution"
-            href={`https://exercism.io/tracks/${props.track.id}/exercises/${props.exercise.id}/solutions/${solution.uuid}`}
-          >
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div>{solution.author}</div>
-              <div>{"★ " + solution.stars}</div>
-            </div>
-          </a>
-        ))}
+const Solutions = (state: StateProps) => {
+  if (state.solutions) {
+    return (
+      <div class="nav-content">
+        <div class="solution-list">
+          {state.solutions.map(solution => (
+            <a
+              class="solution"
+              href={`https://exercism.io/tracks/${state.track.id}/exercises/${state.exercise.id}/solutions/${
+                solution.uuid
+              }`}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div>{solution.author}</div>
+                <div>{"★ " + solution.stars}</div>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
-  ) : (
-    (() => {
-      postMessageToVSC({ command: "getExerciseSolutions" });
-      return null;
-    })()
-  );
+    );
+  } else {
+    state.postMessageToVSC({ command: "getExerciseSolutions" });
+    return null;
+  }
 };
 
 export default Solutions;
