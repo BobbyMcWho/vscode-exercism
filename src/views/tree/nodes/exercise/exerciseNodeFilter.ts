@@ -36,29 +36,34 @@ export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
   }
 
   filterByTopic(topic: string): void {
-    this._store.mutate(model => {
+    this._store.update(model => {
       if (model.flags & ExerciseNodeFilterFlags.FILTER_TOPIC && topic === model.topicToFilter) {
-        model.flags ^= ExerciseNodeFilterFlags.FILTER_TOPIC;
-        model.topicToFilter = undefined;
+        return {
+          flags: model.flags ^= ExerciseNodeFilterFlags.FILTER_TOPIC,
+          topicToFilter: undefined
+        };
       } else {
-        model.flags |= ExerciseNodeFilterFlags.FILTER_TOPIC;
-        model.topicToFilter = topic;
+        return {
+          flags: model.flags |= ExerciseNodeFilterFlags.FILTER_TOPIC,
+          topicToFilter: topic
+        };
       }
     });
   }
 
   toggle(flags: ExerciseNodeFilterFlags): void {
-    this._store.mutate(model => {
+    this._store.update(model => {
+      let prevFlags = model.flags;
       if (flags === ExerciseNodeFilterFlags.FILTER_COMPLETED) {
-        if (model.flags & ExerciseNodeFilterFlags.FILTER_UNCOMPLETED) {
-          model.flags ^= ExerciseNodeFilterFlags.FILTER_UNCOMPLETED;
+        if (prevFlags & ExerciseNodeFilterFlags.FILTER_UNCOMPLETED) {
+          prevFlags ^= ExerciseNodeFilterFlags.FILTER_UNCOMPLETED;
         }
       } else if (flags === ExerciseNodeFilterFlags.FILTER_UNCOMPLETED) {
-        if (model.flags & ExerciseNodeFilterFlags.FILTER_COMPLETED) {
-          model.flags ^= ExerciseNodeFilterFlags.FILTER_COMPLETED;
+        if (prevFlags & ExerciseNodeFilterFlags.FILTER_COMPLETED) {
+          prevFlags ^= ExerciseNodeFilterFlags.FILTER_COMPLETED;
         }
       }
-      model.flags ^= flags;
+      return { flags: prevFlags ^= flags };
     });
   }
 

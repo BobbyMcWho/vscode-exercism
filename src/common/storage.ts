@@ -4,8 +4,8 @@ import { Logger } from "./logger";
 
 /**
  * StorageItem is a generic object that abstracts away the details of the global storage by
- * providing a repository-like interface to its functions. Each StorageItem can independently update the
- * global storage without worrying about performance and other such issues.
+ * providing a repository-like interface to its functions. Each StorageItem can independently
+ * update the global storage.
  */
 export class StorageItem<T> {
   private _model: T;
@@ -61,13 +61,13 @@ export class StorageItem<T> {
   }
 
   /**
-   * Mutate and save the model using a callback transaction.
+   * Update and save the model.
    *
-   * @param fn The transaction callback to use.
+   * @param fn The update callback to use.
    */
-  mutate(fn: (model: T) => void): void {
+  update(fn: (model: T) => Partial<T>): void {
     Logger.debug("storage", "Updating model:", this._key);
-    fn(this._model);
+    this._model = { ...this._model, ...fn(this._model) };
     this.save();
   }
 

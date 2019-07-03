@@ -19,14 +19,12 @@ export class ExercismController {
 
   // Get all available tracks (from local storage or scraping exercism.io).
   async getAllTracks(): Promise<Track[]> {
-    return new Promise(resolve =>
-      this._userDataStore.mutate(async model => {
-        if (!model.tracks) {
-          model.tracks = await scraper.fetchAllTracks();
-        }
-        resolve(model.tracks);
-      })
-    );
+    let { tracks } = this._userDataStore.model;
+    if (!tracks) {
+      tracks = await scraper.fetchAllTracks();
+      this._userDataStore.update(_ => ({ tracks }));
+    }
+    return tracks;
   }
 
   // Get the exercises associated with the given track.

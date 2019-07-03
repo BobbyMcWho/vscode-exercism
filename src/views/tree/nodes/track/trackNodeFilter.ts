@@ -28,16 +28,16 @@ export class TrackNodeFilter implements TreeNodeFilter<TrackNode> {
   }
 
   toggle(flags: TrackNodeFilterFlags): void {
-    this._store.mutate(model => {
-      model.flags ^= flags;
-    });
+    this._store.update(model => ({
+      flags: model.flags ^= flags
+    }));
   }
 
   focus(trackNode: TrackNode): void {
-    this._store.mutate(model => {
-      model.flags ^= TrackNodeFilterFlags.FILTER_FOCUSED;
-      model.trackToFocus = trackNode.id;
-    });
+    this._store.update(model => ({
+      flags: model.flags ^= TrackNodeFilterFlags.FILTER_FOCUSED,
+      trackToFocus: trackNode.id
+    }));
   }
 
   filter(nodes: TrackNode[]): TrackNode[] {
