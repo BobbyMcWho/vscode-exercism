@@ -134,6 +134,30 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
       }
     },
     {
+      id: "exercism.exercise.openInBrowser",
+      cb: ({ parent: { track }, exercise }: ExerciseNode): void => {
+        const uri = vscode.Uri.parse(`https://www.exercism.io/tracks/${track.id}/exercises/${exercise.id})`);
+        vscode.env.openExternal(uri);
+      }
+    },
+    {
+      id: "exercism.exercise.openInTerminal",
+      cb: (node: ExerciseNode | FileNode): void => {
+        const name = `Exercism - ${node.label}`;
+        let terminal = vscode.window.terminals.find(terminal => terminal.name === name);
+        if (!terminal) {
+          terminal = vscode.window.createTerminal({
+            cwd:
+              node instanceof ExerciseNode
+                ? exercismController.getExerciseDirPath(node.parent.track, node.exercise)
+                : node.resourceUri.fsPath,
+            name: `Exercism - ${node.label}`
+          });
+        }
+        terminal.show();
+      }
+    },
+    {
       id: "exercism.exercise.openStart",
       cb: async (exerciseNode: ExerciseNode): Promise<void> => {
         if (!(exerciseNode.exercise.status & ExerciseStatus.DOWNLOADED)) {

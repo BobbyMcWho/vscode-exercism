@@ -7,14 +7,12 @@ import { TreeNode } from "../treeNode";
 
 export class ExerciseNode implements TreeNode {
   private _isShowingTopics: boolean;
-  public readonly contextValue: string;
   public readonly label: string;
   public readonly id: string;
   public readonly command: vscode.Command;
 
   constructor(public readonly parent: TrackNode, public readonly exercise: Exercise) {
     this._isShowingTopics = false;
-    this.contextValue = "exerciseTreeNode";
     this.label = this.exercise.name;
     this.id = this.parent.id + "/" + this.exercise.id;
     this.command = {
@@ -22,6 +20,17 @@ export class ExerciseNode implements TreeNode {
       arguments: [this],
       title: "Open Exercise Preview"
     };
+  }
+
+  get contextValue(): string {
+    let value = "exerciseTreeNode";
+    if (this.exercise.status & ExerciseStatus.COMPLETED) {
+      value += ":completed";
+    }
+    if (this.exercise.status & ExerciseStatus.DOWNLOADED) {
+      value += ":directory";
+    }
+    return value;
   }
 
   get iconPath(): CustomIconURI {
