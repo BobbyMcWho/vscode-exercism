@@ -1,4 +1,3 @@
-import * as glob from "fast-glob";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as vscode from "vscode";
@@ -134,9 +133,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
       cb: async (exerciseNode: ExerciseNode): Promise<void> => {
         if (!(exerciseNode.exercise.status & ExerciseStatus.DOWNLOADED)) {
           const action = await vscode.window.showErrorMessage(
-            `You can only open downloaded exercises. Would you like to download "${
-              exerciseNode.id
-            }"?`,
+            `You can only open downloaded exercises. Would you like to download "${exerciseNode.id}"?`,
             "Download",
             "Cancel"
           );
@@ -152,11 +149,14 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           }
         }
 
-        const files = await glob(ExtensionManager.getConfigurationItem<string>("openStartGlob", ""), {
-          cwd: exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise),
-          absolute: true,
-          onlyFiles: true
-        });
+        const files = await (await import("fast-glob"))(
+          ExtensionManager.getConfigurationItem<string>("openStartGlob", ""),
+          {
+            cwd: exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise),
+            absolute: true,
+            onlyFiles: true
+          }
+        );
 
         if (tracksTreeProvider.view.visible) {
           vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility");
