@@ -1,4 +1,5 @@
 import * as fs from "fs-extra";
+import * as glob from "glob";
 import * as path from "path";
 import * as vscode from "vscode";
 import { ExtensionManager } from "./common/context";
@@ -178,14 +179,11 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           }
         }
 
-        const files = await (await import("fast-glob")).sync(
-          ExtensionManager.getConfigurationItem<string>("openStartGlob", ""),
-          {
-            cwd: exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise),
-            absolute: true,
-            onlyFiles: true
-          }
-        );
+        const files = glob.sync(ExtensionManager.getConfigurationItem<string>("openStartGlob", ""), {
+          cwd: exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise),
+          absolute: true,
+          nodir: true
+        });
 
         if (tracksTreeProvider.view.visible) {
           vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility");

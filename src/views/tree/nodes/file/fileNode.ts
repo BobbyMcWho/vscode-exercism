@@ -1,16 +1,13 @@
+import * as fs from "fs";
+import * as glob from "glob";
 import * as path from "path";
 import * as vscode from "vscode";
 import { ExerciseNode } from "../exercise/exerciseNode";
 import { TreeNode } from "../treeNode";
 
-export async function getFileNodesForDir(parent: ExerciseNode | FileNode, dir: string): Promise<FileNode[]> {
-  return (await (await import("fast-glob")).sync("*", {
-    cwd: dir,
-    absolute: true,
-    objectMode: true,
-    onlyFiles: false
-  })).map(file => {
-    return new FileNode(parent, vscode.Uri.file(file.path), file.dirent.isDirectory());
+export async function getFileNodesForDir(parent: ExerciseNode | FileNode, cwd: string): Promise<FileNode[]> {
+  return glob.sync("*", { cwd, nodir: false, absolute: true }).map(file => {
+    return new FileNode(parent, vscode.Uri.file(file), fs.statSync(file).isDirectory());
   });
 }
 
