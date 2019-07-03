@@ -55,7 +55,7 @@ export class TracksTreeProvider implements vscode.TreeDataProvider<TreeNode> {
   }
 
   async getFileNodeChildren(fileNode: FileNode): Promise<FileNode[] | never[]> {
-    return this.fileNodeFilter.filter(await getFileNodesForDir(fileNode, fileNode.resourceUri.fsPath));
+    return this.fileNodeFilter.filter(getFileNodesForDir(fileNode, fileNode.resourceUri.fsPath));
   }
 
   async getRootNodeChildren(): Promise<TrackNode[]> {

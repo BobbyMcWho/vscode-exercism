@@ -5,7 +5,7 @@ import * as vscode from "vscode";
 import { ExerciseNode } from "../exercise/exerciseNode";
 import { TreeNode } from "../treeNode";
 
-export async function getFileNodesForDir(parent: ExerciseNode | FileNode, cwd: string): Promise<FileNode[]> {
+export function getFileNodesForDir(parent: ExerciseNode | FileNode, cwd: string): FileNode[] {
   return glob.sync("*", { cwd, nodir: false, absolute: true }).map(file => {
     return new FileNode(parent, vscode.Uri.file(file), fs.statSync(file).isDirectory());
   });
