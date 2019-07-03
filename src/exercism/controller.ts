@@ -4,7 +4,7 @@ import * as vscode from "vscode";
 import { Logger } from "../common/logger";
 import { StorageItem } from "../common/storage";
 import { execute } from "../common/utilities";
-import { Exercise, ExerciseStatus, Solution, Track, TrackStatus, UserDataModel } from "../typings/api";
+import { Exercise, ExerciseMetadata, ExerciseStatus, Solution, Track, TrackStatus, UserDataModel } from "../typings/api";
 import { getUserConfig } from "./config";
 import * as scraper from "./scraper";
 
@@ -63,6 +63,14 @@ export class ExercismController {
 
   getUserDataInJSON(): string {
     return this._userDataStore.toJSON();
+  }
+
+  async getExerciseMetadata(track: Track, exercise: Exercise): Promise<ExerciseMetadata | undefined> {
+    const filepath = path.join(this.getExerciseDirPath(track, exercise), ".exercism", "metadata.json");
+    if (!(await fs.pathExists(filepath))) {
+      return;
+    }
+    return fs.readJson(filepath);
   }
 
   // Get the directory path of the given track.

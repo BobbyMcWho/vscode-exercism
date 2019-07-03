@@ -69,6 +69,16 @@ export interface DownloadPayload {
   };
 }
 
+interface ExerciseMetadata {
+  track: string;
+  exercise: string;
+  id: string;
+  url: string;
+  handle: string;
+  is_requester: boolean;
+  auto_approve: boolean;
+}
+
 export interface UserConfig {
   apibaseurl: string;
   token: string;

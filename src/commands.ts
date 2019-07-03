@@ -136,9 +136,11 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
     },
     {
       id: "exercism.exercise.openInBrowser",
-      cb: ({ parent: { track }, exercise }: ExerciseNode): void => {
-        const uri = vscode.Uri.parse(`https://www.exercism.io/tracks/${track.id}/exercises/${exercise.id})`);
-        vscode.env.openExternal(uri);
+      cb: async ({ parent: { track }, exercise }: ExerciseNode): Promise<void> => {
+        const metadata = await exercismController.getExerciseMetadata(track, exercise);
+        if (metadata) {
+          vscode.env.openExternal(vscode.Uri.parse(metadata.url));
+        }
       }
     },
     {
