@@ -2,7 +2,7 @@ html,
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
   font-size: 14px;
-  padding: 0 1rem;
+  padding: 0 1.2rem;
   word-wrap: break-word;
   height: 100%;
 }
