@@ -61,7 +61,7 @@ export class StorageItem<T> {
   }
 
   /**
-   * Update and save the model.
+   * Update and save the model using a callback.
    *
    * @param fn The update callback to use.
    */
