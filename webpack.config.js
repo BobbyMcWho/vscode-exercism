@@ -1,9 +1,19 @@
 const path = require("path");
 
-const webview = {
-  name: "webview",
+const webview_preact = {
+  name: "webview_preact",
   entry: {
-    index: "./webview/index.tsx"
+    index: "./preact/index.tsx"
+  },
+  resolve: {
+    alias: {
+      preact: path.join(__dirname, "node_modules", "preact", "src")
+    },
+    extensions: [".ts", ".js", ".tsx", ".jsx"]
+  },
+  output: {
+    filename: "index.js",
+    path: path.resolve(__dirname, "dist")
   },
   module: {
     rules: [
@@ -17,22 +27,13 @@ const webview = {
         use: ["style-loader", "css-loader"]
       }
     ]
-  },
-  resolve: {
-    alias: {
-      preact: path.join(__dirname, "node_modules", "preact", "src")
-    },
-    extensions: [".ts", ".js", ".tsx", ".jsx"]
-  },
-  output: {
-    filename: "index.js",
-    path: path.resolve(__dirname, "dist")
   }
 };
 
 const webview_svelte = {
+  name: "webview_svelte",
   entry: {
-    bundle: ["./svelte/index.js"]
+    index: "./svelte/index.js"
   },
   resolve: {
     extensions: [".mjs", ".js", ".svelte"]
