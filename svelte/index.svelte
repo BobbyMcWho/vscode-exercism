@@ -51,7 +51,7 @@
             {#if $store.instructions}
                 <div>{@html marked.parse($store.instructions)}</div>
             {:else}
-                <div>You need to download this $store.exercise before you can view its instructions.</div>
+                <div>You have to download this exercise before you can view its instructions.</div>
             {/if}
         {:else}
             {#if $store.solutions}
