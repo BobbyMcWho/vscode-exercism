@@ -95,7 +95,8 @@ header .top-section .icon {
 body.vscode-light header .top-section .icon {
   background-image: var(--exerciseIconLight);
 }
-body.vscode-dark header .top-section .icon {
+
+body header .top-section .icon {
   background-image: var(--exerciseIconDark);
 }
 
