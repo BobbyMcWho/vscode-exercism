@@ -80,17 +80,26 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
     },
     {
       id: "exercism.exercise.createNewFile",
-      cb: async (exerciseNode: ExerciseNode): Promise<void> => {
+      cb: async (node: ExerciseNode | FileNode): Promise<void> => {
         const filename = await vscode.window.showInputBox({
           placeHolder: "New file name",
           prompt: "Input the name of the file you wish to create."
         });
 
-        if (filename) {
-          const dir = exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise);
-          await fs.writeFile(dir, "");
-          tracksTreeProvider.refresh(exerciseNode);
+        if (!filename) {
+          return;
         }
+
+        await fs.ensureFile(
+          path.join(
+            node instanceof ExerciseNode
+              ? exercismController.getExerciseDirPath(node.parent.track, node.exercise)
+              : node.resourceUri.fsPath,
+            filename
+          )
+        );
+
+        tracksTreeProvider.refresh(node);
       }
     },
     {
