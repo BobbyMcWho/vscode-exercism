@@ -34,53 +34,58 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
       id: "exercism.track.downloadAllExercises",
       cb: async (trackNode: TrackNode): Promise<void> => {
         let disposables: vscode.Disposable[] = [];
-        await vscode.window.withProgress(
-          {
-            title: "Downloading exercise:",
-            cancellable: true,
-            location: vscode.ProgressLocation.Notification
-          },
-          async (progress, token) => {
-            token.onCancellationRequested(
-              () => {
-                throw new Error("Cancelled downloading all exercises.");
-              },
-              null,
-              disposables
-            );
+        try {
+          vscode.window.withProgress(
+            {
+              title: "Downloading exercise:",
+              cancellable: true,
+              location: vscode.ProgressLocation.Notification
+            },
+            async (progress, token) => {
+              token.onCancellationRequested(
+                () => {
+                  throw new Error("Cancelled downloading all exercises.");
+                },
+                null,
+                disposables
+              );
 
-            const exerciseNodes = await tracksTreeProvider.getTrackNodeChildren(trackNode);
+              const exerciseNodes = await tracksTreeProvider.getTrackNodeChildren(trackNode);
 
-            for (let i = 0; i < exerciseNodes.length; i++) {
-              const exerciseNode = exerciseNodes[i];
-              progress.report({ message: exerciseNode.id, increment: (i / exerciseNodes.length) * 100 });
-              if (!(exerciseNode.exercise.status & ExerciseStatus.DOWNLOADED)) {
-                while (true) {
-                  try {
-                    await exercismController.downloadExercise(trackNode.track, exerciseNode.exercise);
-                  } catch (e) {
-                    const action = await vscode.window.showErrorMessage(String(e), "Retry", "Cancel");
-                    if (action !== "Retry") {
-                      return;
+              for (let i = 0; i < exerciseNodes.length; i++) {
+                const exerciseNode = exerciseNodes[i];
+                progress.report({ message: exerciseNode.id, increment: (i / exerciseNodes.length) * 100 });
+
+                if (!(exerciseNode.exercise.status & ExerciseStatus.DOWNLOADED)) {
+                  while (true) {
+                    try {
+                      await exercismController.downloadExercise(trackNode.track, exerciseNode.exercise);
+                    } catch (e) {
+                      const action = await vscode.window.showErrorMessage(String(e), "Retry", "Cancel");
+                      if (action !== "Retry") {
+                        return;
+                      }
                     }
+                    tracksTreeProvider.refresh(exerciseNode);
                   }
-                  tracksTreeProvider.refresh(exerciseNode);
                 }
               }
             }
-          }
-        );
-        disposables.forEach(d => d.dispose());
+          );
+        } finally {
+          disposables.forEach(d => d.dispose());
+        }
       }
     },
     {
       id: "exercism.exercise.createNewFile",
       cb: async (exerciseNode: ExerciseNode): Promise<void> => {
-        const newFileName = await vscode.window.showInputBox({
+        const filename = await vscode.window.showInputBox({
           placeHolder: "New file name",
           prompt: "Input the name of the file you wish to create."
         });
-        if (newFileName) {
+
+        if (filename) {
           const dir = exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise);
           await fs.writeFile(dir, "");
           tracksTreeProvider.refresh(exerciseNode);
