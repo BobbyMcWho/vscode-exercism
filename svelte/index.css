@@ -178,6 +178,10 @@ header .bottom-section .nav-link {
   padding: 12px;
 }
 
+body.vscode-light header .bottom-section .nav-link:hover {
+  filter: brightness(0.8);
+}
+
 header .bottom-section .nav-link:hover {
   filter: brightness(1.2);
 }
