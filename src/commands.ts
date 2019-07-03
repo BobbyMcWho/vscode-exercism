@@ -149,7 +149,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           }
         }
 
-        const files = await (await import("fast-glob"))(
+        const files = await (await import("fast-glob")).sync(
           ExtensionManager.getConfigurationItem<string>("openStartGlob", ""),
           {
             cwd: exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise),
