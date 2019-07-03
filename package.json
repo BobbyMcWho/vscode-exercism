@@ -82,12 +82,12 @@
       },
       {
         "command": "exercism.exercise.complete",
-        "title": "Complete",
+        "title": "Complete Exercise",
         "category": "Exercism"
       },
       {
         "command": "exercism.exercise.download",
-        "title": "Download",
+        "title": "Download Exercise",
         "category": "Exercism"
       },
       {
@@ -97,7 +97,7 @@
       },
       {
         "command": "exercism.file.submit",
-        "title": "Submit File for Evaluation",
+        "title": "Submit File",
         "category": "Exercism"
       },
       {
