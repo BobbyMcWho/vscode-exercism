@@ -75,7 +75,6 @@ export class TreeNodePreviewManager implements vscode.Disposable {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
       </head>
       <body>
-        <div class="flexible" id=root></div>
         <script src="${ExtensionManager.getAbsolutePathURI("dist/index.js").with({
           scheme: "vscode-resource"
         })}"></script>

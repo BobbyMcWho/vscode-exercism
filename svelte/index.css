@@ -15,6 +15,7 @@ body {
   height: 100%;
   flex-direction: column;
   min-width: 300px;
+  line-height: 22px;
 }
 
 a:focus,
@@ -28,24 +29,21 @@ textarea:focus {
 main {
   flex: 1;
   overflow: auto;
+  padding: 0 1rem;
   padding-bottom: 1.25rem;
 }
 
-main .nav-content {
-  padding: 0 1rem;
-}
-
-main .nav-content .solution-list {
+main .solution-list {
   display: flex;
   flex-wrap: wrap;
 }
 
-main .nav-content .solution {
+main .solution-list .solution {
   transition: 0.2s;
   flex: 1;
   min-width: 180px;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: none !important;
   padding: 2rem;
   border-radius: 2px;
   margin: 6px;
@@ -54,7 +52,7 @@ main .nav-content .solution {
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-main .nav-content .solution:hover {
+main .solution-list .solution:hover {
   border: 1px solid;
 }
 
@@ -80,7 +78,7 @@ header .top-section {
   align-items: center;
   align-content: center;
   min-height: 100px;
-  padding: 1rem 1rem 0 1rem;
+  padding: 0.8rem 1rem 0.1rem 1rem;
 }
 
 header .top-section .icon {
@@ -97,7 +95,6 @@ header .top-section .icon {
 body.vscode-light header .top-section .icon {
   background-image: var(--exerciseIconLight);
 }
-
 body.vscode-dark header .top-section .icon {
   background-image: var(--exerciseIconDark);
 }
@@ -129,6 +126,14 @@ header .top-section .meta .difficulty {
 
 header .top-section .meta .summary {
   line-height: 1.2rem;
+}
+
+header .top-section .meta .summary .topic {
+  padding-right: 4px;
+}
+
+header .top-section .meta .summary .topic.active {
+  filter: brightness(0.8);
 }
 
 header .top-section .actions {
@@ -172,7 +177,12 @@ header .bottom-section .nav-link {
   padding: 12px;
 }
 
+header .bottom-section .nav-link:hover {
+  filter: brightness(1.2);
+}
+
 header .bottom-section .nav-link.active {
   color: var(--vscode-editor-foreground);
   border-bottom: 1px solid var(--vscode-editor-foreground);
+  filter: none !important;
 }

@@ -441,6 +441,8 @@
     "css-loader": "^2.1.1",
     "mocha": "^6.1.4",
     "style-loader": "^0.23.1",
+    "svelte": "^3.6.3",
+    "svelte-loader": "^2.13.4",
     "temp": "^0.9.0",
     "ts-loader": "^6.0.4",
     "typescript": "^3.5.2",

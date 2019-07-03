@@ -30,6 +30,35 @@ const webview = {
   }
 };
 
+const webview_svelte = {
+  entry: {
+    bundle: ["./svelte/index.js"]
+  },
+  resolve: {
+    extensions: [".mjs", ".js", ".svelte"]
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "index.js",
+    chunkFilename: "index.[id].js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.svelte$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "svelte-loader"
+        }
+      },
+      {
+        test: /\.css/,
+        use: ["style-loader", "css-loader"]
+      }
+    ]
+  }
+};
+
 const extension = {
   name: "extension",
   target: "node",
@@ -61,4 +90,4 @@ const extension = {
   }
 };
 
-module.exports = [extension, webview];
+module.exports = [extension, webview_svelte];

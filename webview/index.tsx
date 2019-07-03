@@ -22,5 +22,5 @@ render(
   <StateProvider>
     <App />
   </StateProvider>,
-  document.getElementById("root")
+  document.body
 );
