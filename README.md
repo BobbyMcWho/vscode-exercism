@@ -24,7 +24,7 @@ You can download this extension from the [Visual Studio Marketplace](https://mar
 
 **Why did you create this extension?**
 
-I wanted the ability to complete exercises without having to leave my editor or dirty my current workspace.
+I wanted the ability to complete exercises without having to leave my editor or mess up my current workspace.
 
 **Does this extension intend to replace the website?**
 
