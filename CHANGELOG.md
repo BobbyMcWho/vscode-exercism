@@ -2,10 +2,19 @@
 
 ## v1
 
+### v1.16.0 (July 3rd 2019)
+
+- Context menu commands will no longer be accessible from the commands palette
+- Fixed issue where resetting the filters wouldn't work
+- Added several new context menu commands
+- Improved preview layout and added some minor features
+- Started using svelte instead of preact
+- Screenshot updated to reflect recent changes
+
 ### v1.15.3 (June 26th 2019)
 
-- Update screenshot
-- Fix folders not showing up (this broke with previous update)
+- Updated screenshot
+- Fixed folders not showing up (this broke with previous update)
 
 ### v1.15.2 (June 26th 2019)
 
