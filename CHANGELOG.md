@@ -2,6 +2,10 @@
 
 ## v1
 
+### v1.16.1 (July 3rd 2019)
+
+- Fixed filtering issues... again :(
+
 ### v1.16.0 (July 3rd 2019)
 
 - Context menu commands will no longer be accessible from the commands palette
