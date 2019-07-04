@@ -2,6 +2,10 @@
 
 ## v1
 
+### v1.16.2 (July 3rd 2019)
+
+- Removed unused packages
+
 ### v1.16.1 (July 3rd 2019)
 
 - Fixed filtering issues... again :(
