@@ -19,7 +19,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
     {
       id: "exercism.track.toggleFocus",
       cb: (trackNode: TrackNode): void => {
-        tracksTreeProvider.trackNodeFilter.focus(trackNode);
+        tracksTreeProvider.trackNodeFilter.toggleFocus(trackNode);
         tracksTreeProvider.refresh();
       }
     },

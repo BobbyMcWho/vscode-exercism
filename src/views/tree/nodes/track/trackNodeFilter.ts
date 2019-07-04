@@ -11,7 +11,7 @@ export enum TrackNodeFilterFlags {
 
 interface TrackNodeFilterStore {
   flags: TrackNodeFilterFlags;
-  trackToFocus?: string;
+  trackToFocus: string | undefined;
 }
 
 export class TrackNodeFilter implements TreeNodeFilter<TrackNode> {
@@ -19,7 +19,8 @@ export class TrackNodeFilter implements TreeNodeFilter<TrackNode> {
 
   constructor() {
     this._store = new StorageItem<TrackNodeFilterStore>("tree.filter.track", {
-      flags: TrackNodeFilterFlags.NONE
+      flags: TrackNodeFilterFlags.NONE,
+      trackToFocus: undefined
     });
   }
 
@@ -29,14 +30,14 @@ export class TrackNodeFilter implements TreeNodeFilter<TrackNode> {
 
   toggle(flags: TrackNodeFilterFlags): void {
     this._store.update(model => ({
-      flags: model.flags ^= flags
+      flags: model.flags ^ flags
     }));
   }
 
-  focus(trackNode: TrackNode): void {
+  toggleFocus(trackNode: TrackNode): void {
     this._store.update(model => ({
-      flags: model.flags ^= TrackNodeFilterFlags.FILTER_FOCUSED,
-      trackToFocus: trackNode.id
+      flags: model.flags ^ TrackNodeFilterFlags.FILTER_FOCUSED,
+      trackToFocus: model.flags & TrackNodeFilterFlags.FILTER_FOCUSED && model.trackToFocus ? undefined : trackNode.id
     }));
   }
 

@@ -19,7 +19,7 @@ export enum ExerciseNodeFilterFlags {
 
 interface ExerciseNodeFilterStore {
   flags: ExerciseNodeFilterFlags;
-  topicToFilter?: string;
+  topicToFilter: string | undefined;
 }
 
 export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
@@ -27,7 +27,8 @@ export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
 
   constructor() {
     this._store = new StorageItem<ExerciseNodeFilterStore>("tree.filter.exercise", {
-      flags: ExerciseNodeFilterFlags.NONE
+      flags: ExerciseNodeFilterFlags.NONE,
+      topicToFilter: undefined
     });
   }
 
@@ -39,12 +40,12 @@ export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
     this._store.update(model => {
       if (model.flags & ExerciseNodeFilterFlags.FILTER_TOPIC && topic === model.topicToFilter) {
         return {
-          flags: model.flags ^= ExerciseNodeFilterFlags.FILTER_TOPIC,
+          flags: model.flags ^ ExerciseNodeFilterFlags.FILTER_TOPIC,
           topicToFilter: undefined
         };
       } else {
         return {
-          flags: model.flags |= ExerciseNodeFilterFlags.FILTER_TOPIC,
+          flags: model.flags | ExerciseNodeFilterFlags.FILTER_TOPIC,
           topicToFilter: topic
         };
       }
@@ -63,7 +64,7 @@ export class ExerciseNodeFilter implements TreeNodeFilter<ExerciseNode> {
           prevFlags ^= ExerciseNodeFilterFlags.FILTER_COMPLETED;
         }
       }
-      return { flags: prevFlags ^= flags };
+      return { flags: prevFlags ^ flags };
     });
   }
 
