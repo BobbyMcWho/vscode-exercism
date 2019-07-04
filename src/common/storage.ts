@@ -1,4 +1,3 @@
-import { debounce } from "helpful-decorators";
 import { ExtensionManager } from "./context";
 import { Logger } from "./logger";
 
@@ -42,10 +41,8 @@ export class StorageItem<T> {
   }
 
   /**
-   * Save the model to the global storage. It is debounced by 10 seconds to avoid
-   * the expense of consecutive update calls to the global storage.
+   * Save the model to the global storage.
    */
-  @debounce(3000)
   async save(): Promise<void> {
     Logger.debug("storage", "Saving model to global storage:", this._key);
     ExtensionManager.updateGlobalStorage(this._key, this._model);
