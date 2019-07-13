@@ -322,7 +322,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
       id: "exercism.global.clearStorageData",
       cb: async (): Promise<void> => {
         const action = await vscode.window.showWarningMessage(
-          "YOU ARE ABOUT TO PERMANENTLY DELETE ALL OF YOUR LOCAL DATA! PROCEED?",
+          "YOU ARE ABOUT TO PERMANENTLY DELETE ALL OF YOUR LOCAL DATA! THIS ACTION WILL RESTART VSCODE! PROCEED?",
           "Yes",
           "Cancel"
         );
@@ -372,7 +372,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
         try {
           await vscode.window.withProgress(
             {
-              title: "Submitting exercise...",
+              title: "Submitting exercise file...",
               location: vscode.ProgressLocation.Notification
             },
             () => exercismController.submitExerciseFile(fileNode.getExerciseNode().exercise, fileNode.resourceUri)
