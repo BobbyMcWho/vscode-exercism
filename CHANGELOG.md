@@ -2,6 +2,11 @@
 
 ## v1
 
+### v1.16.3 (July 13th 2019)
+
+- Updated dependencies
+- Changed some error messages
+
 ### v1.16.2 (July 3rd 2019)
 
 - Removed unused packages
