@@ -190,7 +190,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           }
         }
 
-        const files = glob.sync(ExtensionManager.getConfigurationItem<string>("openStartGlob", ""), {
+        const files = glob.sync(ExtensionManager.getConfigurationItem<string>("openStartGlob", "*"), {
           cwd: exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise),
           absolute: true,
           nodir: true
