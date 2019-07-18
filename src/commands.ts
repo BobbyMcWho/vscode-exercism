@@ -202,7 +202,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
 
         if (files.length < 1) {
           await vscode.window.showErrorMessage(
-            "We couldn't find any files matching the `openStartGlob` setting! Please make sure the glob includes the file extensions you want opened before trying again."
+            "The specified glob did not match any files. Please make sure the `openStartGlob` setting includes your desired file extensions before trying again."
           );
           return;
         }
