@@ -20,5 +20,5 @@ function getUserConfigDirPath(): string {
 }
 
 export function getUserConfig(): UserConfig {
-  return fs.readJsonSync(path.join(getUserConfigDirPath(), "/exercism/user.json"));
+  return fs.readJsonSync(path.join(getUserConfigDirPath(), "exercism", "user.json"));
 }
