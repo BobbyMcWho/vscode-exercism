@@ -196,15 +196,15 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           nodir: true
         });
 
-        if (tracksTreeProvider.view.visible) {
-          vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility");
-        }
-
         if (files.length < 1) {
           await vscode.window.showErrorMessage(
             "The specified glob did not match any files. Please make sure the `openStartGlob` setting includes your desired file extensions before trying again."
           );
           return;
+        }
+
+        if (tracksTreeProvider.view.visible) {
+          vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility");
         }
 
         if (files.length > 1) {
