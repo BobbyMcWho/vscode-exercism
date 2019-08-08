@@ -128,7 +128,7 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           if (action === "Retry") {
             return vscode.commands.executeCommand("exercism.exercise.download", exerciseNode);
           } else {
-            return;
+            throw e;
           }
         }
         tracksTreeProvider.refresh(exerciseNode);
