@@ -2,6 +2,11 @@
 
 ## v1
 
+### v1.16.4 (August 8th 2019)
+
+- Ignoring node_modules by default
+- Added some file extensions to the glob
+
 ### v1.16.3 (July 13th 2019)
 
 - Updated dependencies
