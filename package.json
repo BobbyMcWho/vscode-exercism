@@ -423,9 +423,15 @@
       {
         "title": "Exercism",
         "properties": {
+          "exercism.maxFilesToOpen": {
+            "type": "integer",
+            "default": 10,
+            "description": "The max number of files to open when executing the `Open & Start` command.",
+            "scope": "window"
+          },
           "exercism.openStartGlob": {
             "type": "string",
-            "default": "**/!(README).{fs,js,go,md,rs,vim,cc,cpp,c,coffee,cs,swift,ts,h,hpp,java,lua,rb,sh,vb,php,py}",
+            "default": "{,!(node_modules)/**/}!(README).{fs,js,go,md,rs,vim,cc,cpp,c,coffee,cs,swift,ts,h,hpp,java,lua,rb,sh,vb,php,py}",
             "description": "The file glob to use when executing the `Open & Start` command.",
             "scope": "window"
           },

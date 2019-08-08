@@ -217,7 +217,11 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
           });
         }
 
-        for (let i = 0; i < files.length; i++) {
+        for (
+          let i = 0;
+          i < files.length && i != ExtensionManager.getConfigurationItem<number>("maxFilesToOpen", 10);
+          i++
+        ) {
           await vscode.window.showTextDocument(vscode.Uri.file(files[i]), {
             preview: false,
             viewColumn: (i % 3) + 1
