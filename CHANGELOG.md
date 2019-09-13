@@ -2,6 +2,11 @@
 
 ## v1
 
+### v1.16.5 (September 13th, 2019)
+
+- Added .dart files to default glob
+- Fixed issue where having spaces in file path wouldn't allow you to submit files
+
 ### v1.16.4 (August 8th 2019)
 
 - Ignoring node_modules by default
