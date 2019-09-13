@@ -431,7 +431,7 @@
           },
           "exercism.openStartGlob": {
             "type": "string",
-            "default": "{,!(node_modules)/**/}!(README).{fs,js,go,md,rs,vim,cc,cpp,c,coffee,cs,swift,ts,h,hpp,java,lua,rb,sh,vb,php,py}",
+            "default": "{,!(node_modules)/**/}!(README).{dart,fs,js,go,md,rs,vim,cc,cpp,c,coffee,cs,swift,ts,h,hpp,java,lua,rb,sh,vb,php,py}",
             "description": "The file glob to use when executing the `Open & Start` command.",
             "scope": "window"
           },
