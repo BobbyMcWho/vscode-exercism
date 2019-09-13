@@ -86,7 +86,7 @@ export class ExercismController {
     Logger.debug("exercism", "Submitting exercise file:", uri.toString());
 
     try {
-      await execute(`exercism submit ${uri.fsPath}`);
+      await execute(`exercism submit "${uri.fsPath}"`);
     } catch (e) {
       throw e;
     }
