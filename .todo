@@ -1,0 +1,3 @@
+[ ] - add a content security policy
+[ ] - fix preview scrolling performance regression (maybe return to preact)
+[ ] - clean up and document code
