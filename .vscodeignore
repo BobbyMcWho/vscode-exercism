@@ -3,6 +3,7 @@
 out/test/**
 src/**
 .gitignore
+website-icons
 vsc-extension-quickstart.md
 scripts/**
 node_modules/**
