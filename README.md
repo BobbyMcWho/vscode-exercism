@@ -34,10 +34,6 @@ No, the purpose of this tool is to supplement the website. Furthermore, there is
 
 As mentioned above, there is no available api that supports that functionality. Please read or subscribe to [#4087](https://github.com/exercism/exercism/issues/4087) for more information.
 
-## Contributing
-
-Pull requests, feature requests, or any other form of contribution is always welcome.
-
 ## License
 
 Source code is licensed under MIT. The track and exercise icons are licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) by Exercism, Inc and Noun Project. The status icons are licensed under [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/) by Icons8 LLC.
