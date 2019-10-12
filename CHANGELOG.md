@@ -2,6 +2,10 @@
 
 ## v1
 
+### v1.16.7 (October 11th, 2019)
+
+- Updated icons
+
 ### v1.16.5 (September 13th, 2019)
 
 - Added .dart files to default glob
