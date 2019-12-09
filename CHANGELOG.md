@@ -2,6 +2,11 @@
 
 ## v1
 
+### v1.16.8 (December 9th, 2019)
+
+- Updated packages
+- Added new track icons
+
 ### v1.16.7 (October 11th, 2019)
 
 - Updated icons

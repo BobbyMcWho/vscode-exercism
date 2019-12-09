@@ -8,7 +8,7 @@
 
 ### Prerequisites
 
-This extension requires you to install the official [Exercism](https://exercism.io) client in order to download and submit exercises.
+This extension requires you to install the official [Exercism](https://exercism.io) client in order to download and submit exercises. Please make sure that the exercism-cli executable works as expected before filing an issue against this repository.
 
 ### Installation
 
@@ -28,11 +28,11 @@ I wanted the ability to complete exercises without having to leave my editor or 
 
 **Does this extension intend to replace the website?**
 
-No, the purpose of this tool is to supplement the website. Furthermore, there is no public api that provides access to profile information, making it extremely difficult to replicate online features.
+No, the purpose of this extension is to supplement the website.
 
 **Why can't I view my profile information? Why is my progress not synced with exercism.io?**
 
-As mentioned above, there is no available api that supports that functionality. Please read or subscribe to [#4087](https://github.com/exercism/exercism/issues/4087) for more information.
+There is no available api that supports that functionality. Please read or subscribe to [#4087](https://github.com/exercism/exercism/issues/4087) for more information.
 
 ## License
 
