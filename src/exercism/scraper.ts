@@ -25,20 +25,22 @@ export async function fetchExerciseSolutions(track: Track, exercise: Exercise): 
     $(".solution").each((_, el) => {
       let details: number[] = [];
       const href = $(el).attr("href");
-      const uuid = href.substr(href.lastIndexOf("/") + 1);
-      $(el)
-        .find(".details-bar > .detail")
-        .each((i, el) => {
-          details[i] = parseInt($(el).text());
+      if (href) {
+        const uuid = href.substr(href.lastIndexOf("/") + 1);
+        $(el)
+          .find(".details-bar > .detail")
+          .each((i, el) => {
+            details[i] = parseInt($(el).text());
+          });
+        solutions.push({
+          author: $(el)
+            .find(".details-bar > .handle")
+            .text(),
+          comments: details[0],
+          stars: details[1],
+          uuid
         });
-      solutions.push({
-        author: $(el)
-          .find(".details-bar > .handle")
-          .text(),
-        comments: details[0],
-        stars: details[1],
-        uuid
-      });
+      }
     });
   } catch (err) {
     Logger.error("scraper", err);
@@ -53,35 +55,37 @@ export async function fetchTrackExercises(trackID: string): Promise<Exercise[]> 
     const $ = (await import("cheerio")).load(data);
     $(".exercise").each((_, el) => {
       const href = $(el).attr("href");
-      const id = href.substr(href.lastIndexOf("/") + 1);
-      let topics: string[] = [];
-      $(el)
-        .find(".details > .topics > .topic")
-        .each((_, el) => {
-          topics.push($(el).text());
+      if (href) {
+        const id = href.substr(href.lastIndexOf("/") + 1);
+        let topics: string[] = [];
+        $(el)
+          .find(".details > .topics > .topic")
+          .each((_, el) => {
+            topics.push($(el).text());
+          });
+        let difficulty = $(el)
+          .find(".stats > .difficulty")
+          .text();
+        if (difficulty === "easy") {
+          difficulty = "★";
+        } else if (difficulty === "medium") {
+          difficulty = "★★";
+        } else {
+          difficulty = "★★★";
+        }
+        exercises.push({
+          id,
+          name: $(el)
+            .find("h3")
+            .text(),
+          summary: $(el)
+            .find(".details > summary")
+            .text(),
+          difficulty,
+          topics,
+          status: ExerciseStatus.INACTIVE
         });
-      let difficulty = $(el)
-        .find(".stats > .difficulty")
-        .text();
-      if (difficulty === "easy") {
-        difficulty = "★";
-      } else if (difficulty === "medium") {
-        difficulty = "★★";
-      } else {
-        difficulty = "★★★";
       }
-      exercises.push({
-        id,
-        name: $(el)
-          .find("h3")
-          .text(),
-        summary: $(el)
-          .find(".details > summary")
-          .text(),
-        difficulty,
-        topics,
-        status: ExerciseStatus.INACTIVE
-      });
     });
   } catch (err) {
     Logger.error("scraper", err);
@@ -96,23 +100,25 @@ export async function fetchAllTracks(): Promise<Track[]> {
     const $ = (await import("cheerio")).load(data);
     $(".track").each((_, el) => {
       const href = $(el).attr("href");
-      const id = href.substr(href.lastIndexOf("/") + 1);
-      const count = $(el)
-        .find(".title > .num-exercises")
-        .text();
-      const totalExercises = parseInt(count.substr(0, count.indexOf(" ")));
-      tracks.push({
-        id,
-        name: $(el)
-          .find(".title > h2")
-          .text(),
-        totalExercises,
-        totalExercisesCompleted: 0,
-        status: TrackStatus.INACTIVE,
-        summary: $(el)
-          .find("summary")
-          .text()
-      });
+      if (href) {
+        const id = href.substr(href.lastIndexOf("/") + 1);
+        const count = $(el)
+          .find(".title > .num-exercises")
+          .text();
+        const totalExercises = parseInt(count.substr(0, count.indexOf(" ")));
+        tracks.push({
+          id,
+          name: $(el)
+            .find(".title > h2")
+            .text(),
+          totalExercises,
+          totalExercisesCompleted: 0,
+          status: TrackStatus.INACTIVE,
+          summary: $(el)
+            .find("summary")
+            .text()
+        });
+      }
     });
   } catch (err) {
     Logger.error("scraper", err);

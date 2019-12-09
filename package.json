@@ -465,31 +465,31 @@
     "vscode:prepublish": "npm run build-prod"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.13",
+    "@types/cheerio": "^0.22.15",
     "@types/fs-extra": "^7.0.0",
     "@types/glob": "^7.1.1",
     "@types/marked": "^0.6.5",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^10.14.21",
+    "@types/node": "^10.17.7",
     "@types/temp": "^0.8.34",
-    "@types/vscode": "^1.39.0",
-    "css-loader": "^3.2.0",
+    "@types/vscode": "^1.40.0",
+    "css-loader": "^3.3.0",
     "lodash": "^4.17.15",
-    "mocha": "^6.2.1",
+    "mocha": "^6.2.2",
     "style-loader": "^0.23.1",
-    "svelte": "^3.12.1",
+    "svelte": "^3.16.1",
     "svelte-loader": "^2.13.6",
-    "temp": "^0.9.0",
-    "ts-loader": "^6.2.0",
-    "typescript": "^3.6.4",
-    "webpack": "^4.41.1",
-    "webpack-bundle-analyzer": "^3.5.2",
-    "webpack-cli": "^3.3.9"
+    "temp": "^0.9.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "fs-extra": "^8.1.0",
-    "glob": "^7.1.4",
+    "glob": "^7.1.6",
     "marked": "^0.7.0"
   }
 }
