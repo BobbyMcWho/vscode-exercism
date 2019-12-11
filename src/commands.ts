@@ -227,6 +227,16 @@ export function RegisterCommands(exercismController: ExercismController, tracksT
             viewColumn: (i % 3) + 1
           });
         }
+
+        const name = `Exercism - ${exerciseNode.label}`;
+        let terminal = vscode.window.terminals.find(terminal => terminal.name === name);
+        if (!terminal) {
+          terminal = vscode.window.createTerminal({
+            cwd: exercismController.getExerciseDirPath(exerciseNode.parent.track, exerciseNode.exercise),
+            name: `Exercism - ${exerciseNode.label}`
+          });
+        }
+        terminal.show();
       }
     },
     {
