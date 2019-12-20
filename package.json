@@ -450,6 +450,12 @@
             ],
             "description": "Specifies the verbosity of the logger. By default all logging is disabled.",
             "scope": "window"
+          },
+          "exercism.openTerminal": {
+            "type": "boolean",
+            "default": true,
+            "description": "Open a terminal window at the root of the exercise when clicking \"Open and Start\"",
+            "scope": "window"
           }
         }
       }
